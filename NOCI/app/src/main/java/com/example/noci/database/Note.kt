@@ -4,7 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDate
-import java.util.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Entity(tableName = "note_table")
 data class Note(
@@ -17,7 +18,7 @@ data class Note(
     @ColumnInfo(name = "noteDescription")
     val description: String = "",
 
-    //@ColumnInfo(name = "noteDate")
-    //val date: LocalDate = LocalDate.parse("2020/1/1")
+    @ColumnInfo(name = "noteDate")
+    val date: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")).toString()
 
 )

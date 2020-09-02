@@ -2,7 +2,6 @@ package com.example.noci.notes.input
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.noci.database.Note
 import com.example.noci.database.NoteDatabase

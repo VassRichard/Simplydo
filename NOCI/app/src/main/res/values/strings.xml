@@ -5,5 +5,6 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="add_note_button">Add note button</string>
-    <string name="dummy">DUMMY</string>
+    <string name="dummy">Lorem ipsum dolor sit amet.</string>
+    <string name="date">DATE</string>
 </resources>

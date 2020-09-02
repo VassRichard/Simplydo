@@ -33,9 +33,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/notes_title"
-            app:rightBgColor="@color/blue"
-            app:rightImage="@drawable/ic_delete"
-            app:rightText="Delete"
+            app:leftBgColor="@color/blue"
+            app:leftImage="@drawable/ic_delete"
             app:textColor="@android:color/white"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:textSize="20sp" />

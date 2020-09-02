@@ -11,6 +11,7 @@ class Splashscreen : AppCompatActivity() {
 
     private val runnable = Runnable {
         startActivity(Intent(applicationContext, MainActivity::class.java))
+        finish()
     }
 
     override fun onResume() {
