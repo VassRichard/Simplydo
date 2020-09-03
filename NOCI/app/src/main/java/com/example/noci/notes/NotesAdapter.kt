@@ -16,9 +16,10 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatter.ISO_LOCAL_DATE
 
 
-class NotesAdapter(private val adapterDelete: AdapterDelete) : ListAdapter<Note, NotesAdapter.ViewHolder>(
-    ShowNotesDiffCallback()
-) {
+class NotesAdapter(private val adapterDelete: AdapterDelete) :
+    ListAdapter<Note, NotesAdapter.ViewHolder>(
+        ShowNotesDiffCallback()
+    ) {
 
     private var noteList = arrayListOf<Note>()
 //        set(value) {
@@ -88,12 +89,11 @@ class NotesAdapter(private val adapterDelete: AdapterDelete) : ListAdapter<Note,
     }
 }
 
-class ShowNotesDiffCallback: DiffUtil.ItemCallback<Note>() {
+class ShowNotesDiffCallback : DiffUtil.ItemCallback<Note>() {
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
         return oldItem.id == newItem.id
     }
 
-    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
         return oldItem == newItem
     }

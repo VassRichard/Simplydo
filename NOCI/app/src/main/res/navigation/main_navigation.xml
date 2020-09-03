@@ -14,7 +14,8 @@
             android:id="@+id/action_notesFragment_to_inputFragment"
             app:destination="@id/inputFragment"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:popUpTo="@id/notesFragment" />
+            app:popUpTo="@id/inputFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/inputFragment"
@@ -23,6 +24,8 @@
         tools:layout="@layout/fragment_input">
         <action
             android:id="@+id/action_inputFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
+            app:destination="@id/notesFragment"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
