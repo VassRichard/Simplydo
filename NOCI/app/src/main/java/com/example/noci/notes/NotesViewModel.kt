@@ -9,16 +9,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.lang.String.format
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val viewModelJob = Job()
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
+    private val _currentTime = MutableLiveData<String>()
+    val currentTime : LiveData<String>
+        get() = _currentTime
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -47,6 +51,20 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         uiScope.launch {
             repository.deleteNote(note)
         }
+    }
+
+    fun updateTime() {
+        //_currentTime.value = LocalDateTime.now()
+        val c: Calendar = Calendar.getInstance()
+
+        val df = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val formattedDate: String = df.format(c.time)
+        _currentTime.value = formattedDate
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 
 }

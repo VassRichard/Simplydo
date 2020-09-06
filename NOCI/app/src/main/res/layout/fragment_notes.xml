@@ -16,14 +16,23 @@
 
         <TextView
             android:id="@+id/notes_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/notes"
+            android:hint="@string/notes"
             android:textSize="36sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:layout_constraintBottom_toTopOf="@+id/notes_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/notes_title" />
 
         <com.tsuryo.swipeablerv.SwipeableRecyclerView
             android:id="@+id/notes_list"
@@ -46,12 +55,12 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
             android:contentDescription="@string/add_note"
-            android:src="@drawable/ic_add"
             android:onClick="@{() -> notesViewModel.goToInputNote()}"
+            android:src="@drawable/ic_add"
             android:tint="@android:color/holo_blue_dark"
             app:backgroundTint="@color/cardview_light_background"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/notes_title" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

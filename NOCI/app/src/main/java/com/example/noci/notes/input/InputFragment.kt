@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.noci.R
 import com.example.noci.databinding.FragmentInputBinding
+import kotlinx.android.synthetic.main.fragment_input.*
 
 class InputFragment : Fragment() {
     private lateinit var binding: FragmentInputBinding

@@ -19,6 +19,9 @@ data class Note(
     val description: String = "",
 
     @ColumnInfo(name = "noteDate")
-    val date: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")).toString()
+    val date: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")).toString(),
+
+    @ColumnInfo(name = "noteType")
+    val type: Int = -1
 
 )

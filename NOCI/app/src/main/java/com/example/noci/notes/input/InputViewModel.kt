@@ -8,6 +8,7 @@ import com.example.noci.database.NoteDatabase
 import com.example.noci.database.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class InputViewModel(application: Application): AndroidViewModel(application)  {
 
@@ -17,6 +18,8 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
 
     private val readAll: LiveData<List<Note>>
     private val repository: NoteRepository
+
+    private var noteType : Int = -1
 
     init {
         val noteDao = NoteDatabase.getInstance(application).noteDao
@@ -29,7 +32,7 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
     }
 
     fun insertNote(title: String, description: String) {
-        val input = Note(0, title, description)
+        val input = Note(0, title, description, type = noteType)
         insert(input)
         Log.e("this", "Added $input")
     }
@@ -42,5 +45,9 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addNote(note)
         }
+    }
+
+    fun onSetSleepQuality(quality: Int) {
+        noteType = quality
     }
 }

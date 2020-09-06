@@ -30,8 +30,8 @@
                 android:id="@+id/add_title"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="7.5dp"
                 android:hint="@string/title"
-                android:layout_marginStart="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,9 +44,12 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="112dp"
+
             android:theme="@style/TextInputLayoutAppearance"
-            app:layout_constraintBottom_toTopOf="@+id/add"
+            app:layout_constraintBottom_toTopOf="@+id/quality_one_image"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_title">
 
@@ -54,14 +57,79 @@
                 android:id="@+id/add_description"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="7.5dp"
                 android:hint="@string/description"
-                android:layout_marginStart="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/quality_zero_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="76dp"
+            android:onClick="@{() -> inputViewModel.onSetSleepQuality(0)}"
+            app:layout_constraintBottom_toBottomOf="@+id/quality_one_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_type_0" />
+
+        <ImageView
+            android:id="@+id/quality_one_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:onClick="@{() -> inputViewModel.onSetSleepQuality(1)}"
+            app:layout_constraintBottom_toTopOf="@+id/quality_four_image"
+            app:layout_constraintEnd_toStartOf="@+id/quality_two_image"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/quality_zero_image"
+            app:layout_constraintTop_toBottomOf="@+id/description_layout"
+            app:srcCompat="@drawable/ic_type_1" />
+
+        <ImageView
+            android:id="@+id/quality_two_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="44dp"
+            android:onClick="@{() -> inputViewModel.onSetSleepQuality(2)}"
+            app:layout_constraintBottom_toBottomOf="@+id/quality_one_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_type_2" />
+
+        <ImageView
+            android:id="@+id/quality_three_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="76dp"
+            android:onClick="@{() -> inputViewModel.onSetSleepQuality(3)}"
+            app:layout_constraintBottom_toBottomOf="@+id/quality_four_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_type_3" />
+
+        <ImageView
+            android:id="@+id/quality_four_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:onClick="@{() -> inputViewModel.onSetSleepQuality(4)}"
+            app:layout_constraintBottom_toTopOf="@+id/add"
+            app:layout_constraintEnd_toStartOf="@+id/quality_five_image"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/quality_three_image"
+            app:layout_constraintTop_toBottomOf="@+id/quality_one_image"
+            app:srcCompat="@drawable/ic_type_4" />
+
+
+        <ImageView
+            android:id="@+id/quality_five_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="48dp"
+            android:onClick="@{() -> inputViewModel.onSetSleepQuality(5)}"
+            app:layout_constraintBottom_toBottomOf="@+id/quality_four_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_type_5" />
 
         <Button
             android:id="@+id/add"
@@ -73,8 +141,9 @@
             android:textColor="@android:color/holo_blue_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/quality_four_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

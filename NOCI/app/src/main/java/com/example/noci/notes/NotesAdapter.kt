@@ -22,10 +22,6 @@ class NotesAdapter(private val adapterDelete: AdapterDelete) :
     ) {
 
     private var noteList = arrayListOf<Note>()
-//        set(value) {
-//            field = value
-//            notifyDataSetChanged()
-//        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -36,35 +32,32 @@ class NotesAdapter(private val adapterDelete: AdapterDelete) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = noteList[position]
 
+        if(currentItem.type == 0) {
+            holder.type.setImageResource(R.drawable.ic_type_0)
+        }
+        else if(currentItem.type == 1) {
+            holder.type.setImageResource(R.drawable.ic_type_1)
+        }
+        else if(currentItem.type == 2) {
+            holder.type.setImageResource(R.drawable.ic_type_2)
+        }
+        else if(currentItem.type == 3) {
+            holder.type.setImageResource(R.drawable.ic_type_3)
+        }
+        else if(currentItem.type == 4) {
+            holder.type.setImageResource(R.drawable.ic_type_4)
+        }
+        else if(currentItem.type == 5) {
+            holder.type.setImageResource(R.drawable.ic_type_5)
+        }
         holder.title.text = currentItem.title
 
-//        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-//        val text: String = currentItem.date.format(formatter)
         holder.date.text = currentItem.date
 
         holder.deleteButton.setOnClickListener {
             deleteItem(position)
-            //adapterDelete.onDeleteNote(currentItem.id)
             adapterDelete.onDeleteNote(currentItem)
         }
-
-        //        holder.deleteButton.setOnClickListener {
-//            adapterListener.onCategoryClicked(currentItem)
-//            Log.e("BLA", "BLA")
-//            Log.e("BLA", "BLA")
-//        }
-
-//        holder.title.setOnDragListener(object : SwipeLeftRightCallback.Listener {
-//            override fun onSwipedLeft(position: Int) {
-//                //noteList.remove(position)
-//                Log.e("SWIPED", "AT $position")
-//                //notifyDataSetChanged()
-//            }
-//
-//            override fun onSwipedRight(position: Int) {
-//                TODO("Not yet implemented")
-//            }
-//        })
     }
 
     override fun getItemCount() = noteList.size
@@ -72,9 +65,9 @@ class NotesAdapter(private val adapterDelete: AdapterDelete) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.note_title)
         val date: TextView = itemView.findViewById(R.id.note_date)
+        val type: ImageView = itemView.findViewById(R.id.note_type)
 
         val deleteButton: ImageView = itemView.findViewById(R.id.delete_note)
-        //val description: TextView = itemView.findViewById(R.id.add_description)
     }
 
     fun setData(note: ArrayList<Note>) {

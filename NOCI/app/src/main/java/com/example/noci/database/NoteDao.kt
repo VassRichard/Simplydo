@@ -12,6 +12,9 @@ interface NoteDao {
     @Insert
     suspend fun insert(note: Note)
 
+//    @Query("INSERT * INTO note_table WHERE noteId = :key")
+//    suspend fun insertType()
+
     @Query("SELECT * FROM note_table ORDER BY id ASC")
     fun readAll() : LiveData<List<Note>>
 
