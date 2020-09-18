@@ -32,23 +32,25 @@ class NotesAdapter(private val adapterDelete: AdapterDelete) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = noteList[position]
 
-        if(currentItem.type == 0) {
-            holder.type.setImageResource(R.drawable.ic_type_0)
-        }
-        else if(currentItem.type == 1) {
-            holder.type.setImageResource(R.drawable.ic_type_1)
-        }
-        else if(currentItem.type == 2) {
-            holder.type.setImageResource(R.drawable.ic_type_2)
-        }
-        else if(currentItem.type == 3) {
-            holder.type.setImageResource(R.drawable.ic_type_3)
-        }
-        else if(currentItem.type == 4) {
-            holder.type.setImageResource(R.drawable.ic_type_4)
-        }
-        else if(currentItem.type == 5) {
-            holder.type.setImageResource(R.drawable.ic_type_5)
+        when (currentItem.type) {
+            0 -> {
+                holder.type.setImageResource(R.drawable.ic_health)
+            }
+            1 -> {
+                holder.type.setImageResource(R.drawable.ic_relationships)
+            }
+            2 -> {
+                holder.type.setImageResource(R.drawable.ic_career)
+            }
+            3 -> {
+                holder.type.setImageResource(R.drawable.ic_personal)
+            }
+            4 -> {
+                holder.type.setImageResource(R.drawable.ic_social_v1)
+            }
+            5 -> {
+                holder.type.setImageResource(R.drawable.ic_recreation_v3)
+            }
         }
         holder.title.text = currentItem.title
 
@@ -58,6 +60,8 @@ class NotesAdapter(private val adapterDelete: AdapterDelete) :
             deleteItem(position)
             adapterDelete.onDeleteNote(currentItem)
         }
+
+        //holder.type.onHo
     }
 
     override fun getItemCount() = noteList.size

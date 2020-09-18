@@ -1,24 +1,24 @@
 package com.example.noci.notes
 
+//import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
+
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-//import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
 import com.example.noci.R
 import com.example.noci.database.Note
 import com.example.noci.databinding.FragmentNotesBinding
+import com.example.noci.InputActivity
 import kotlinx.android.synthetic.main.fragment_notes.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class NotesFragment : Fragment(), AdapterDelete {
@@ -27,6 +27,7 @@ class NotesFragment : Fragment(), AdapterDelete {
     private lateinit var notesViewModel: NotesViewModel
 
     private var threadChecker = false
+    private val adapter = NotesAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,12 +40,38 @@ class NotesFragment : Fragment(), AdapterDelete {
 
         binding.notesViewModel = notesViewModel
 
-        val adapter = NotesAdapter(this)
         binding.notesList.adapter = adapter
+
+        return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (threadChecker != true) {
+            thread.start()
+        }
+
+        notesViewModel.readAllData.observe(viewLifecycleOwner, Observer {
+            if (it.isEmpty()) {
+                binding.emptyListTitle.visibility = View.VISIBLE
+            } else {
+                binding.emptyListTitle.visibility = View.INVISIBLE
+            }
+        })
+
+        notesViewModel.listChecker.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                binding.emptyListTitle.visibility = View.VISIBLE
+            } else {
+                binding.emptyListTitle.visibility = View.INVISIBLE
+            }
+        })
 
         notesViewModel.goToInput.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                findNavController().navigate(R.id.action_notesFragment_to_inputFragment)
+
+                onAddNote()
                 notesViewModel.resetGoToInput()
             }
         })
@@ -56,16 +83,6 @@ class NotesFragment : Fragment(), AdapterDelete {
         var itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
         itemTouchHelper.attachToRecyclerView(notes_list)
 
-        return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        if(threadChecker != true)
-        {
-            thread.start()
-        }
     }
 
     private val thread: Thread = object : Thread() {
@@ -76,7 +93,7 @@ class NotesFragment : Fragment(), AdapterDelete {
                     sleep(1000)
                     val c: Calendar = Calendar.getInstance()
 
-                    val df = SimpleDateFormat("dd/MMM/yyyy HH:mm")
+                    val df = SimpleDateFormat("EEEE", Locale.ENGLISH)
                     val formattedDate: String = df.format(c.time)
 
                     binding.notesTitle.text = formattedDate
@@ -88,5 +105,16 @@ class NotesFragment : Fragment(), AdapterDelete {
 
     override fun onDeleteNote(currentItem: Note) {
         notesViewModel.deleteFromLocalDB(currentItem)
+    }
+
+    // transfer the clicked car's brand details to the activity which will call the brand's list of cars ( click on mazda, it will populate only with cars that belong to mazda )
+    fun onAddNote() {
+        val intent = Intent(context, InputActivity::class.java)
+
+        startActivity(intent)
+
+//        val intent = Intent(context, CarsActivity::class.java)
+//        intent.putExtra("categoryId", categoryId)
+//        startActivity(intent)
     }
 }

@@ -1,6 +1,7 @@
 package com.example.noci.database
 
 import androidx.lifecycle.LiveData
+import kotlin.properties.Delegates
 
 class NoteRepository(private val noteDao: NoteDao) {
 
@@ -14,7 +15,4 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.deleteNote(note)
     }
 
-    fun delete(note: Note) {
-        noteDao.delete(note)
-    }
 }

@@ -47,7 +47,7 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         }
     }
 
-    fun onSetSleepQuality(quality: Int) {
+    fun onSetNoteType(quality: Int) {
         noteType = quality
     }
 }

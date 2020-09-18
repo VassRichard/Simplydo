@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="settingsViewModel"
+            type="com.example.noci.settings.SettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/notes_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="SETTINGS"
+            android:textSize="32sp"
+            android:textColor="#5491CF "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="6dp"
+            android:background="@drawable/list_style"/>
+
+        <TextView
+            android:id="@+id/dark_mode_switch_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:text="Dark mode"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notes_title"
+            android:background="@drawable/list_style"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/dark_mode_switch"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="15dp"
+            android:onClick="@{() -> settingsViewModel.onClickDarkMode()}"
+            app:layout_constraintBottom_toBottomOf="@+id/dark_mode_switch_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dark_mode_switch_text"
+            app:layout_constraintTop_toBottomOf="@id/notes_title" />
+
+        <TextView
+            android:id="@+id/notes_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Developed by Maarchosias"
+            android:textSize="20sp"
+            android:textColor="#5491CF"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="6dp"
+            android:background="@drawable/list_style"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

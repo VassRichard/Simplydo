@@ -1,5 +1,6 @@
 package com.example.noci.notes.input
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.noci.InputActivity
+import com.example.noci.MainActivity
 import com.example.noci.R
 import com.example.noci.databinding.FragmentInputBinding
 import kotlinx.android.synthetic.main.fragment_input.*
@@ -30,6 +33,12 @@ class InputFragment : Fragment() {
 
         binding.inputViewModel = inputViewModel
 
+        return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         inputViewModel.insertInitializer.observe(viewLifecycleOwner, Observer {
             //binding.addTitle.toString() != "" && binding.addDescription.toString() != ""
             val noteTitle = binding.addTitle.text.toString()
@@ -42,11 +51,9 @@ class InputFragment : Fragment() {
                     .show()
             } else {
                 inputViewModel.insertNote(noteTitle, noteDescription)
-                findNavController().navigate(R.id.action_inputFragment_to_notesFragment)
+                onGoBack()
             }
         })
-
-        return binding.root
     }
 
     override fun onPause() {
@@ -56,4 +63,11 @@ class InputFragment : Fragment() {
         binding.addTitle.setText("")
         binding.addDescription.setText("")
     }
+
+    fun onGoBack() {
+        val intent = Intent(context, MainActivity::class.java)
+
+        startActivity(intent)
+    }
+
 }

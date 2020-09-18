@@ -16,14 +16,17 @@
 
         <TextView
             android:id="@+id/notes_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="@string/notes"
-            android:textSize="36sp"
+            android:gravity="center|end"
+            android:paddingEnd="5dp"
+            android:textSize="32sp"
+            android:textColor="#5491CF "
             app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="6dp"
+            android:background="@drawable/list_style"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -34,18 +37,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/notes_title" />
 
+        <TextView
+            android:id="@+id/empty_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="List empty!"
+            android:textSize="36sp"
+            android:gravity="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.tsuryo.swipeablerv.SwipeableRecyclerView
             android:id="@+id/notes_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/notes_title"
+            app:layout_constraintVertical_bias="0.0"
             app:leftBgColor="@color/blue"
             app:leftImage="@drawable/ic_delete"
             app:textColor="@android:color/white"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:textSize="20sp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

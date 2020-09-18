@@ -16,14 +16,10 @@ interface NoteDao {
 //    suspend fun insertType()
 
     @Query("SELECT * FROM note_table ORDER BY id ASC")
-    fun readAll() : LiveData<List<Note>>
+    fun readAll(): LiveData<List<Note>>
 
     @Delete
     suspend fun deleteNote(noteId: Note)
-
-    @Delete
-    fun delete(note: Note)
-
 
 //    @Update
 //    fun update(note: NoteAttr)
