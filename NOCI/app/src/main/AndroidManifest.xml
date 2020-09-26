@@ -24,14 +24,13 @@
             android:theme="@style/SplashScreenTheme">
         </activity>
         <activity
-            android:name=".InputActivity" />
+            android:name=".InputActivity"
+            android:theme="@style/AppTheme"/>
         <uses-library android:name="android.test.base"
             android:required="false" />
         <uses-library android:name="android.test.mock"
             android:required="false" />
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

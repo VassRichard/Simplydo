@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#5491CF</item>
         <item name="colorAccent">#5491CF</item>
-        <item name="backgroundColor">#FFFFFF</item>
+        <item name="backgroundColor">#5491CF</item>
         <item name="cardBackgroundColor">#FFFFFF</item>
         <item name="textColor">#000000</item>
         <item name="android:windowFullscreen">false</item>
@@ -13,9 +13,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppThemeDark" parent="Theme.AppCompat.DayNight">
+    <style name="AppThemeDark" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#000000</item>
         <item name="backgroundColor">#000000</item>
@@ -54,7 +54,7 @@
         <item name="android:textColor">#FF0099CC</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">#FF0099CC</item>
-        <item name="colorControlHighlight">#FF0099CC</item>
+        <item name="colorControlHighlight">#5491CF</item>
     </style>
 
 </resources>

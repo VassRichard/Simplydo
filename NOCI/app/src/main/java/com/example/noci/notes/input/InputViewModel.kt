@@ -37,10 +37,6 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         Log.e("this", "Added $input")
     }
 
-    fun showAllNotes() {
-        //tonight.value = getTonightFromDatabase()
-    }
-
     fun insert(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addNote(note)
