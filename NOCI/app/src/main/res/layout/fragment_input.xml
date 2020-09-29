@@ -12,8 +12,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="match_parent"
         android:background="@color/white">
+=======
+        android:layout_height="match_parent">
+>>>>>>> parent of 86dc984... New app name/splash/logo
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_title"
@@ -22,6 +26,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:theme="@style/TextInputLayoutAppearance"
+<<<<<<< HEAD
+=======
+            app:tint="@color/red"
+>>>>>>> parent of 86dc984... New app name/splash/logo
             app:layout_constraintBottom_toTopOf="@+id/description_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +39,10 @@
                 android:id="@+id/add_title"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginStart="7.5dp"
+=======
+>>>>>>> parent of 86dc984... New app name/splash/logo
                 android:hint="@string/title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +56,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 86dc984... New app name/splash/logo
             android:theme="@style/TextInputLayoutAppearance"
             app:layout_constraintBottom_toTopOf="@+id/note_type"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +70,10 @@
                 android:id="@+id/add_description"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginStart="7.5dp"
+=======
+>>>>>>> parent of 86dc984... New app name/splash/logo
                 android:hint="@string/description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +161,11 @@
             android:background="@drawable/note_style"
             android:onClick="@{() -> inputViewModel.insertNoteInitializer()}"
             android:text="@string/add_note_button"
+<<<<<<< HEAD
             android:textColor="@android:color/holo_blue_dark"
+=======
+            android:textColor="@color/inputButtonText"
+>>>>>>> parent of 86dc984... New app name/splash/logo
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

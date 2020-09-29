@@ -73,7 +73,11 @@ dependencies {
     // Assertions
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.ext:truth:1.3.0'
+<<<<<<< HEAD
     androidTestImplementation 'com.google.truth:truth:0.42'
+=======
+    androidTestImplementation 'com.google.truth:truth:1.0'
+>>>>>>> parent of 86dc984... New app name/splash/logo
 
     // Espresso dependencies
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

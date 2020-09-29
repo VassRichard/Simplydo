@@ -22,10 +22,16 @@
         android:id="@+id/bottom_navigation_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:background="?android:attr/windowBackground"
         app:itemBackground="@color/colorPrimaryDark"
         app:itemIconTint="@color/cardview_light_background"
         app:itemTextColor="@color/white"
+=======
+        app:itemBackground="@color/bottomNavMenuBackgroundColor"
+        app:itemIconTint="@color/bottomNavMenuItemTintColor"
+        app:itemTextColor="@color/bottomNavMenuTextColor"
+>>>>>>> parent of 86dc984... New app name/splash/logo
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

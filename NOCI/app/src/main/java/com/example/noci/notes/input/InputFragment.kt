@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+<<<<<<< HEAD
+=======
+import androidx.appcompat.app.AppCompatDelegate
+>>>>>>> parent of 86dc984... New app name/splash/logo
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +20,11 @@ import com.example.noci.InputActivity
 import com.example.noci.MainActivity
 import com.example.noci.R
 import com.example.noci.databinding.FragmentInputBinding
+<<<<<<< HEAD
+=======
+import com.example.noci.settings.SWITCH_CHECKED
+import com.orhanobut.hawk.Hawk
+>>>>>>> parent of 86dc984... New app name/splash/logo
 import kotlinx.android.synthetic.main.fragment_input.*
 
 class InputFragment : Fragment() {

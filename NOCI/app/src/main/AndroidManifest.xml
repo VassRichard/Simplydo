@@ -24,14 +24,23 @@
             android:theme="@style/SplashScreenTheme">
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".InputActivity" />
+=======
+            android:name=".InputActivity"
+            android:theme="@style/AppTheme"/>
+>>>>>>> parent of 86dc984... New app name/splash/logo
         <uses-library android:name="android.test.base"
             android:required="false" />
         <uses-library android:name="android.test.mock"
             android:required="false" />
+<<<<<<< HEAD
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+=======
+
+>>>>>>> parent of 86dc984... New app name/splash/logo
     </application>
 
 </manifest>

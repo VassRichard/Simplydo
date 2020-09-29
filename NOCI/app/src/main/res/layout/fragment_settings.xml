@@ -19,15 +19,24 @@
             android:gravity="center"
             android:text="SETTINGS"
             android:textSize="32sp"
+<<<<<<< HEAD
             android:textColor="#5491CF "
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:elevation="6dp"
+=======
+            android:textColor="@color/settingsHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="1dp"
+>>>>>>> parent of 86dc984... New app name/splash/logo
             android:background="@drawable/list_style"/>
 
         <TextView
             android:id="@+id/dark_mode_switch_text"
+<<<<<<< HEAD
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -36,12 +45,27 @@
             android:text="Dark mode"
             android:textSize="18sp"
             android:textColor="#000000"
+=======
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="1dp"
+            android:text="Dark mode"
+            android:textSize="18sp"
+            android:elevation="5dp"
+            android:textColor="@color/settingsSubmenu"
+            app:layout_constraintEnd_toEndOf="parent"
+>>>>>>> parent of 86dc984... New app name/splash/logo
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notes_title"
             android:background="@drawable/list_style"/>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/dark_mode_switch"
+<<<<<<< HEAD
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingTop="15dp"
@@ -50,6 +74,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/dark_mode_switch_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/dark_mode_switch_text"
+=======
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingEnd="15dp"
+            android:layout_marginTop="1dp"
+            android:elevation="5dp"
+            android:onClick="@{() -> settingsViewModel.onClickDarkMode()}"
+            app:layout_constraintBottom_toBottomOf="@+id/dark_mode_switch_text"
+            app:layout_constraintEnd_toEndOf="parent"
+>>>>>>> parent of 86dc984... New app name/splash/logo
             app:layout_constraintTop_toBottomOf="@id/notes_title" />
 
         <TextView
@@ -59,7 +93,11 @@
             android:gravity="center"
             android:text="Developed by Maarchosias"
             android:textSize="20sp"
+<<<<<<< HEAD
             android:textColor="#5491CF"
+=======
+            android:textColor="@color/settingsCredits"
+>>>>>>> parent of 86dc984... New app name/splash/logo
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
             app:layout_constraintStart_toStartOf="parent"
