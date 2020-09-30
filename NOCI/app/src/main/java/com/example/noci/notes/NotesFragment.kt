@@ -55,23 +55,10 @@ class NotesFragment : Fragment(), AdapterDelete {
         notesViewModel.readAllData.observe(viewLifecycleOwner, Observer {
             if (it.isEmpty()) {
                 binding.emptyListTitle.visibility = View.VISIBLE
-<<<<<<< HEAD
-            } else {
-                binding.emptyListTitle.visibility = View.INVISIBLE
-            }
-        })
-
-        notesViewModel.listChecker.observe(viewLifecycleOwner, Observer {
-            if (it == true) {
-                binding.emptyListTitle.visibility = View.VISIBLE
-            } else {
-                binding.emptyListTitle.visibility = View.INVISIBLE
-=======
                 binding.emptyListDescription.visibility = View.VISIBLE
             } else {
                 binding.emptyListTitle.visibility = View.INVISIBLE
                 binding.emptyListDescription.visibility = View.INVISIBLE
->>>>>>> parent of 86dc984... New app name/splash/logo
             }
         })
 

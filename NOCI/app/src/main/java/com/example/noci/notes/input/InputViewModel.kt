@@ -37,13 +37,6 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         Log.e("this", "Added $input")
     }
 
-<<<<<<< HEAD
-    fun showAllNotes() {
-        //tonight.value = getTonightFromDatabase()
-    }
-
-=======
->>>>>>> parent of 86dc984... New app name/splash/logo
     fun insert(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addNote(note)

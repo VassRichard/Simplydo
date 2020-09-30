@@ -3,14 +3,6 @@ package com.example.noci
 import com.example.noci.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-<<<<<<< HEAD
-
-class InputActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_input)
-    }
-=======
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.noci.settings.SWITCH_CHECKED
 import com.orhanobut.hawk.Hawk
@@ -33,5 +25,4 @@ class InputActivity : AppCompatActivity() {
         setContentView(R.layout.activity_input)
     }
 
->>>>>>> parent of 86dc984... New app name/splash/logo
 }

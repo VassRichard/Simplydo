@@ -2,31 +2,17 @@ package com.example.noci
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-<<<<<<< HEAD
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import com.google.android.material.bottomnavigation.BottomNavigationView
-=======
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.noci.settings.SWITCH_CHECKED
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.orhanobut.hawk.Hawk
->>>>>>> parent of 86dc984... New app name/splash/logo
 
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-<<<<<<< HEAD
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // setup bottom navigation view
-        setUpNavigation()
-
-=======
 
         Hawk.init(this).build()
 
@@ -49,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         // setup bottom navigation view
         setUpNavigation()
->>>>>>> parent of 86dc984... New app name/splash/logo
     }
 
     fun setUpNavigation() {

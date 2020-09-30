@@ -27,13 +27,6 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     val goToInput: LiveData<Boolean>
         get() = _goToInput
 
-<<<<<<< HEAD
-    private val _listChecker = MutableLiveData<Boolean>()
-    val listChecker: LiveData<Boolean>
-        get() = _listChecker
-
-=======
->>>>>>> parent of 86dc984... New app name/splash/logo
     val readAllData: LiveData<List<Note>>
 
     private val repository: NoteRepository

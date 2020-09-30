@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".splashscreen.Splashscreen"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,27 +21,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".splashscreen.Splashscreen"
-            android:theme="@style/SplashScreenTheme">
+            android:name=".MainActivity">
         </activity>
         <activity
-<<<<<<< HEAD
-            android:name=".InputActivity" />
-=======
-            android:name=".InputActivity"
-            android:theme="@style/AppTheme"/>
->>>>>>> parent of 86dc984... New app name/splash/logo
+            android:name=".InputActivity">
+        </activity>
         <uses-library android:name="android.test.base"
             android:required="false" />
         <uses-library android:name="android.test.mock"
             android:required="false" />
-<<<<<<< HEAD
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-=======
 
->>>>>>> parent of 86dc984... New app name/splash/logo
     </application>
 
 </manifest>
