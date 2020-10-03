@@ -23,6 +23,13 @@ class InputActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input)
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        finish()
     }
 
 }

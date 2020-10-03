@@ -4,6 +4,7 @@ package com.example.noci.notes
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.example.noci.database.Note
 import com.example.noci.databinding.FragmentNotesBinding
 import com.example.noci.InputActivity
 import kotlinx.android.synthetic.main.fragment_notes.*
+import java.lang.reflect.Array.get
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,6 +27,9 @@ class NotesFragment : Fragment(), AdapterDelete {
 
     private lateinit var binding: FragmentNotesBinding
     private lateinit var notesViewModel: NotesViewModel
+
+    val MONTHS =
+        arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
     private var threadChecker = false
     private val adapter = NotesAdapter(this)
@@ -71,7 +76,20 @@ class NotesFragment : Fragment(), AdapterDelete {
         })
 
         notesViewModel.readAllData.observe(viewLifecycleOwner, Observer {
+            val calendar = Calendar.getInstance()
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val month = calendar.get(Calendar.MONTH)
+            val year = calendar.get(Calendar.YEAR)
+            val todayDate = "" + day + " " + MONTHS[month] + " " + year
+
+            for (item in it) {
+                Log.e("TAG ITEM : ", "${item}")
+                if (todayDate == item.noteDate) {
+                    Log.e("TODAY", "TODAY")
+                }
+            }
             adapter.setData(it as ArrayList<Note>)
+            Log.e("TAG SIZE : ", "${it.size}")
         })
 
         var itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))

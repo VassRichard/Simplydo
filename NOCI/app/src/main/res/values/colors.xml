@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#5491CF</color>
     <color name="colorAccent">#5491CF</color>
 
+    <color name="bottomNavMenuIconInactive">#FFFFFF</color>
+    <color name="bottomNavMenuIconActive">#000000</color>
 
     <color name="mainTopHeader">#FFFFFF</color>
     <color name="mainPageDay">#5491CF</color>

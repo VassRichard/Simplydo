@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="6dp"
-        android:layout_marginBottom="3dp"
-        android:background="@drawable/note_style">
+        android:background="@drawable/note_style"
+        android:elevation="32dp">
 
         <ImageView
             android:id="@+id/note_type"
@@ -37,6 +37,7 @@
             android:fontFamily="@font/work_sans_regular"
             android:gravity="center"
             android:text="@string/dummy"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/delete_note"
             app:layout_constraintStart_toEndOf="@id/note_type"
@@ -44,18 +45,18 @@
 
         <TextView
             android:id="@+id/note_date"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
             android:layout_marginBottom="1dp"
+            android:layout_marginEnd="5dp"
             android:fontFamily="@font/work_sans_regular"
             android:gravity="bottom|end"
             android:text="@string/date"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/delete_note"
+            app:layout_constraintStart_toEndOf="@id/note_type"
             app:layout_constraintTop_toBottomOf="@id/note_title"
             tools:ignore="SmallSp" />
 

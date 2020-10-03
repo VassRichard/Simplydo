@@ -16,6 +16,10 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
     val insertInitializer : LiveData<Boolean>
         get() = _insertInitializer
 
+    private val _insertDateInitializer = MutableLiveData<Boolean>()
+    val insertDateInitializer : LiveData<Boolean>
+    get() = _insertDateInitializer
+
     private val readAll: LiveData<List<Note>>
     private val repository: NoteRepository
 
@@ -31,8 +35,12 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         _insertInitializer.value = true
     }
 
-    fun insertNote(title: String, description: String) {
-        val input = Note(0, title, description, type = noteType)
+    fun insertNoteDateInitializer() {
+        _insertDateInitializer.value = true
+    }
+
+    fun insertNote(title: String, date: String) {
+        val input = Note(0, title, date, type = noteType)
         insert(input)
         Log.e("this", "Added $input")
     }
