@@ -11,7 +11,7 @@
     <color name="mainPageDay">#5491CF</color>
     <color name="mainPageNoteBorder">#5491CF</color>
 
-    <color name="inputButtonText">#5491CF</color>
+    <color name="inputButtonText">#FFFFFF</color>
     <color name="inputTextInputLayoutBorder">#5491CF</color>
 
     <color name="settingsHeader">#5491CF</color>

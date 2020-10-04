@@ -15,7 +15,7 @@
 
     <style name="AppThemeDark" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#5491CF</item>
+        <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#000000</item>
         <item name="backgroundColor">#000000</item>
