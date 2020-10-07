@@ -15,10 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.noci.R
 import com.example.noci.database.Note
-import com.example.noci.databinding.FragmentNotesBinding
 import com.example.noci.InputActivity
+import com.example.noci.databinding.FragmentNotesBinding
 import kotlinx.android.synthetic.main.fragment_notes.*
-import java.lang.reflect.Array.get
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,7 +27,7 @@ class NotesFragment : Fragment(), AdapterDelete {
     private lateinit var binding: FragmentNotesBinding
     private lateinit var notesViewModel: NotesViewModel
 
-    val MONTHS =
+    private val MONTHS =
         arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
     private var threadChecker = false
@@ -53,7 +52,7 @@ class NotesFragment : Fragment(), AdapterDelete {
     override fun onStart() {
         super.onStart()
 
-        if (threadChecker != true) {
+        if (!threadChecker) {
             thread.start()
         }
 
@@ -83,16 +82,18 @@ class NotesFragment : Fragment(), AdapterDelete {
             val todayDate = "" + day + " " + MONTHS[month] + " " + year
 
             for (item in it) {
-                Log.e("TAG ITEM : ", "${item}")
+                Log.e("TAG ITEM : ", "$item")
                 if (todayDate == item.noteDate) {
                     Log.e("TODAY", "TODAY")
                 }
             }
-            adapter.setData(it as ArrayList<Note>)
-            Log.e("TAG SIZE : ", "${it.size}")
+
+            it?.let {
+                adapter.submitList(it)
+            }
         })
 
-        var itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
+        val itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
         itemTouchHelper.attachToRecyclerView(notes_list)
 
     }
@@ -115,18 +116,14 @@ class NotesFragment : Fragment(), AdapterDelete {
         }
     }
 
-    override fun onDeleteNote(currentItem: Note) {
+    override fun deleteItem(currentItem: Note) {
         notesViewModel.deleteFromLocalDB(currentItem)
     }
 
-    // transfer the clicked car's brand details to the activity which will call the brand's list of cars ( click on mazda, it will populate only with cars that belong to mazda )
     fun onAddNote() {
         val intent = Intent(context, InputActivity::class.java)
 
         startActivity(intent)
-
-//        val intent = Intent(context, CarsActivity::class.java)
-//        intent.putExtra("categoryId", categoryId)
-//        startActivity(intent)
     }
+
 }

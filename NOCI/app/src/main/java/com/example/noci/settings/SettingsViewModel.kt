@@ -10,9 +10,16 @@ class SettingsViewModel : ViewModel() {
     val onClickedSwitch: LiveData<Boolean>
         get() = _onClickedSwitch
 
+    private val _onGoBackToMain = MutableLiveData<Boolean>()
+    val onGoBackToMain : LiveData<Boolean>
+        get() = _onGoBackToMain
 
     fun onClickDarkMode() {
         _onClickedSwitch.value = true
+    }
+
+    fun onGoBack() {
+        _onGoBackToMain.value = true
     }
 
 }

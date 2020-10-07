@@ -8,7 +8,6 @@ import com.example.noci.database.NoteDatabase
 import com.example.noci.database.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class InputViewModel(application: Application): AndroidViewModel(application)  {
 
@@ -18,7 +17,11 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
 
     private val _insertDateInitializer = MutableLiveData<Boolean>()
     val insertDateInitializer : LiveData<Boolean>
-    get() = _insertDateInitializer
+        get() = _insertDateInitializer
+
+    private val _onGoBackToMain = MutableLiveData<Boolean>()
+    val onGoBackToMain : LiveData<Boolean>
+        get() = _onGoBackToMain
 
     private val readAll: LiveData<List<Note>>
     private val repository: NoteRepository
@@ -51,7 +54,11 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         }
     }
 
-    fun onSetNoteType(quality: Int) {
-        noteType = quality
+    fun onSetNoteType(type: Int) {
+        noteType = type
+    }
+
+    fun onGoBack() {
+        _onGoBackToMain.value = true
     }
 }

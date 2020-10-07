@@ -14,21 +14,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            android:paddingStart="5dp"
+            android:src="@drawable/ic_back"
+            android:elevation="6dp"
+            android:background="@drawable/list_style"
+            android:backgroundTint="@color/mainTopHeader"
+            android:onClick="@{() -> inputViewModel.onGoBack()}"
+            app:layout_constraintEnd_toStartOf="@id/input_fragment_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/input_fragment_title" />
+
         <TextView
             android:id="@+id/input_fragment_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="40dp"
             android:background="@drawable/list_style"
             android:backgroundTint="@color/mainTopHeader"
             android:elevation="6dp"
             android:fontFamily="@font/work_sans_regular"
             android:gravity="center|end"
+            android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:text="@string/input_fragment_title"
             android:textColor="@color/mainPageDay"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/back_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -48,7 +64,7 @@
                 android:id="@+id/add_title"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/title"
+                android:hint="@string/input_fragment_note"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

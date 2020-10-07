@@ -53,6 +53,14 @@ class SettingsFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        settingsViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
+            if(it) {
+                val intent = Intent(context, MainActivity::class.java)
+
+                startActivity(intent)
+            }
+        })
+
         binding.darkModeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
