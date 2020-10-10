@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.example.noci.settings.SWITCH_CHECKED
+import com.example.noci.settings.SWITCH_CHECKER
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.orhanobut.hawk.Hawk
 
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         Hawk.init(this).build()
 
-        val theme = Hawk.get<String>(SWITCH_CHECKED)
+        val theme = Hawk.get<String>(SWITCH_CHECKER)
         if (theme == "dark_mode") {
             setTheme(R.style.AppThemeDark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

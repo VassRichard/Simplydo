@@ -1,10 +1,12 @@
 package com.example.noci
 
-import com.example.noci.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.noci.settings.SWITCH_CHECKED
+import androidx.navigation.findNavController
+import com.example.noci.database.Note
+import com.example.noci.notes.input.InputFragmentArgs
+import com.example.noci.settings.SWITCH_CHECKER
 import com.orhanobut.hawk.Hawk
 
 class InputActivity : AppCompatActivity() {
@@ -12,7 +14,7 @@ class InputActivity : AppCompatActivity() {
 
         Hawk.init(this).build()
 
-        val theme = Hawk.get<String>(SWITCH_CHECKED)
+        val theme = Hawk.get<String>(SWITCH_CHECKER)
         if (theme == "dark_mode") {
             setTheme(R.style.AppThemeDark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -23,6 +25,14 @@ class InputActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input)
+
+        // get the parcelable object into a variable
+        val noteObject = intent?.getParcelableExtra<Note>("note")
+
+        // find the navigation controller, set the new navigation graph and send the object to the new fragments
+        if (noteObject != null) {
+            findNavController(R.id.input_nav_host_fragment).setGraph(R.navigation.input_navigation, InputFragmentArgs(noteObject).toBundle())
+        }
 
     }
 

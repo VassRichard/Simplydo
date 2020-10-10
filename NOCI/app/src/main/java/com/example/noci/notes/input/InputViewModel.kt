@@ -54,6 +54,12 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         }
     }
 
+    fun updateNote(id: Int, newTitle: String, newDate: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateNote(id, newTitle, newDate)
+        }
+    }
+
     fun onSetNoteType(type: Int) {
         noteType = type
     }

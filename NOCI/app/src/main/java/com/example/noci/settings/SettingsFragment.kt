@@ -1,13 +1,11 @@
 package com.example.noci.settings
 
 import android.content.Intent
-import android.graphics.*
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
@@ -18,10 +16,8 @@ import com.example.noci.MainActivity
 import com.example.noci.R
 import com.example.noci.databinding.FragmentSettingsBinding
 import com.orhanobut.hawk.Hawk
-import kotlinx.android.synthetic.main.activity_main.*
 
-
-const val SWITCH_CHECKED: String = ""
+const val SWITCH_CHECKER: String = ""
 
 class SettingsFragment : Fragment() {
 
@@ -39,7 +35,7 @@ class SettingsFragment : Fragment() {
 
         binding.settingsViewModel = settingsViewModel
 
-        var theme = Hawk.get<String>(SWITCH_CHECKED)
+        var theme = Hawk.get<String>(SWITCH_CHECKER)
         if(theme == "dark_mode") {
             binding.darkModeSwitch.isChecked = true
         } else {
@@ -67,13 +63,13 @@ class SettingsFragment : Fragment() {
                 //activity?.setTheme(R.style.AppThemeDark)
                 //activity?.startActivity(Intent(context, MainActivity::class.java))
                 //activity?.finish()
-                Hawk.put(SWITCH_CHECKED, "dark_mode")
+                Hawk.put(SWITCH_CHECKER, "dark_mode")
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 //activity?.setTheme(R.style.AppTheme)
                 //startActivity(Intent(context, MainActivity::class.java))
                 //activity?.finish()
-                Hawk.put(SWITCH_CHECKED, "light_mode")
+                Hawk.put(SWITCH_CHECKER, "light_mode")
             }
         }
     }

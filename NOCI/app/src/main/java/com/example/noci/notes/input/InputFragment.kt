@@ -4,7 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +13,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.noci.InputActivity
 import com.example.noci.MainActivity
 import com.example.noci.R
 import com.example.noci.databinding.FragmentInputBinding
-import java.lang.String.format
+import com.example.noci.notes.EDIT_CHECKER
+import com.orhanobut.hawk.Hawk
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -49,24 +49,49 @@ class InputFragment : Fragment() {
         binding.addDate.text =
             LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy")).toString()
 
+        Hawk.init(context).build()
+
+        val editChecker = Hawk.get<String>(EDIT_CHECKER)
+
+        //if (editChecker == "edit") {
+        val details = InputFragmentArgs.fromBundle(requireArguments()).note
+
+        binding.addButton.text = "SAVE NOTE"
+
+        if (details != null) {
+            binding.addTitle.setText(details.title)
+            binding.addDate.text = details.noteDate
+            //binding.noteType.
+        }
+        //}
+
         inputViewModel.insertInitializer.observe(viewLifecycleOwner, Observer {
             //binding.addTitle.toString() != "" && binding.addDescription.toString() != ""
             val noteTitle = binding.addTitle.text.toString()
             val noteDate = binding.addDate.text.toString()
-
+            //Hawk.put(EDIT_CHECKER, "nonEdit")
+            if (details != null) {
+                Log.e("NOTE TAG : ", "IS ${details.id} , ${details.title}, ${details.noteDate}, ${details.date}")
+            }
             if (TextUtils.isEmpty(noteTitle)) {
                 Toast.makeText(context, "Title field can't be empty!", Toast.LENGTH_SHORT).show()
             } else if (TextUtils.isEmpty(noteDate)) {
                 Toast.makeText(context, "Date field can't be empty!", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                inputViewModel.insertNote(noteTitle, noteDate)
+                if (details != null) {
+                    inputViewModel.updateNote(details.id, noteTitle, noteDate)
+                } else {
+                    inputViewModel.insertNote(noteTitle, noteDate)
+
+                }
+
                 onGoBack()
             }
         })
 
         inputViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
-            if(it) {
+            if (it) {
                 val intent = Intent(context, MainActivity::class.java)
 
                 startActivity(intent)
@@ -98,8 +123,6 @@ class InputFragment : Fragment() {
 
             datepickerdialog!!.show()
         })
-
-
 
     }
 

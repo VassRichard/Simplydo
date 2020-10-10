@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.noci.R
 import com.example.noci.database.Note
@@ -22,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class NotesFragment : Fragment(), AdapterDelete {
+class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
 
     private lateinit var binding: FragmentNotesBinding
     private lateinit var notesViewModel: NotesViewModel
@@ -31,7 +32,7 @@ class NotesFragment : Fragment(), AdapterDelete {
         arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
     private var threadChecker = false
-    private val adapter = NotesAdapter(this)
+    private val adapter = NotesAdapter(this, this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -114,6 +115,13 @@ class NotesFragment : Fragment(), AdapterDelete {
             } catch (e: InterruptedException) {
             }
         }
+    }
+
+    override fun detailItem(currentItem: Note) {
+        val intent = Intent(context, InputActivity::class.java)
+
+        intent.putExtra("note", currentItem)
+        startActivity(intent)
     }
 
     override fun deleteItem(currentItem: Note) {

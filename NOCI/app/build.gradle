@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 30
@@ -94,4 +95,15 @@ dependencies {
 
     // Hawk - local storage
     implementation 'com.orhanobut:hawk:2.0.1'
+
+    // Kotlin Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+
+    // Anko is a Kotlin library which makes Android application development faster and easier.
+    implementation "org.jetbrains.anko:anko:0.10.4"
+
+    // Navigation safe-args
+    //classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0"
+
 }
