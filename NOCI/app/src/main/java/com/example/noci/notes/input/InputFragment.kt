@@ -56,12 +56,11 @@ class InputFragment : Fragment() {
         //if (editChecker == "edit") {
         val details = InputFragmentArgs.fromBundle(requireArguments()).note
 
-        binding.addButton.text = "SAVE NOTE"
-
         if (details != null) {
+            binding.addButton.text = "SAVE NOTE"
+
             binding.addTitle.setText(details.title)
             binding.addDate.text = details.noteDate
-            //binding.noteType.
         }
         //}
 
@@ -70,9 +69,9 @@ class InputFragment : Fragment() {
             val noteTitle = binding.addTitle.text.toString()
             val noteDate = binding.addDate.text.toString()
             //Hawk.put(EDIT_CHECKER, "nonEdit")
-            if (details != null) {
-                Log.e("NOTE TAG : ", "IS ${details.id} , ${details.title}, ${details.noteDate}, ${details.date}")
-            }
+            //if (details != null) {
+                //Log.e("NOTE TAG : ", "IS ${details.id} , ${details.title}, ${details.noteDate}, ${details.date}")
+            //}
             if (TextUtils.isEmpty(noteTitle)) {
                 Toast.makeText(context, "Title field can't be empty!", Toast.LENGTH_SHORT).show()
             } else if (TextUtils.isEmpty(noteDate)) {
@@ -130,8 +129,8 @@ class InputFragment : Fragment() {
         super.onPause()
 
         // Clear all value here
-        binding.addTitle.setText("")
-        binding.addDate.setText("")
+        //binding.addTitle.setText("")
+        //binding.addDate.setText("")
     }
 
     fun onGoBack() {

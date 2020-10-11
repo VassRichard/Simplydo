@@ -27,6 +27,7 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
     private val repository: NoteRepository
 
     private var noteType : Int = -1
+    private var newNoteType: Int = -1
 
     init {
         val noteDao = NoteDatabase.getInstance(application).noteDao
@@ -56,12 +57,13 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
 
     fun updateNote(id: Int, newTitle: String, newDate: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateNote(id, newTitle, newDate)
+            repository.updateNote(id, newTitle, newDate, newNoteType)
         }
     }
 
     fun onSetNoteType(type: Int) {
         noteType = type
+        newNoteType = type
     }
 
     fun onGoBack() {
