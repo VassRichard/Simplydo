@@ -106,4 +106,7 @@ dependencies {
     // Navigation safe-args
     //classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0"
 
+    //
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
 }

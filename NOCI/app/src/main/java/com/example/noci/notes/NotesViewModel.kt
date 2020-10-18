@@ -1,9 +1,11 @@
 package com.example.noci.notes
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.noci.database.Note
 import com.example.noci.database.NoteDatabase
 import com.example.noci.database.NoteRepository
@@ -19,17 +21,21 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _currentTime = MutableLiveData<String>()
-    val currentTime: LiveData<String>
-        get() = _currentTime
+//    private val _currentTime = MutableLiveData<String>()
+//    val currentTime: LiveData<String>
+//        get() = _currentTime
 
     private val _goToInput = MutableLiveData<Boolean>()
     val goToInput: LiveData<Boolean>
         get() = _goToInput
 
-    val readAllData: LiveData<List<Note>>
+    private val _switch = MutableLiveData<Boolean>()
+    val switch : LiveData<Boolean>
+        get() = _switch
 
     private val repository: NoteRepository
+
+    val readAllData: LiveData<List<Note>>
 
     init {
         val noteDao = NoteDatabase.getInstance(application).noteDao
@@ -41,6 +47,14 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun goToInputNote() {
         _goToInput.value = true
+    }
+
+//    fun goToListsFragment() {
+//        _goToLists.value = true
+//    }
+
+    fun switchTo() {
+        _switch.value = true
     }
 
     fun resetGoToInput() {

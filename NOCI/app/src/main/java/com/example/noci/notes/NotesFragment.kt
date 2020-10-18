@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +21,8 @@ import com.example.noci.InputActivity
 import com.example.noci.databinding.FragmentNotesBinding
 import kotlinx.android.synthetic.main.fragment_notes.*
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -46,6 +49,7 @@ class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
         binding.notesViewModel = notesViewModel
 
         binding.notesList.adapter = adapter
+        //binding.listsList.adapter = adapter
 
         return binding.root
     }
@@ -57,6 +61,11 @@ class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
             thread.start()
         }
 
+//        val todayDate =
+//            LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy")).toString()
+
+        //notesViewModel.getTodayTasksCount(todayDate)
+
         notesViewModel.readAllData.observe(viewLifecycleOwner, Observer {
             if (it.isEmpty()) {
                 binding.emptyListTitle.visibility = View.VISIBLE
@@ -64,35 +73,58 @@ class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
             } else {
                 binding.emptyListTitle.visibility = View.INVISIBLE
                 binding.emptyListDescription.visibility = View.INVISIBLE
+
+                val calendar = Calendar.getInstance()
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+                val month = calendar.get(Calendar.MONTH)
+                val year = calendar.get(Calendar.YEAR)
+                val todayDate = "" + day + " " + MONTHS[month] + " " + year
+
+                var todayTasks: Int = 0
+
+                for (item in it) {
+                    //Log.e("TAG ITEM : ", "$item")
+                    if (todayDate == item.noteDate) {
+                        todayTasks += 1
+                        //Log.e("TODAY", "TODAY")
+                    }
+                }
+
+                Toast.makeText(context, "Today you have $todayTasks", Toast.LENGTH_LONG).show()
+
+                it?.let {
+                    adapter.submitList(it)
+                }
             }
         })
 
         notesViewModel.goToInput.observe(viewLifecycleOwner, Observer {
             if (it == true) {
 
-                onAddNote()
-                notesViewModel.resetGoToInput()
-            }
-        })
+                if(binding.notesList.visibility == View.VISIBLE) {
+                    onAddNote()
+                    notesViewModel.resetGoToInput()
+                } else {
+                    Toast.makeText(context, "YOLO BOY", Toast.LENGTH_LONG).show()
 
-        notesViewModel.readAllData.observe(viewLifecycleOwner, Observer {
-            val calendar = Calendar.getInstance()
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
-            val month = calendar.get(Calendar.MONTH)
-            val year = calendar.get(Calendar.YEAR)
-            val todayDate = "" + day + " " + MONTHS[month] + " " + year
-
-            for (item in it) {
-                Log.e("TAG ITEM : ", "$item")
-                if (todayDate == item.noteDate) {
-                    Log.e("TODAY", "TODAY")
                 }
-            }
 
-            it?.let {
-                adapter.submitList(it)
             }
         })
+
+        notesViewModel.switch.observe(viewLifecycleOwner, Observer {
+            binding.notesList.visibility = View.GONE
+
+            binding.listsList.visibility = View.VISIBLE
+        })
+
+//        notesViewModel.goToLists.observe(viewLifecycleOwner, Observer {
+//            if(it == true) {
+//                val intent = Intent(context, InputActivity::class.java)
+//
+//                startActivity(intent)
+//            }
+//        })
 
         val itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
         itemTouchHelper.attachToRecyclerView(notes_list)
@@ -117,7 +149,7 @@ class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
         }
     }
 
-    override fun detailItem(currentItem: Note) {
+    override fun editItem(currentItem: Note) {
         val intent = Intent(context, InputActivity::class.java)
 
         intent.putExtra("note", currentItem)

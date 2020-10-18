@@ -31,6 +31,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/switch_to_lists"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="SWITCH"
+            android:gravity="center"
+            android:onClick="@{() -> notesViewModel.switchTo()}"
+            app:layout_constraintTop_toBottomOf="@id/notes_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
             android:id="@+id/empty_list_title"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -66,8 +77,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notes_title"
+            app:layout_constraintTop_toBottomOf="@+id/switch_to_lists"
             app:layout_constraintVertical_bias="0.0"
+            android:visibility="visible"
+            app:leftBgColor="@color/blue"
+            app:leftImage="@drawable/ic_delete"
+            app:textColor="@android:color/white"
+            app:textSize="20sp" />
+
+        <com.tsuryo.swipeablerv.SwipeableRecyclerView
+            android:id="@+id/lists_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_to_lists"
+            app:layout_constraintVertical_bias="0.0"
+            android:visibility="gone"
             app:leftBgColor="@color/blue"
             app:leftImage="@drawable/ic_delete"
             app:textColor="@android:color/white"

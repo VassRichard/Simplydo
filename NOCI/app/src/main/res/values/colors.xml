@@ -11,6 +11,10 @@
     <color name="mainPageDay">#5491CF</color>
     <color name="mainPageNoteBorder">#5491CF</color>
 
+    <color name="mainOverdueColorYesterday">#FF0000</color>
+    <color name="mainOverdueColorToday">#32CD32</color>
+    <color name="mainOverdueColorTomorrow">#5491CF</color>
+
     <color name="inputButtonText">#FFFFFF</color>
     <color name="inputTextInputLayoutBorder">#5491CF</color>
 

@@ -22,10 +22,21 @@
         android:elevation="32dp">
 
         <ImageView
+            android:id="@+id/overdue_signaler"
+            android:layout_width="4dp"
+            android:layout_height="35dp"
+            android:background="@drawable/note_overdue_yesterday"
+            app:layout_constraintCircleRadius="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
             android:id="@+id/note_type"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="7.5dp"
+
             android:src="@drawable/ic_type"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,4 +83,5 @@
             app:layout_constraintTop_toTopOf="@+id/note_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

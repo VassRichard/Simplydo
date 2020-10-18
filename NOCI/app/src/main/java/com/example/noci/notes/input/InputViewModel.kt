@@ -43,7 +43,7 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         _insertDateInitializer.value = true
     }
 
-    fun insertNote(title: String, date: String) {
+    fun addNote(title: String, date: String) {
         val input = Note(0, title, date, type = noteType)
         insert(input)
         Log.e("this", "Added $input")

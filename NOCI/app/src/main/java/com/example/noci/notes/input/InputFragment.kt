@@ -49,9 +49,9 @@ class InputFragment : Fragment() {
         binding.addDate.text =
             LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy")).toString()
 
-        Hawk.init(context).build()
+        //Hawk.init(context).build()
 
-        val editChecker = Hawk.get<String>(EDIT_CHECKER)
+        //val editChecker = Hawk.get<String>(EDIT_CHECKER)
 
         //if (editChecker == "edit") {
         val details = InputFragmentArgs.fromBundle(requireArguments()).note
@@ -81,7 +81,7 @@ class InputFragment : Fragment() {
                 if (details != null) {
                     inputViewModel.updateNote(details.id, noteTitle, noteDate)
                 } else {
-                    inputViewModel.insertNote(noteTitle, noteDate)
+                    inputViewModel.addNote(noteTitle, noteDate)
 
                 }
 
