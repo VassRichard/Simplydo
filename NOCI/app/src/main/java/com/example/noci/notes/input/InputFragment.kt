@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.noci.MainActivity
 import com.example.noci.R
 import com.example.noci.databinding.FragmentInputBinding
-import com.example.noci.notes.EDIT_CHECKER
-import com.orhanobut.hawk.Hawk
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*

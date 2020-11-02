@@ -11,11 +11,12 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/notes_title"
+            android:id="@+id/day_header"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/list_style"
@@ -30,16 +31,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/switch_to_lists"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="SWITCH"
-            android:gravity="center"
-            android:onClick="@{() -> notesViewModel.switchTo()}"
-            app:layout_constraintTop_toBottomOf="@id/notes_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/notes"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_type"
+            android:onClick="@{() -> notesViewModel.goToListNoteTrue()}"
+            android:paddingStart="5dp"
+            android:elevation="6dp"
+            app:layout_constraintStart_toStartOf="@id/day_header"
+            app:layout_constraintTop_toTopOf="@id/day_header"
+            app:layout_constraintBottom_toBottomOf="@id/day_header"/>
+
+        <ImageView
+            android:id="@+id/lists"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_type"
+            android:onClick="@{() -> notesViewModel.goToListNoteFalse()}"
+            android:paddingStart="5dp"
+            android:elevation="6dp"
+            app:layout_constraintStart_toStartOf="@id/day_header"
+            app:layout_constraintTop_toTopOf="@id/day_header"
+            app:layout_constraintBottom_toBottomOf="@id/day_header"/>
 
         <TextView
             android:id="@+id/empty_list_title"
@@ -77,7 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switch_to_lists"
+            app:layout_constraintTop_toBottomOf="@+id/day_header"
             app:layout_constraintVertical_bias="0.0"
             android:visibility="visible"
             app:leftBgColor="@color/blue"
@@ -89,21 +103,33 @@
             android:id="@+id/lists_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switch_to_lists"
-            app:layout_constraintVertical_bias="0.0"
-            android:visibility="gone"
             app:leftBgColor="@color/blue"
             app:leftImage="@drawable/ic_delete"
             app:textColor="@android:color/white"
             app:textSize="20sp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/notes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/add_note"
+            android:onClick="@{() -> notesViewModel.goToInputNote()}"
+            android:src="@drawable/ic_baseline_add_24"
+            app:backgroundTint="@color/cardview_light_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/colorAccent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/lists_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"

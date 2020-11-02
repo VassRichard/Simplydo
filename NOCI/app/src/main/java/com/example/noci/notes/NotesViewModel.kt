@@ -29,6 +29,10 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     val goToInput: LiveData<Boolean>
         get() = _goToInput
 
+    private val _goToList = MutableLiveData<Boolean>()
+    val goToList: LiveData<Boolean>
+        get() = _goToList
+
     private val _switch = MutableLiveData<Boolean>()
     val switch : LiveData<Boolean>
         get() = _switch
@@ -47,6 +51,14 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun goToInputNote() {
         _goToInput.value = true
+    }
+
+    fun goToListNoteTrue() {
+        _goToList.value = true
+    }
+
+    fun goToListNoteFalse() {
+        _goToList.value = false
     }
 
 //    fun goToListsFragment() {
