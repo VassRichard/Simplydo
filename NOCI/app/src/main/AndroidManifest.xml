@@ -36,7 +36,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity">
+            android:name=".NotesActivity">
+        </activity>
+        <activity
+            android:name=".ListsActivity">
+        </activity>
+        <activity
+            android:name=".ListsInputActivity">
         </activity>
         <activity
             android:name=".InputActivity">

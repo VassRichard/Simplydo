@@ -7,7 +7,6 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.AndroidViewModel
-import com.example.noci.MainActivity
 
 
 class MyNewIntentService(application: Application) : AndroidViewModel(application) {
@@ -17,23 +16,23 @@ class MyNewIntentService(application: Application) : AndroidViewModel(applicatio
     private val context = getApplication<Application>().applicationContext
 
     fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val intent = Intent(getApplication(), MainActivity::class.java)
-            val pendingIntent = TaskStackBuilder.create(context).run {
-                addNextIntentWithParentStack(intent)
-                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-            }
-
-            builder = NotificationCompat.Builder(context!!, CHANNEL_ID)
-                //.setSmallIcon(R.drawable.notification_icon)
-                .setContentTitle("You wanna hear a secret?")
-                .setContentText("Then just click on me!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setOngoing(true)
-                .setContentIntent(pendingIntent)
-            val notification = builder.build()
-            val notificationManagerCompat = NotificationManagerCompat.from(context)
-            notificationManagerCompat.notify(0, notification)
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val intent = Intent(getApplication(), MainActivity::class.java)
+//            val pendingIntent = TaskStackBuilder.create(context).run {
+//                addNextIntentWithParentStack(intent)
+//                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+//            }
+//
+//            builder = NotificationCompat.Builder(context!!, CHANNEL_ID)
+//                //.setSmallIcon(R.drawable.notification_icon)
+//                .setContentTitle("You wanna hear a secret?")
+//                .setContentText("Then just click on me!")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setOngoing(true)
+//                .setContentIntent(pendingIntent)
+//            val notification = builder.build()
+//            val notificationManagerCompat = NotificationManagerCompat.from(context)
+//            notificationManagerCompat.notify(0, notification)
+//        }
     }
 }

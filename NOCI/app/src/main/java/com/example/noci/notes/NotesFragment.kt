@@ -2,11 +2,11 @@ package com.example.noci.notes
 
 //import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,16 +15,18 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.noci.R
 import com.example.noci.database.Note
 import com.example.noci.InputActivity
-import com.example.noci.databinding.FragmentMainBinding
-import kotlinx.android.synthetic.main.fragment_main.*
-import java.lang.Math.abs
+import com.example.noci.databinding.FragmentNotesBinding
+import com.orhanobut.hawk.Hawk
+import kotlinx.android.synthetic.main.fragment_notes.*
 import java.text.SimpleDateFormat
 import java.util.*
+
+const val SWITCH_CHECKER: String = ""
 
 
 class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
 
-    private lateinit var binding: FragmentMainBinding
+    private lateinit var binding: FragmentNotesBinding
     private lateinit var notesViewModel: NotesViewModel
 
     private val MONTHS =
@@ -39,7 +41,7 @@ class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notes, container, false)
         notesViewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
 
         binding.notesViewModel = notesViewModel
@@ -56,6 +58,26 @@ class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
         if (!threadChecker) {
             thread.start()
         }
+
+
+
+        notesViewModel.onClickedSwitch.observe(viewLifecycleOwner, Observer {
+//            var theme = Hawk.get<String>(SWITCH_CHECKER)
+//            if (theme == "light_mode") {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//                //activity?.setTheme(R.style.AppThemeDark)
+//                //activity?.startActivity(Intent(context, MainActivity::class.java))
+//                //activity?.finish()
+//                Hawk.put(SWITCH_CHECKER, "dark_mode")
+//            } else {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//                //activity?.setTheme(R.style.AppTheme)
+//                //startActivity(Intent(context, MainActivity::class.java))
+//                //activity?.finish()
+//                Hawk.put(SWITCH_CHECKER, "light_mode")
+//            }
+        })
+
 
         binding.notesList.visibility = View.VISIBLE
         binding.notesButton.visibility = View.VISIBLE
@@ -111,33 +133,41 @@ class NotesFragment : Fragment(), AdapterInfo, AdapterDelete {
             }
         })
 
-        // WORK MORE
-        notesViewModel.goToList.observe(viewLifecycleOwner, Observer {
-            if(it) {
-                binding.notesList.visibility = View.GONE
-                binding.notesButton.visibility = View.GONE
-                binding.listsList.visibility = View.VISIBLE
-                binding.listsButton.visibility = View.VISIBLE
-
-                //binding.emptyListTitle.visibility = View.GONE
-                //binding.emptyListDescription.visibility = View.GONE
-
-                binding.notes.visibility = View.GONE
-                binding.lists.visibility = View.VISIBLE
-            }
-            if(!it) {
-                binding.listsList.visibility = View.GONE
-                binding.listsButton.visibility = View.GONE
-                binding.notesList.visibility = View.VISIBLE
-                binding.notesButton.visibility = View.VISIBLE
-
-                //binding.emptyListTitle.visibility = View.VISIBLE
-                //binding.emptyListDescription.visibility = View.VISIBLE
-
-                binding.notes.visibility = View.VISIBLE
-                binding.lists.visibility = View.GONE
-            }
-        })
+//        // WORK MORE
+//        notesViewModel.goToList.observe(viewLifecycleOwner, Observer {
+//            if(it) {
+//                binding.notesList.visibility = View.GONE
+//                binding.notesButton.visibility = View.GONE
+//                binding.listsList.visibility = View.VISIBLE
+//                binding.listsButton.visibility = View.VISIBLE
+//
+//                //binding.emptyListTitle.visibility = View.GONE
+//                //binding.emptyListDescription.visibility = View.GONE
+//
+//                binding.notes.visibility = View.GONE
+//                binding.lists.visibility = View.VISIBLE
+//
+//            }
+//            if(!it) {
+//                binding.listsList.visibility = View.GONE
+//                binding.listsButton.visibility = View.GONE
+//
+//                binding.listsList.visibility = View.INVISIBLE
+//                binding.listsButton.visibility = View.INVISIBLE
+//
+//                binding.notesList.visibility = View.VISIBLE
+//                binding.notesButton.visibility = View.VISIBLE
+//
+//                //binding.emptyListTitle.visibility = View.VISIBLE
+//                //binding.emptyListDescription.visibility = View.VISIBLE
+//
+//                binding.notes.visibility = View.VISIBLE
+//                binding.lists.visibility = View.GONE
+//
+//                binding.lists.visibility = View.INVISIBLE
+//
+//            }
+//        })
 
         notesViewModel.switch.observe(viewLifecycleOwner, Observer {
             binding.notesList.visibility = View.GONE

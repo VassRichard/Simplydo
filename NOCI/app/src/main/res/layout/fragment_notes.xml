@@ -32,23 +32,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/notes"
+            android:id="@+id/day_night"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_type"
-            android:onClick="@{() -> notesViewModel.goToListNoteTrue()}"
-            android:paddingStart="5dp"
-            android:elevation="6dp"
-            app:layout_constraintStart_toStartOf="@id/day_header"
-            app:layout_constraintTop_toTopOf="@id/day_header"
-            app:layout_constraintBottom_toBottomOf="@id/day_header"/>
-
-        <ImageView
-            android:id="@+id/lists"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_type"
-            android:onClick="@{() -> notesViewModel.goToListNoteFalse()}"
+            android:onClick="@{() -> notesViewModel.dayNightSwitcher()}"
             android:paddingStart="5dp"
             android:elevation="6dp"
             app:layout_constraintStart_toStartOf="@id/day_header"

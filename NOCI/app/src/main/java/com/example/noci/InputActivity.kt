@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import com.example.noci.database.Note
+import com.example.noci.notes.SWITCH_CHECKER
 import com.example.noci.notes.input.InputFragmentArgs
-import com.example.noci.settings.SWITCH_CHECKER
 import com.orhanobut.hawk.Hawk
 
 class InputActivity : AppCompatActivity() {

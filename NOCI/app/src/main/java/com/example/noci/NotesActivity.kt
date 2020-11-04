@@ -4,21 +4,17 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.noci.notes.SWITCH_CHECKER
 import com.example.noci.notification.AlarmReceiver
-import com.example.noci.settings.SWITCH_CHECKER
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.orhanobut.hawk.Hawk
-import kotlinx.android.synthetic.main.activity_main.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class NotesActivity : AppCompatActivity() {
     lateinit var bottomNavigationView : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_notes)
 
     }
 

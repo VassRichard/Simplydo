@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.noci.MainActivity
+import com.example.noci.NotesActivity
 import com.example.noci.R
 import com.example.noci.databinding.FragmentInputBinding
 import java.time.LocalDateTime
@@ -88,7 +88,7 @@ class InputFragment : Fragment() {
 
         inputViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
             if (it) {
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(context, NotesActivity::class.java)
 
                 startActivity(intent)
             }
@@ -131,7 +131,7 @@ class InputFragment : Fragment() {
     }
 
     fun onGoBack() {
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, NotesActivity::class.java)
 
         startActivity(intent)
     }

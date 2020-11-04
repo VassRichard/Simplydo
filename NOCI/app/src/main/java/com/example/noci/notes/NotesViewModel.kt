@@ -1,11 +1,9 @@
 package com.example.noci.notes
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.noci.database.Note
 import com.example.noci.database.NoteDatabase
 import com.example.noci.database.NoteRepository
@@ -29,9 +27,9 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     val goToInput: LiveData<Boolean>
         get() = _goToInput
 
-    private val _goToList = MutableLiveData<Boolean>()
-    val goToList: LiveData<Boolean>
-        get() = _goToList
+    private val _onClickedSwitch = MutableLiveData<Boolean>()
+    val onClickedSwitch: LiveData<Boolean>
+        get() = _onClickedSwitch
 
     private val _switch = MutableLiveData<Boolean>()
     val switch : LiveData<Boolean>
@@ -53,13 +51,14 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         _goToInput.value = true
     }
 
-    fun goToListNoteTrue() {
-        _goToList.value = true
+    fun dayNightSwitcher() {
+        _onClickedSwitch.value = true
     }
 
-    fun goToListNoteFalse() {
-        _goToList.value = false
+    fun dayNightResetter() {
+        _onClickedSwitch.value = false
     }
+
 
 //    fun goToListsFragment() {
 //        _goToLists.value = true

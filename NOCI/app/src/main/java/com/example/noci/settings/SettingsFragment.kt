@@ -12,12 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.noci.MainActivity
+import com.example.noci.NotesActivity
 import com.example.noci.R
 import com.example.noci.databinding.FragmentSettingsBinding
 import com.orhanobut.hawk.Hawk
-
-const val SWITCH_CHECKER: String = ""
 
 class SettingsFragment : Fragment() {
 
@@ -35,12 +33,12 @@ class SettingsFragment : Fragment() {
 
         binding.settingsViewModel = settingsViewModel
 
-        var theme = Hawk.get<String>(SWITCH_CHECKER)
-        if(theme == "dark_mode") {
-            binding.darkModeSwitch.isChecked = true
-        } else {
-            binding.darkModeSwitch.isChecked = false
-        }
+//        var theme = Hawk.get<String>(SWITCH_CHECKER)
+//        if(theme == "dark_mode") {
+//            binding.darkModeSwitch.isChecked = true
+//        } else {
+//            binding.darkModeSwitch.isChecked = false
+//        }
 
         return binding.root
     }
@@ -51,26 +49,26 @@ class SettingsFragment : Fragment() {
 
         settingsViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
             if(it) {
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(context, NotesActivity::class.java)
 
                 startActivity(intent)
             }
         })
 
         binding.darkModeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                //activity?.setTheme(R.style.AppThemeDark)
-                //activity?.startActivity(Intent(context, MainActivity::class.java))
-                //activity?.finish()
-                Hawk.put(SWITCH_CHECKER, "dark_mode")
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                //activity?.setTheme(R.style.AppTheme)
-                //startActivity(Intent(context, MainActivity::class.java))
-                //activity?.finish()
-                Hawk.put(SWITCH_CHECKER, "light_mode")
-            }
+//            if (isChecked) {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//                //activity?.setTheme(R.style.AppThemeDark)
+//                //activity?.startActivity(Intent(context, MainActivity::class.java))
+//                //activity?.finish()
+//                Hawk.put(SWITCH_CHECKER, "dark_mode")
+//            } else {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//                //activity?.setTheme(R.style.AppTheme)
+//                //startActivity(Intent(context, MainActivity::class.java))
+//                //activity?.finish()
+//                Hawk.put(SWITCH_CHECKER, "light_mode")
+//            }
         }
     }
 
