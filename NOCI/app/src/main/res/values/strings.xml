@@ -9,6 +9,9 @@
     <string name="input_fragment_date">DATE</string>
     <string name="input_fragment_button">Add note</string>
 
+    <string name="lists_input_fragment_title">Create your list</string>
+    <string name="lists_input_fragment_add_item">Add item</string>
+
     <string name="settings_fragment_title">Settings</string>
 
     <string name="noteDate">Date</string>
@@ -18,4 +21,5 @@
     <string name="journal">JOURNAL</string>
     <string name="no_notes_added">Oops! No notes added!</string>
     <string name="add_notes">Let\'s add something, shall we?</string>
+
 </resources>

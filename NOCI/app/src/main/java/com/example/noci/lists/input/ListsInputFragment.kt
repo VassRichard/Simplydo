@@ -15,10 +15,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.noci.ListsInputActivity
 import com.example.noci.R
+import com.example.noci.database.Note
+import com.example.noci.database_lists.items.Items
 import com.example.noci.databinding.FragmentInputListsBinding
 import java.util.*
 
-class ListsInputFragment : Fragment() {
+class ListsInputFragment : Fragment(), ItemsAdapterDelete {
 
     private lateinit var binding: FragmentInputListsBinding
     private lateinit var inputViewModel: ListsInputViewModel
@@ -26,7 +28,7 @@ class ListsInputFragment : Fragment() {
     val MONTHS =
     arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
-    private val adapter = ShopNoteAdapter(this, this)
+    private val adapter = ShopNoteAdapter( this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,12 +63,12 @@ class ListsInputFragment : Fragment() {
         if (details != null) {
             //binding.addButton.text = "SAVE NOTE"
 
-            binding.addTitle.setText(details.title)
+            binding.addTitle.text = details.title
             //binding.addDate.text = details.noteDate
         }
         //}
 
-        inputViewModel.shopReadAll.observe(viewLifecycleOwner, Observer {
+        inputViewModel.itemsReadAll.observe(viewLifecycleOwner, Observer {
             if (it.isEmpty()) {
                 //binding.emptyListTitle.visibility = View.VISIBLE
                 //binding.emptyListDescription.visibility = View.VISIBLE
@@ -138,18 +140,24 @@ class ListsInputFragment : Fragment() {
 
         inputViewModel.addToListBool.observe(viewLifecycleOwner, Observer {
             if(it) {
-                val subnote = binding.addToText.text.toString()
+                val subnote = binding.itemName.text.toString()
                 val noteId = details?.id
 
                 Log.e(" NOTE : ", " $subnote and $noteId")
 
-                if (noteId != null) {
+                if (noteId != null && subnote != "") {
                     inputViewModel.addNote(subnote, noteId)
                 }
+
+                binding.itemName.setText("")
 
                 //inputViewModel.addToNote(subnote)
             }
         })
+    }
+
+    override fun deleteItem(currentItem: Items) {
+        inputViewModel.deleteFromLocalDB(currentItem)
     }
 
     fun onGoBack() {

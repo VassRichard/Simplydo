@@ -87,37 +87,8 @@
             app:textColor="@android:color/white"
             app:textSize="20sp" />
 
-        <com.tsuryo.swipeablerv.SwipeableRecyclerView
-            android:id="@+id/lists_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:leftBgColor="@color/blue"
-            app:leftImage="@drawable/ic_delete"
-            app:textColor="@android:color/white"
-            app:textSize="20sp" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/notes_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:contentDescription="@string/add_note"
-            android:onClick="@{() -> notesViewModel.goToInputNote()}"
-            android:src="@drawable/ic_baseline_add_24"
-            app:backgroundTint="@color/cardview_light_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/colorAccent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/lists_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"

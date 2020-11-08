@@ -3,13 +3,20 @@ package com.example.noci.lists.input
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.noci.database.Note
 import com.example.noci.database_lists.items.Items
 import com.example.noci.database_lists.items.ItemsDatabase
 import com.example.noci.database_lists.items.ItemsRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ListsInputViewModel(application: Application): AndroidViewModel(application)  {
+
+    private val viewModelJob = Job()
+
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _insertInitializer = MutableLiveData<Boolean>()
     val insertInitializer : LiveData<Boolean>
@@ -30,8 +37,8 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
     //private val readAll: LiveData<List<Note>>
     //private val repository: NoteRepository
 
-    val shopReadAll: LiveData<List<Items>>
-    private val shopRepository: ItemsRepository
+    val itemsReadAll: LiveData<List<Items>>
+    private val itemsRepository: ItemsRepository
 
 
     private var noteType : Int = -1
@@ -43,9 +50,9 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
         //readAll = repository.readAllData
 
         val shopNoteDao = ItemsDatabase.getInstance(application).shopNoteDao
-        shopRepository = ItemsRepository(shopNoteDao)
+        itemsRepository = ItemsRepository(shopNoteDao)
         //shopReadAll = shopRepository.readAllData
-        shopReadAll = shopRepository.readSpecificData
+        itemsReadAll = itemsRepository.readSpecificData
     }
 
     fun insertNoteInitializer() {
@@ -64,7 +71,7 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
 
     fun insert(note: Items) {
         viewModelScope.launch(Dispatchers.IO) {
-            shopRepository.addNote(note)
+            itemsRepository.addNote(note)
         }
     }
 
@@ -73,6 +80,12 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
 //            repository.updateNote(id, newTitle, newDate)
 //        }
 //    }
+
+    fun deleteFromLocalDB(item: Items) {
+        uiScope.launch {
+           itemsRepository.deleteNote(item)
+        }
+    }
 
     fun addToNote(subnote: String) {
         viewModelScope.launch(Dispatchers.IO) {

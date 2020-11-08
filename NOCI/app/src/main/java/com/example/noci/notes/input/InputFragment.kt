@@ -79,7 +79,6 @@ class InputFragment : Fragment() {
                     inputViewModel.updateNote(details.id, noteTitle, noteDate)
                 } else {
                     inputViewModel.addNote(noteTitle, noteDate)
-
                 }
 
                 onGoBack()

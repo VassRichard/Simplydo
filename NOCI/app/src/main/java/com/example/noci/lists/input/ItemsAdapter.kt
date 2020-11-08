@@ -12,7 +12,7 @@ import com.example.noci.databinding.ItemStyleBinding
 
 const val EDIT_CHECKER: String = ""
 
-class ShopNoteAdapter(private val adapterInfo: ListsInputFragment, private val adapterDelete: ListsInputFragment) :
+class ShopNoteAdapter(private val adapterDelete: ItemsAdapterDelete) :
     ListAdapter<Items, ShopNoteAdapter.ViewHolder>(
         ShowNotesDiffCallback()
     ) {
@@ -26,12 +26,12 @@ class ShopNoteAdapter(private val adapterInfo: ListsInputFragment, private val a
 
         Log.e("ITEM : ", "IS $currentItem")
 
-        holder.bind(currentItem, adapterInfo, adapterDelete)
+        holder.bind(currentItem, adapterDelete)
     }
 
     class ViewHolder(val binding: ItemStyleBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(currentItem: Items, adapterInfo: ListsInputFragment, adapterDelete: ListsInputFragment) {
+        fun bind(currentItem: Items, adapterDelete: ItemsAdapterDelete) {
             binding.listTitle.text = currentItem.name
 
             // context for the overdueSignaler
@@ -52,9 +52,9 @@ class ShopNoteAdapter(private val adapterInfo: ListsInputFragment, private val a
 //            }
 
             // function for deleting a note, this.function -> interface -> override function
-//            binding.deleteNote.setOnClickListener {
-//                adapterDelete.deleteItem(currentItem)
-//            }
+            binding.itemCheckbox.setOnClickListener {
+                adapterDelete.deleteItem(currentItem)
+            }
 
         }
 
@@ -79,10 +79,6 @@ class ShowNotesDiffCallback : DiffUtil.ItemCallback<Items>() {
     }
 }
 
-interface AdapterInfo {
-    fun editItem(currentItem: Items)
-}
-
-interface AdapterDelete {
+interface ItemsAdapterDelete {
     fun deleteItem(currentItem: Items)
 }
