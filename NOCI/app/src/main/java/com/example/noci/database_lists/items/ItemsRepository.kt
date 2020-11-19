@@ -2,15 +2,19 @@ package com.example.noci.database_lists.items
 
 import androidx.lifecycle.LiveData
 import com.example.listprototype.list.CURRENT_LIST
+import com.example.noci.lists.ITEM_DELETER_CHECKER
 import com.orhanobut.hawk.Hawk
 
 class ItemsRepository(private val itemsNoteDao: ItemsDao) {
 
-    val readAllData: LiveData<List<Items>> = itemsNoteDao.readAll()
+    private val theAlmightyID: String? = Hawk.get<String>(CURRENT_LIST)
 
-    val theAlmightyID = Hawk.get<String>(CURRENT_LIST)
-
-    val readSpecificData: LiveData<List<Items>> = itemsNoteDao.readSpecificData(theAlmightyID.toInt())
+    //val readAllData: LiveData<List<Items>> = itemsNoteDao.readAll()
+    val readSpecificData: LiveData<List<Items>>? = theAlmightyID?.toInt()?.let {
+        itemsNoteDao.readSpecificData(
+            it
+        )
+    }
 
     //private val today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy")).toString()
 
@@ -26,6 +30,12 @@ class ItemsRepository(private val itemsNoteDao: ItemsDao) {
 
     suspend fun deleteNote(note: Items) {
         itemsNoteDao.deleteNote(note)
+    }
+
+    suspend fun deleteItemsFromSpecificList() {
+        val theItemsId = Hawk.get<String>(ITEM_DELETER_CHECKER)
+
+        itemsNoteDao.deleteItemsFromSpecificList(theItemsId.toInt())
     }
 
 }

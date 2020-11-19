@@ -50,6 +50,8 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
         binding.notesList.adapter = adapter
 
+        Hawk.init(this.context).build()
+
         return binding.root
     }
 

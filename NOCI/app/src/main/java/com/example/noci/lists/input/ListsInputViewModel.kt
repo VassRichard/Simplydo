@@ -51,8 +51,9 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
 
         val shopNoteDao = ItemsDatabase.getInstance(application).shopNoteDao
         itemsRepository = ItemsRepository(shopNoteDao)
-        //shopReadAll = shopRepository.readAllData
-        itemsReadAll = itemsRepository.readSpecificData
+
+        // change readSpecificData to readAllData if you want to show all items
+        itemsReadAll = itemsRepository.readSpecificData!!
     }
 
     fun insertNoteInitializer() {
@@ -86,6 +87,12 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
            itemsRepository.deleteNote(item)
         }
     }
+
+//    fun deleteItemsFromSpecificList() {
+//        uiScope.launch {
+//            itemsRepository.deleteItemsFromSpecificList()
+//        }
+//    }
 
     fun addToNote(subnote: String) {
         viewModelScope.launch(Dispatchers.IO) {

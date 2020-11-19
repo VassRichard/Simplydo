@@ -34,8 +34,10 @@ class ShopNoteAdapter(private val adapterDelete: ItemsAdapterDelete) :
         fun bind(currentItem: Items, adapterDelete: ItemsAdapterDelete) {
             binding.listTitle.text = currentItem.name
 
-            // context for the overdueSignaler
-
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // CREATE IN THE ITEM DATABASE A BOOLEAN TYPE, AFTER THE READING OF ALL DATA CHECK IF THE ITEMS ARE CHECKED OR NOT THEN SHOW THEM AS SUCH, ON EVERY ITEMCHECKBOX CLICK CHECK IF THE ITEM IS CHECKED, IF CHECKED THEN UNCHECK, ELSE CHECK
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            
 //            if(currentItem.listBool == true) {
 //                binding.expand.visibility = View.VISIBLE
 //            } else {
@@ -53,7 +55,7 @@ class ShopNoteAdapter(private val adapterDelete: ItemsAdapterDelete) :
 
             // function for deleting a note, this.function -> interface -> override function
             binding.itemCheckbox.setOnClickListener {
-                adapterDelete.deleteItem(currentItem)
+                //adapterDelete.deleteItem(currentItem)
             }
 
         }

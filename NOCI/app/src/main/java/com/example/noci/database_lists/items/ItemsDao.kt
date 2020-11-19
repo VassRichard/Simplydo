@@ -27,6 +27,8 @@ interface ItemsDao {
     @Delete
     suspend fun deleteNote(noteId: Items)
 
+    @Query( "DELETE FROM item_table WHERE noteId = :id")
+    suspend fun deleteItemsFromSpecificList(id: Int)
 
 //    @Update
 //    fun update(note: NoteAttr)

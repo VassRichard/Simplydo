@@ -26,7 +26,7 @@ interface ShopListDao {
     suspend fun updateNote(id: Int, newTitle: String, newDate: String)
 
     @Delete
-    suspend fun deleteNote(noteId: ShopLists)
+    suspend fun deleteList(noteId: ShopLists)
 
 
 //    @Update

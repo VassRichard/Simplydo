@@ -18,6 +18,8 @@ import com.example.noci.R
 import com.example.noci.database.Note
 import com.example.noci.database_lists.items.Items
 import com.example.noci.databinding.FragmentInputListsBinding
+import com.example.noci.lists.ITEM_DELETER_CHECKER
+import com.orhanobut.hawk.Hawk
 import java.util.*
 
 class ListsInputFragment : Fragment(), ItemsAdapterDelete {
@@ -56,6 +58,9 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
 
         //val editChecker = Hawk.get<String>(EDIT_CHECKER)
 
+        val itemsIdString = Hawk.get<String>(ITEM_DELETER_CHECKER)
+        //val itemsIdInt = itemsIdString.toInt()
+
         //if (editChecker == "edit") {0
         val details = ListsInputFragmentArgs.fromBundle(requireArguments()).lists
         Log.e(" DET ", "$details")
@@ -79,6 +84,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
                 it?.let {
                     adapter.submitList(it)
                 }
+                Hawk.delete(ITEM_DELETER_CHECKER)
             }
         })
 
@@ -154,6 +160,12 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
                 //inputViewModel.addToNote(subnote)
             }
         })
+
+//        if(itemsIdString != null || itemsIdString != "") {
+//            //val id = ITEM_DELETER_CHECKER-0
+//            inputViewModel.deleteItemsFromSpecificList()
+//        }
+
     }
 
     override fun deleteItem(currentItem: Items) {

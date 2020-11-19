@@ -2,6 +2,8 @@ package com.example.noci.database_lists
 
 
 import androidx.lifecycle.LiveData
+import com.example.noci.database_lists.items.Items
+import com.example.noci.database_lists.items.ItemsDao
 
 class ShopListsRepository(private val noteDao: ShopListDao) {
 
@@ -23,8 +25,12 @@ class ShopListsRepository(private val noteDao: ShopListDao) {
         noteDao.updateNote(id, newTitle, newDate)
     }
 
-    suspend fun deleteNote(note: ShopLists) {
-        noteDao.deleteNote(note)
+    suspend fun deleteList(note: ShopLists) {
+        noteDao.deleteList(note)
+    }
+
+    suspend fun deleteItemsFromSpecificList(itemsId: Int) {
+        //itemDao.deleteItemsFromSpecificList(itemsId)
     }
 
 }
