@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import com.example.noci.database.Note
-import com.example.noci.notes.SWITCH_CHECKER
 import com.example.noci.notes.input.InputFragmentArgs
 import com.orhanobut.hawk.Hawk
 
@@ -14,7 +13,8 @@ class InputActivity : AppCompatActivity() {
 
         Hawk.init(this).build()
 
-        val theme = Hawk.get<String>(SWITCH_CHECKER)
+        val theme = Hawk.get<String>(MODE_ENABLER, "")
+
         if (theme == "dark_mode") {
             setTheme(R.style.AppThemeDark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

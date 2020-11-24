@@ -15,16 +15,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.noci.R
 import com.example.noci.database.Note
 import com.example.noci.InputActivity
+import com.example.noci.MODE_ENABLER
 import com.example.noci.databinding.FragmentNotesBinding
 import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.fragment_notes.*
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
-
-const val SWITCH_CHECKER: String = ""
-
 
 class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
@@ -50,25 +46,47 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
         binding.notesList.adapter = adapter
 
-        Hawk.init(this.context).build()
-
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
 
+        Hawk.init(context).build()
+
         if (!threadChecker) {
             thread.start()
         }
 
-        binding.notesList.visibility = View.VISIBLE
-        binding.notesButton.visibility = View.VISIBLE
+//        binding.notesList.visibility = View.VISIBLE
+//        binding.notesButton.visibility = View.VISIBLE
 
         //val todayDate =
             //LocalDateTime.now().format(DateTimeFormatter.ofPattern("d MMM yyyy")).toString()
 
         //notesViewModel.getTodayTasksCount(todayDate)
+
+        notesViewModel.onClickedSwitch.observe(viewLifecycleOwner, Observer {
+            if(it) {
+                val theme = Hawk.get<String>(MODE_ENABLER)
+
+                if(theme == null) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    //activity?.setTheme(R.style.AppThemeDark)
+                    //activity?.startActivity(Intent(context, NotesActivity::class.java))
+                    //activity?.finish()
+                    Hawk.put(MODE_ENABLER, "dark_mode")
+                    notesViewModel.dayNightResetter()
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    //activity?.setTheme(R.style.AppThemeDark)
+                    //activity?.startActivity(Intent(context, NotesActivity::class.java))
+                    //activity?.finish()
+                    Hawk.delete(MODE_ENABLER)
+                    notesViewModel.dayNightResetter()
+                }
+            }
+        })
 
         notesViewModel.readAllData.observe(viewLifecycleOwner, Observer {
             if (it.isEmpty()) {
@@ -77,7 +95,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
             } else {
                 binding.emptyListTitle.visibility = View.INVISIBLE
                 binding.emptyListDescription.visibility = View.INVISIBLE
-
+            }
                 // show the amount of tasks today
 //                val calendar = Calendar.getInstance()
 //                val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -100,7 +118,8 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
                 it?.let {
                     adapter.submitList(it)
                 }
-            }
+
+            Hawk.delete(EDIT_CHECKER)
         })
 
         notesViewModel.goToInput.observe(viewLifecycleOwner, Observer {
@@ -122,6 +141,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
     }
 
+    // Thread function that runs in another Thread, not blocking the interface and calculates today's date
     private val thread: Thread = object : Thread() {
         override fun run() {
             try {
@@ -140,6 +160,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
         }
     }
 
+    // override function for editItem interface defined in NotesAdapter, it also transfers a Bundle(that holds the currentItem's attributes) into the InputActivity
     override fun editItem(currentItem: Note) {
         val intent = Intent(context, InputActivity::class.java)
 
@@ -147,10 +168,12 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
         startActivity(intent)
     }
 
+    // override function for deleteItem interface defined in NotesAdapter
     override fun deleteItem(currentItem: Note) {
         notesViewModel.deleteFromLocalDB(currentItem)
     }
 
+    // function that accesses the InputActivity interface
     fun onAddNote() {
         val intent = Intent(context, InputActivity::class.java)
 

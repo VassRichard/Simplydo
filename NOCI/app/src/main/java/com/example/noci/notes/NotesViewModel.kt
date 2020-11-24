@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val viewModelJob = Job()

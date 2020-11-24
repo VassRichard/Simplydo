@@ -22,6 +22,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/empty_lists_title"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:fontFamily="@font/amiko_bold"
+            android:gravity="bottom|center"
+            android:text="@string/no_lists_added"
+            android:textSize="24sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/empty_lists_description"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:fontFamily="@font/amiko_regular"
+            android:gravity="top|center"
+            android:text="@string/add_lists"
+            android:textSize="20sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/empty_lists_title" />
+
         <EditText
             android:id="@+id/lists_title"
             android:layout_width="0dp"

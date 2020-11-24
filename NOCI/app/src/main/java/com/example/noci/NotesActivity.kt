@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.example.noci.notes.SWITCH_CHECKER
 import com.example.noci.notification.AlarmReceiver
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.orhanobut.hawk.Hawk
 
+const val MODE_ENABLER: String = ""
 
 class NotesActivity : AppCompatActivity() {
     lateinit var bottomNavigationView : BottomNavigationView
@@ -21,7 +21,8 @@ class NotesActivity : AppCompatActivity() {
 
         Hawk.init(this).build()
 
-        val theme = Hawk.get<String>(SWITCH_CHECKER)
+        val theme = Hawk.get<String>(MODE_ENABLER)
+
         if (theme == "dark_mode") {
             setTheme(R.style.AppThemeDark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

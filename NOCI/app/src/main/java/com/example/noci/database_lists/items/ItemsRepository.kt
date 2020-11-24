@@ -1,7 +1,7 @@
 package com.example.noci.database_lists.items
 
 import androidx.lifecycle.LiveData
-import com.example.listprototype.list.CURRENT_LIST
+import com.example.noci.lists.CURRENT_LIST
 import com.example.noci.lists.ITEM_DELETER_CHECKER
 import com.orhanobut.hawk.Hawk
 
