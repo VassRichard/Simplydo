@@ -13,7 +13,7 @@
         <argument
             android:name="lists"
             android:defaultValue="@null"
-            app:argType="com.example.noci.database_lists.ShopLists"
+            app:argType="com.example.noci.database_lists.ItemList"
             app:nullable="true" />
     </fragment>
 </navigation>

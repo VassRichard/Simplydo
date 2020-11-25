@@ -2,18 +2,16 @@ package com.example.noci.database_lists
 
 
 import androidx.lifecycle.LiveData
-import com.example.noci.database_lists.items.Items
-import com.example.noci.database_lists.items.ItemsDao
 
-class ShopListsRepository(private val noteDao: ShopListDao) {
+class ItemListRepository(private val noteDao: ItemListDao) {
 
-    val readAllData: LiveData<List<ShopLists>> = noteDao.readAll()
+    val readAllData: LiveData<List<ItemList>> = noteDao.readAll()
 
     //private val today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy")).toString()
 
     //val todayTasksCount: LiveData<String> = noteDao.getTodayTasksCount()
 
-    suspend fun addNote(note: ShopLists) {
+    suspend fun addNote(note: ItemList) {
         noteDao.addNote(note)
     }
 
@@ -25,7 +23,11 @@ class ShopListsRepository(private val noteDao: ShopListDao) {
         noteDao.updateNote(id, newTitle, newDate)
     }
 
-    suspend fun deleteList(note: ShopLists) {
+    suspend fun updateTitle(titleId: Int, title: String) {
+        noteDao.updateTitle(titleId, title)
+    }
+
+    suspend fun deleteList(note: ItemList) {
         noteDao.deleteList(note)
     }
 

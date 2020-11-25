@@ -70,7 +70,9 @@ class InputFragment : Fragment() {
                 //Log.e("NOTE TAG : ", "IS ${details.id} , ${details.title}, ${details.noteDate}, ${details.date}")
             //}
             if (TextUtils.isEmpty(noteTitle)) {
-                Toast.makeText(context, "Title field can't be empty!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Title field can't be empty!", Toast.LENGTH_SHORT)
+                    .show()
+                binding.addTitle.requestFocus()
             } else if (TextUtils.isEmpty(noteDate)) {
                 Toast.makeText(context, "Date field can't be empty!", Toast.LENGTH_SHORT)
                     .show()

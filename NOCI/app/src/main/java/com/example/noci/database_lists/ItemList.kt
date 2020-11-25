@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter
 
 @Parcelize
 @Entity(tableName = "list_table")
-data class ShopLists @RequiresApi(Build.VERSION_CODES.O) constructor(
+data class ItemList @RequiresApi(Build.VERSION_CODES.O) constructor(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
 

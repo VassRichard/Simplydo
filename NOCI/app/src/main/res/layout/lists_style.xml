@@ -7,7 +7,7 @@
 
         <variable
             name="note"
-            type="com.example.noci.database_lists.ShopLists" />
+            type="com.example.noci.database_lists.ItemList" />
 
     </data>
 

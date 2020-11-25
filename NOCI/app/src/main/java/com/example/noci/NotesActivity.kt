@@ -64,11 +64,11 @@ class NotesActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
-        val intent = Intent(this, AlarmReceiver::class.java)
-        intent.putExtra("NotificationText", "some text")
-        val pendingIntent =
-            PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-        val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
-        alarmManager[AlarmManager.RTC_WAKEUP, 1000] = pendingIntent
+//        val intent = Intent(this, AlarmReceiver::class.java)
+//        intent.putExtra("NotificationText", "some text")
+//        val pendingIntent =
+//            PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//        val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
+//        alarmManager[AlarmManager.RTC_WAKEUP, 1000] = pendingIntent
     }
 }

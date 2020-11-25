@@ -69,6 +69,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
             //binding.addButton.text = "SAVE NOTE"
 
             binding.addTitle.text = details.title
+            binding.editTitle.setText(details.title)
             //binding.addDate.text = details.noteDate
         }
         //}
@@ -110,8 +111,34 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
             }
         })
 
+        inputViewModel.onChangeTitle.observe(viewLifecycleOwner, Observer {
+            if(it) {
+                binding.addTitle.visibility = View.INVISIBLE
+                binding.editTitle.visibility = View.VISIBLE
+
+                binding.editTitle.requestFocus()
+            }
+            binding.editTitle.onFocusChangeListener = View.OnFocusChangeListener() { view: View, b: Boolean ->
+                if(!binding.editTitle.hasFocus()) {
+                    binding.addTitle.visibility = View.VISIBLE
+                    binding.editTitle.visibility = View.INVISIBLE
+
+                    val newTitle : String = binding.editTitle.text.toString()
+
+                    binding.addTitle.text = newTitle
+                    if (details != null) {
+                        inputViewModel.updateTitle(details.id, newTitle)
+                    }
+                }
+            }
+        })
+
         inputViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
             if (it) {
+                if (details != null) {
+                    inputViewModel.updateTitle(details.id, binding.addTitle.text.toString())
+                }
+
                 val intent = Intent(context, ListsInputActivity::class.java)
 
                 startActivity(intent)
@@ -157,14 +184,8 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
 
                 binding.itemName.setText("")
 
-                //inputViewModel.addToNote(subnote)
             }
         })
-
-//        if(itemsIdString != null || itemsIdString != "") {
-//            //val id = ITEM_DELETER_CHECKER-0
-//            inputViewModel.deleteItemsFromSpecificList()
-//        }
 
     }
 

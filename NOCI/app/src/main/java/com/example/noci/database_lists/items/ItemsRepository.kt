@@ -10,6 +10,7 @@ class ItemsRepository(private val itemsNoteDao: ItemsDao) {
     private val theAlmightyID: String? = Hawk.get<String>(CURRENT_LIST)
 
     //val readAllData: LiveData<List<Items>> = itemsNoteDao.readAll()
+
     val readSpecificData: LiveData<List<Items>>? = theAlmightyID?.toInt()?.let {
         itemsNoteDao.readSpecificData(
             it
@@ -27,6 +28,8 @@ class ItemsRepository(private val itemsNoteDao: ItemsDao) {
 //    fun getTodayTasksCount(today: String) {
 //        noteDao.getTodayTasksCount(today)
 //    }
+
+
 
     suspend fun deleteNote(note: Items) {
         itemsNoteDao.deleteNote(note)

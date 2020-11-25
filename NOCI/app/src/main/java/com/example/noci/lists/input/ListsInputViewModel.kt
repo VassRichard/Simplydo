@@ -4,6 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.noci.database.Note
+import com.example.noci.database_lists.ItemListDatabase
+import com.example.noci.database_lists.ItemListRepository
 import com.example.noci.database_lists.items.Items
 import com.example.noci.database_lists.items.ItemsDatabase
 import com.example.noci.database_lists.items.ItemsRepository
@@ -26,6 +28,10 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
     val insertDateInitializer : LiveData<Boolean>
         get() = _insertDateInitializer
 
+    private val _onChangeTitle = MutableLiveData<Boolean>()
+    val onChangeTitle : LiveData<Boolean>
+        get() = _onChangeTitle
+
     private val _onGoBackToMain = MutableLiveData<Boolean>()
     val onGoBackToMain : LiveData<Boolean>
         get() = _onGoBackToMain
@@ -35,7 +41,7 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
         get() = _addToListBool
 
     //private val readAll: LiveData<List<Note>>
-    //private val repository: NoteRepository
+    private val listRepository: ItemListRepository
 
     val itemsReadAll: LiveData<List<Items>>
     private val itemsRepository: ItemsRepository
@@ -45,8 +51,8 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
     private var newNoteType: Int = -1
 
     init {
-        //val noteDao = NoteDatabase.getInstance(application).noteDao
-        //repository = NoteRepository(noteDao)
+        val noteDao = ItemListDatabase.getInstance(application).noteDao
+        listRepository = ItemListRepository(noteDao)
         //readAll = repository.readAllData
 
         val shopNoteDao = ItemsDatabase.getInstance(application).shopNoteDao
@@ -76,11 +82,15 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-//    fun updateNote(id: Int, newTitle: String, newDate: String) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.updateNote(id, newTitle, newDate)
-//        }
-//    }
+    fun updateTitle(titleId: Int, title: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            listRepository.updateTitle(titleId, title)
+        }
+    }
+
+    fun onChangeTitleObserver() {
+        _onChangeTitle.value = true
+    }
 
     fun deleteFromLocalDB(item: Items) {
         uiScope.launch {
@@ -88,26 +98,20 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-//    fun deleteItemsFromSpecificList() {
-//        uiScope.launch {
-//            itemsRepository.deleteItemsFromSpecificList()
+//    fun addToNote(subnote: String) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            //repository.updateNote(subnote)
 //        }
 //    }
 
-    fun addToNote(subnote: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            //repository.updateNote(subnote)
-        }
-    }
-
-    fun onSetNoteType(type: Int) {
-        noteType = type
-        newNoteType = type
-    }
-
-    fun onGoBack() {
-        _onGoBackToMain.value = true
-    }
+//    fun onSetNoteType(type: Int) {
+//        noteType = type
+//        newNoteType = type
+//    }
+//
+//    fun onGoBack() {
+//        _onGoBackToMain.value = true
+//    }
 
     fun addToList() {
         _addToListBool.value = true
