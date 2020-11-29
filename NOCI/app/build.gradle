@@ -109,4 +109,11 @@ dependencies {
     //
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
+    // Dialog Fragment for list title input
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
+    // supportFragmentManager , not working
+    //implementation "androidx.fragment:fragment-ktx:1.2.5"
+
 }

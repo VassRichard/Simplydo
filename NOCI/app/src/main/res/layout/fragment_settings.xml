@@ -19,7 +19,7 @@
             android:paddingStart="5dp"
             android:src="@drawable/ic_backbutton"
             android:elevation="6dp"
-            android:background="@drawable/list_style"
+            android:background="@color/white"
             android:backgroundTint="@color/mainTopHeader"
             android:onClick="@{() -> settingsViewModel.onGoBack()}"
             app:layout_constraintEnd_toStartOf="@id/settings_fragment_title"
@@ -31,7 +31,7 @@
             android:id="@+id/settings_fragment_title"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:background="@drawable/list_style"
+            android:background="@color/white"
             android:backgroundTint="@color/mainTopHeader"
             android:elevation="6dp"
             android:fontFamily="@font/work_sans_regular"
@@ -60,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/settings_fragment_title"
-            android:background="@drawable/list_style"/>
+            android:background="@color/white"/>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/dark_mode_switch"
@@ -88,7 +88,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:elevation="6dp"
-            android:background="@drawable/list_style"/>
+            android:background="@color/white"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

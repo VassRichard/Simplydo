@@ -87,6 +87,35 @@ class InputFragment : Fragment() {
             }
         })
 
+        inputViewModel.noteOpacity.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                0 -> {
+                    binding.qualityZeroImage.alpha = 0.75F
+                    noteOpacityChanger(it)
+                }
+                1 -> {
+                    binding.qualityOneImage.alpha = 0.75F
+                    noteOpacityChanger(it)
+                }
+                2 -> {
+                    binding.qualityTwoImage.alpha = 0.75F
+                    noteOpacityChanger(it)
+                }
+                3 -> {
+                    binding.qualityThreeImage.alpha = 0.75F
+                    noteOpacityChanger(it)
+                }
+                4 -> {
+                    binding.qualityFourImage.alpha = 0.75F
+                    noteOpacityChanger(it)
+                }
+                5 -> {
+                    binding.qualityFiveImage.alpha = 0.75F
+                    noteOpacityChanger(it)
+                }
+            }
+        })
+
         inputViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
             if (it) {
                 val intent = Intent(context, NotesActivity::class.java)
@@ -121,6 +150,46 @@ class InputFragment : Fragment() {
             datepickerdialog!!.show()
         })
 
+    }
+
+    fun noteOpacityChanger(typeNumber: Int) {
+        if(typeNumber == 0) {
+            binding.qualityOneImage.alpha = 1F
+            binding.qualityTwoImage.alpha = 1F
+            binding.qualityThreeImage.alpha = 1F
+            binding.qualityFourImage.alpha = 1F
+            binding.qualityFiveImage.alpha = 1F
+        } else if(typeNumber == 1) {
+            binding.qualityZeroImage.alpha = 1F
+            binding.qualityTwoImage.alpha = 1F
+            binding.qualityThreeImage.alpha = 1F
+            binding.qualityFourImage.alpha = 1F
+            binding.qualityFiveImage.alpha = 1F
+        } else if(typeNumber == 2) {
+            binding.qualityZeroImage.alpha = 1F
+            binding.qualityOneImage.alpha = 1F
+            binding.qualityThreeImage.alpha = 1F
+            binding.qualityFourImage.alpha = 1F
+            binding.qualityFiveImage.alpha = 1F
+        } else if(typeNumber == 3) {
+            binding.qualityZeroImage.alpha = 1F
+            binding.qualityOneImage.alpha = 1F
+            binding.qualityTwoImage.alpha = 1F
+            binding.qualityFourImage.alpha = 1F
+            binding.qualityFiveImage.alpha = 1F
+        } else if(typeNumber == 4) {
+            binding.qualityZeroImage.alpha = 1F
+            binding.qualityOneImage.alpha = 1F
+            binding.qualityTwoImage.alpha = 1F
+            binding.qualityThreeImage.alpha = 1F
+            binding.qualityFiveImage.alpha = 1F
+        } else if(typeNumber == 5) {
+            binding.qualityZeroImage.alpha = 1F
+            binding.qualityOneImage.alpha = 1F
+            binding.qualityTwoImage.alpha = 1F
+            binding.qualityThreeImage.alpha = 1F
+            binding.qualityFourImage.alpha = 1F
+        }
     }
 
     override fun onPause() {

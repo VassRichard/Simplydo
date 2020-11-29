@@ -18,14 +18,14 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="6dp"
-        android:background="@drawable/note_style"
+        android:background="@drawable/style_note"
         android:elevation="32dp">
 
         <ImageView
             android:id="@+id/overdue_signaler"
             android:layout_width="4dp"
             android:layout_height="35dp"
-            android:background="@drawable/note_overdue_yesterday"
+            android:background="@drawable/overdue_yesterday"
             app:layout_constraintCircleRadius="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

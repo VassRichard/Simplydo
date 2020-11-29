@@ -26,6 +26,10 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
     private val readAll: LiveData<List<Note>>
     private val repository: NoteRepository
 
+    private val _noteOpacity = MutableLiveData<Int>()
+    val noteOpacity: LiveData<Int>
+        get() = _noteOpacity
+
     private var noteType : Int = -1
     private var newNoteType: Int = -1
 
@@ -62,6 +66,8 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
     }
 
     fun onSetNoteType(type: Int) {
+        _noteOpacity.value = type
+
         noteType = type
         newNoteType = type
     }

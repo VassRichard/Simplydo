@@ -126,6 +126,8 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
                     val newTitle : String = binding.editTitle.text.toString()
 
                     binding.addTitle.text = newTitle
+
+                    // check if this goes as intened
                     if (details != null) {
                         inputViewModel.updateTitle(details.id, newTitle)
                     }
@@ -135,10 +137,6 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
 
         inputViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
             if (it) {
-                if (details != null) {
-                    inputViewModel.updateTitle(details.id, binding.addTitle.text.toString())
-                }
-
                 val intent = Intent(context, ListsInputActivity::class.java)
 
                 startActivity(intent)
