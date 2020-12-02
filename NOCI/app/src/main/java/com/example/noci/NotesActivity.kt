@@ -1,39 +1,58 @@
 package com.example.noci
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.example.noci.notification.AlarmReceiver
+import com.example.noci.notes.MODE_ENABLER
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.orhanobut.hawk.Hawk
-
-const val MODE_ENABLER: String = ""
 
 class NotesActivity : AppCompatActivity() {
     lateinit var bottomNavigationView : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        Hawk.init(this).build()
-
-        val theme = Hawk.get<String>(MODE_ENABLER)
-
-        if (theme == "dark_mode") {
+        if(ThemeKey.theme == "dark_mode") {
+            setThemeKey("dark_mode")
             setTheme(R.style.AppThemeDark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            setTheme(R.style.AppTheme)
+        } else if(ThemeKey.theme == "light_mode") {
+            setThemeKey("light_mode")
+            setTheme(R.style.AppThemeLight)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+
+//        Hawk.init(this).build()
+//
+//        val theme = Hawk.get<String>(MODE_ENABLER, "light_mode")
+//
+//        if (theme == "dark_mode") {
+//            Hawk.put(MODE_ENABLER, "dark_mode")
+//            setTheme(R.style.AppThemeDark)
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else if(theme == "light_mode") {
+//            Hawk.put(MODE_ENABLER, "light_mode")
+//            setTheme(R.style.AppThemeLight)
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes)
 
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_NO){
+            applyDayNight(AppCompatDelegate.MODE_NIGHT_NO)
+        } else{
+            applyDayNight(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
     override fun onStart() {
@@ -59,6 +78,16 @@ class NotesActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_menu)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
+    }
+
+    private fun applyDayNight(state: Int){
+        if (state == AppCompatDelegate.MODE_NIGHT_NO){
+            //apply day colors for your views
+            setTheme(R.style.AppThemeLight)
+        }else{
+            //apply night colors for your views
+            setTheme(R.style.AppThemeDark)
+        }
     }
 
     override fun onDestroy() {

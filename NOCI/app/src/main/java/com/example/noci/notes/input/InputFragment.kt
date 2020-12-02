@@ -1,6 +1,7 @@
 package com.example.noci.notes.input
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -8,16 +9,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.noci.NotesActivity
 import com.example.noci.R
+import com.example.noci.ThemeKey
 import com.example.noci.databinding.FragmentInputBinding
+import com.example.noci.notes.MODE_ENABLER
+import com.example.noci.setThemeKey
+import com.orhanobut.hawk.Hawk
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.properties.Delegates
 
 class InputFragment : Fragment() {
     private lateinit var binding: FragmentInputBinding
@@ -25,6 +32,8 @@ class InputFragment : Fragment() {
 
     val MONTHS =
         arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+    private var currentNightMode by Delegates.notNull<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +45,31 @@ class InputFragment : Fragment() {
         inputViewModel = ViewModelProvider(this).get(InputViewModel::class.java)
 
         binding.inputViewModel = inputViewModel
+
+        // the problem is here
+        if(ThemeKey.theme == "dark_mode") {
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            //Hawk.put(MODE_ENABLER, "dark_mode")
+            setThemeKey("dark_mode")
+        } else if(ThemeKey.theme == "light_mode") {
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            //Hawk.put(MODE_ENABLER, "light_mode")
+            setThemeKey("light_mode")
+        }
+
+//        Hawk.init(context).build()
+//
+//        currentNightMode = AppCompatDelegate.getDefaultNightMode()
+//        val theme = Hawk.get<String>(MODE_ENABLER, "light_mode")
+//
+//        // the problem is here
+//        if(theme == "dark_mode") {
+//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//            Hawk.put(MODE_ENABLER, "dark_mode")
+//        } else if(theme == "light_mode") {
+//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//            Hawk.put(MODE_ENABLER, "light_mode")
+//        }
 
         return binding.root
     }

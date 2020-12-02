@@ -6,23 +6,26 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import com.example.noci.database_lists.ItemList
 import com.example.noci.lists.input.ListsInputFragmentArgs
+import com.example.noci.notes.MODE_ENABLER
 import com.orhanobut.hawk.Hawk
 
 class ListsInputActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        Hawk.init(this).build()
-
-        val theme = Hawk.get<String>(MODE_ENABLER, "")
-
-        if (theme == "dark_mode") {
-            setTheme(R.style.AppThemeDark)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            setTheme(R.style.AppTheme)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
+//        Hawk.init(applicationContext).build()
+//
+//        val theme = Hawk.get<String>(MODE_ENABLER, "")
+//
+//        if (theme == "dark_mode") {
+//            setTheme(R.style.AppThemeDark)
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//            Hawk.put(MODE_ENABLER, "dark_mode")
+//        } else {
+//            setTheme(R.style.AppTheme)
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//            Hawk.put(MODE_ENABLER, "light_mode")
+//        }
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_lists)

@@ -2,30 +2,41 @@ package com.example.noci.notes
 
 //import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
 
+import android.app.Activity
+import android.app.Application
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat.recreate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.example.noci.R
-import com.example.noci.database.Note
 import com.example.noci.InputActivity
-import com.example.noci.MODE_ENABLER
+import com.example.noci.R
+import com.example.noci.ThemeKey
+import com.example.noci.database.Note
 import com.example.noci.databinding.FragmentNotesBinding
+import com.example.noci.setThemeKey
+import com.example.noci.utils.MyApplication
 import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.fragment_notes.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
 
 class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
     private lateinit var binding: FragmentNotesBinding
     private lateinit var notesViewModel: NotesViewModel
+
+    private var currentNightMode by Delegates.notNull<Int>()
 
     private val MONTHS =
         arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
@@ -37,7 +48,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notes, container, false)
         notesViewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
@@ -46,49 +57,61 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
         binding.notesList.adapter = adapter
 
+        Hawk.init(context).build()
+
+        currentNightMode = AppCompatDelegate.getDefaultNightMode()
+        val theme = Hawk.get<String>(MODE_ENABLER, "light_mode")
+
+        // the problem is here
+        if(ThemeKey.theme == "dark_mode") {
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            //Hawk.put(MODE_ENABLER, "dark_mode")
+            setThemeKey("dark_mode")
+        } else if(ThemeKey.theme == "light_mode") {
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            //Hawk.put(MODE_ENABLER, "light_mode")
+            setThemeKey("light_mode")
+        }
+
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
 
-        Hawk.init(context).build()
-
         if (!threadChecker) {
             thread.start()
         }
 
-//        binding.notesList.visibility = View.VISIBLE
-//        binding.notesButton.visibility = View.VISIBLE
-
         //val todayDate =
-            //LocalDateTime.now().format(DateTimeFormatter.ofPattern("d MMM yyyy")).toString()
+        //LocalDateTime.now().format(DateTimeFormatter.ofPattern("d MMM yyyy")).toString()
 
         //notesViewModel.getTodayTasksCount(todayDate)
 
         notesViewModel.onClickedSwitch.observe(viewLifecycleOwner, Observer {
-            if(it) {
-                val theme = Hawk.get<String>(MODE_ENABLER)
-
-                if(theme == null) {
+            if (it) {
+                //val currentNightMode =
+                //resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
+                    //Hawk.put(MODE_ENABLER, "dark_mode")
+                    setThemeKey("dark_mode")
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    //activity?.setTheme(R.style.AppThemeDark)
-                    //activity?.startActivity(Intent(context, NotesActivity::class.java))
-                    //activity?.finish()
-                    Hawk.put(MODE_ENABLER, "dark_mode")
+                    //Hawk.put(MODE_ENABLER, "dark_mode")
+                    //activity?.let { it1 -> recreate(it1) }
                     notesViewModel.dayNightResetter()
-                } else {
+                } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                    //Hawk.put(MODE_ENABLER, "light_mode")
+                    setThemeKey("light_mode")
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    //activity?.setTheme(R.style.AppThemeDark)
-                    //activity?.startActivity(Intent(context, NotesActivity::class.java))
-                    //activity?.finish()
-                    Hawk.delete(MODE_ENABLER)
+                    //Hawk.put(MODE_ENABLER, "light_mode")
+                    //activity?.let { it1 -> recreate(it1) }
                     notesViewModel.dayNightResetter()
                 }
             }
         })
 
-        notesViewModel.readAllData.observe(viewLifecycleOwner, Observer {
+        notesViewModel.readAllData.observe(viewLifecycleOwner, Observer
+        {
             if (it.isEmpty()) {
                 binding.emptyListTitle.visibility = View.VISIBLE
                 binding.emptyListDescription.visibility = View.VISIBLE
@@ -96,7 +119,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
                 binding.emptyListTitle.visibility = View.INVISIBLE
                 binding.emptyListDescription.visibility = View.INVISIBLE
             }
-                // show the amount of tasks today
+            // show the amount of tasks today
 //                val calendar = Calendar.getInstance()
 //                val day = calendar.get(Calendar.DAY_OF_MONTH)
 //                val month = calendar.get(Calendar.MONTH)
@@ -115,17 +138,18 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 //
 //                Toast.makeText(context, "Today you have $todayTasks", Toast.LENGTH_LONG).show()
 
-                it?.let {
-                    adapter.submitList(it)
-                }
+            it?.let {
+                adapter.submitList(it)
+            }
 
             Hawk.delete(EDIT_CHECKER)
         })
 
-        notesViewModel.goToInput.observe(viewLifecycleOwner, Observer {
+        notesViewModel.goToInput.observe(viewLifecycleOwner, Observer
+        {
             if (it == true) {
 
-                if(binding.notesList.visibility == View.VISIBLE) {
+                if (binding.notesList.visibility == View.VISIBLE) {
                     onAddNote()
                     notesViewModel.resetGoToInput()
                 } else {
@@ -138,22 +162,24 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
         val itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
         itemTouchHelper.attachToRecyclerView(notes_list)
-
     }
 
     // Thread function that runs in another Thread, not blocking the interface and calculates today's date
-    private val thread: Thread = object : Thread() {
+    private
+    val thread: Thread = object : Thread() {
         override fun run() {
             try {
                 threadChecker = true
                 while (!this.isInterrupted) {
-                    sleep(1000)
+                    //sleep(1000)
                     val c: Calendar = Calendar.getInstance()
 
                     val df = SimpleDateFormat("EEEE", Locale.ENGLISH)
                     val formattedDate: String = df.format(c.time)
 
-                    binding.dayHeader.text = formattedDate
+                    if (binding.dayHeader.text != formattedDate) {
+                        binding.dayHeader.text = formattedDate
+                    }
                 }
             } catch (e: InterruptedException) {
             }

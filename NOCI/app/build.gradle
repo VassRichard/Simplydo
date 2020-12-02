@@ -116,4 +116,11 @@ dependencies {
     // supportFragmentManager , not working
     //implementation "androidx.fragment:fragment-ktx:1.2.5"
 
+    // Koin
+    implementation "org.koin:koin-core:2.1.6"
+    implementation "org.koin:koin-android:2.1.6"
+    implementation 'org.koin:koin-androidx-viewmodel:2.1.3'
+    implementation 'org.koin:koin-androidx-scope:2.1.3'
+    implementation "org.koin:koin-android-architecture:0.9.3"
+    implementation "org.koin:koin-androidx-fragment:2.1.6"
 }
