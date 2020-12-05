@@ -15,23 +15,21 @@
         android:layout_height="match_parent"
         android:elevation="32dp">
 
-
         <TextView
             android:id="@+id/input_fragment_title"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:backgroundTint="@color/mainTopHeader"
+            android:backgroundTint="@color/itemTopHeaderColor"
             android:elevation="6dp"
             android:gravity="center|end"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:text="@string/lists_input_fragment_title"
-            android:textColor="@color/mainPageDay"
+            android:textColor="@color/itemTopHeaderTextColor"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/add_title"
@@ -51,8 +49,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/input_fragment_note"
             android:paddingStart="5dp"
-            android:visibility="invisible"
             android:textSize="18sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/input_fragment_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_marginTop="5dp"
-            android:background="@color/mainPageDay"
+            android:background="@color/mainPageDayColor"
             app:layout_constraintBottom_toTopOf="@id/show_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,11 +97,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:textSize="18sp"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:gravity="center"
             android:screenReaderFocusable="true"
+            android:textSize="18sp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

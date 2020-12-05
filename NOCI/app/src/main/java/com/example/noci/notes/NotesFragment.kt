@@ -63,15 +63,15 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
         val theme = Hawk.get<String>(MODE_ENABLER, "light_mode")
 
         // the problem is here
-        if(ThemeKey.theme == "dark_mode") {
-            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            //Hawk.put(MODE_ENABLER, "dark_mode")
-            setThemeKey("dark_mode")
-        } else if(ThemeKey.theme == "light_mode") {
-            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            //Hawk.put(MODE_ENABLER, "light_mode")
-            setThemeKey("light_mode")
-        }
+//        if(ThemeKey.theme == "dark_mode") {
+//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//            //Hawk.put(MODE_ENABLER, "dark_mode")
+//            setThemeKey("dark_mode")
+//        } else if(ThemeKey.theme == "light_mode") {
+//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//            //Hawk.put(MODE_ENABLER, "light_mode")
+//            setThemeKey("light_mode")
+//        }
 
         return binding.root
     }
@@ -96,14 +96,12 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
                     //Hawk.put(MODE_ENABLER, "dark_mode")
                     setThemeKey("dark_mode")
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    //Hawk.put(MODE_ENABLER, "dark_mode")
                     //activity?.let { it1 -> recreate(it1) }
                     notesViewModel.dayNightResetter()
                 } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
                     //Hawk.put(MODE_ENABLER, "light_mode")
                     setThemeKey("light_mode")
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    //Hawk.put(MODE_ENABLER, "light_mode")
                     //activity?.let { it1 -> recreate(it1) }
                     notesViewModel.dayNightResetter()
                 }

@@ -19,7 +19,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginEnd="6dp"
         android:background="@drawable/style_note"
-        android:backgroundTint="@color/mainTopHeader"
+        android:backgroundTint="@color/noteBackgroundColor"
         android:elevation="32dp">
 
         <ImageView

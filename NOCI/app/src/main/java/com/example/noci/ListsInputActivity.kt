@@ -13,6 +13,16 @@ class ListsInputActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        if(ThemeKey.theme == "dark_mode") {
+            setThemeKey("dark_mode")
+            setTheme(R.style.AppThemeDark)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else if(ThemeKey.theme == "light_mode") {
+            setThemeKey("light_mode")
+            setTheme(R.style.AppThemeLight)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
 //        Hawk.init(applicationContext).build()
 //
 //        val theme = Hawk.get<String>(MODE_ENABLER, "")
