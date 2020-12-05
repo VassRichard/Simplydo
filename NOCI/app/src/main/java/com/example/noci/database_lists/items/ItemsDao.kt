@@ -21,6 +21,9 @@ interface ItemsDao {
     //@Query("SELECT COUNT(*) FROM note_table")
     //fun getTodayTasksCount(): LiveData<String>
 
+    @Query("UPDATE item_table SET itemState = :newState WHERE id = :id")
+    suspend fun editItem(id: Int, newState: Boolean)
+
     @Delete
     suspend fun deleteNote(noteId: Items)
 

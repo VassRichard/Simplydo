@@ -22,7 +22,7 @@ import com.example.noci.lists.ITEM_DELETER_CHECKER
 import com.orhanobut.hawk.Hawk
 import java.util.*
 
-class ListsInputFragment : Fragment(), ItemsAdapterDelete {
+class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
 
     private lateinit var binding: FragmentInputListsBinding
     private lateinit var inputViewModel: ListsInputViewModel
@@ -30,7 +30,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
     val MONTHS =
     arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
-    private val adapter = ShopNoteAdapter( this)
+    private val adapter = ShopNoteAdapter( this, this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -185,6 +185,10 @@ class ListsInputFragment : Fragment(), ItemsAdapterDelete {
             }
         })
 
+    }
+
+    override fun editItem(id: Int, newState: Boolean) {
+        inputViewModel.changeItemState(id, newState)
     }
 
     override fun deleteItem(currentItem: Items) {

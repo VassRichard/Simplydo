@@ -18,6 +18,9 @@ data class Items @RequiresApi(Build.VERSION_CODES.O) constructor(
     val name: String = "",
 
     @ColumnInfo(name = "noteId")
-    val noteId: Int
+    val noteId: Int,
+
+    @ColumnInfo(name = "itemState")
+    val itemState: Boolean
 
 ) : Parcelable

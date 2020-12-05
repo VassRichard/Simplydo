@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 // create the database
-@Database(entities = [Items::class], version = 10, exportSchema = false)
+@Database(entities = [Items::class], version = 11, exportSchema = false)
 abstract class ItemsDatabase : RoomDatabase()
 {
     // we declare the database accessibility class

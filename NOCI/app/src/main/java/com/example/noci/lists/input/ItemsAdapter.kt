@@ -12,7 +12,7 @@ import com.example.noci.databinding.ItemStyleBinding
 
 const val EDIT_CHECKER: String = ""
 
-class ShopNoteAdapter(private val adapterDelete: ItemsAdapterDelete) :
+class ShopNoteAdapter(private val itemAdapterEdit: ItemsAdapterEdit, private val itemAdapterDelete: ItemsAdapterDelete) :
     ListAdapter<Items, ShopNoteAdapter.ViewHolder>(
         ShowNotesDiffCallback()
     ) {
@@ -26,13 +26,14 @@ class ShopNoteAdapter(private val adapterDelete: ItemsAdapterDelete) :
 
         Log.e("ITEM : ", "IS $currentItem")
 
-        holder.bind(currentItem, adapterDelete)
+        holder.bind(currentItem, itemAdapterEdit, itemAdapterDelete)
     }
 
     class ViewHolder(val binding: ItemStyleBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(currentItem: Items, adapterDelete: ItemsAdapterDelete) {
+        fun bind(currentItem: Items, itemAdapterEdit: ItemsAdapterEdit, adapterDelete: ItemsAdapterDelete) {
             binding.listTitle.text = currentItem.name
+            binding.itemCheckbox.isChecked = currentItem.itemState
 
             // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // CREATE IN THE ITEM DATABASE A BOOLEAN TYPE, AFTER THE READING OF ALL DATA CHECK IF THE ITEMS ARE CHECKED OR NOT THEN SHOW THEM AS SUCH, ON EVERY ITEMCHECKBOX CLICK CHECK IF THE ITEM IS CHECKED, IF CHECKED THEN UNCHECK, ELSE CHECK
@@ -56,6 +57,12 @@ class ShopNoteAdapter(private val adapterDelete: ItemsAdapterDelete) :
             // function for deleting a note, this.function -> interface -> override function
             binding.itemCheckbox.setOnClickListener {
                 //adapterDelete.deleteItem(currentItem)
+                if(currentItem.itemState) {
+                    itemAdapterEdit.editItem(currentItem.id, false)
+                } else {
+                    itemAdapterEdit.editItem(currentItem.id, true)
+                }
+
             }
 
         }
@@ -83,4 +90,8 @@ class ShowNotesDiffCallback : DiffUtil.ItemCallback<Items>() {
 
 interface ItemsAdapterDelete {
     fun deleteItem(currentItem: Items)
+}
+
+interface ItemsAdapterEdit {
+    fun editItem(id: Int, newState: Boolean)
 }

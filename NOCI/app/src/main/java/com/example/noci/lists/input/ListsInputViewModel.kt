@@ -71,7 +71,7 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
     }
 
     fun addNote(title: String, noteId: Int) {
-        val input = Items(0, title, noteId)
+        val input = Items(0, title, noteId, false)
         insert(input)
         Log.e("this", "Added $input")
     }
@@ -90,6 +90,12 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
 
     fun onChangeTitleObserver() {
         _onChangeTitle.value = true
+    }
+
+    fun changeItemState(id: Int, newState: Boolean) {
+        uiScope.launch {
+            itemsRepository.editNote(id, newState)
+        }
     }
 
     fun deleteFromLocalDB(item: Items) {

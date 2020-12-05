@@ -29,7 +29,9 @@ class ItemsRepository(private val itemsNoteDao: ItemsDao) {
 //        noteDao.getTodayTasksCount(today)
 //    }
 
-
+    suspend fun editNote(id: Int, newState: Boolean) {
+        itemsNoteDao.editItem(id, newState)
+    }
 
     suspend fun deleteNote(note: Items) {
         itemsNoteDao.deleteNote(note)
