@@ -21,10 +21,6 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-//    private val _currentTime = MutableLiveData<String>()
-//    val currentTime: LiveData<String>
-//        get() = _currentTime
-
     private val _goToInput = MutableLiveData<Boolean>()
     val goToInput: LiveData<Boolean>
         get() = _goToInput
@@ -33,9 +29,9 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     val onClickedSwitch: LiveData<Boolean>
         get() = _onClickedSwitch
 
-    private val _switch = MutableLiveData<Boolean>()
-    val switch : LiveData<Boolean>
-        get() = _switch
+//    private val _switch = MutableLiveData<Boolean>()
+//    val switch : LiveData<Boolean>
+//        get() = _switch
 
     private val repository: NoteRepository
 
@@ -46,11 +42,14 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         repository = NoteRepository(noteDao)
 
         readAllData = repository.readAllData
-
     }
 
     fun goToInputNote() {
         _goToInput.value = true
+    }
+
+    fun goToInputNoteResetter() {
+        _goToInput.value = false
     }
 
     fun dayNightSwitcher() {
@@ -59,19 +58,6 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun dayNightResetter() {
         _onClickedSwitch.value = false
-    }
-
-
-//    fun goToListsFragment() {
-//        _goToLists.value = true
-//    }
-
-    fun switchTo() {
-        _switch.value = true
-    }
-
-    fun resetGoToInput() {
-        _goToInput.value = false
     }
 
     fun deleteFromLocalDB(note: Note) {

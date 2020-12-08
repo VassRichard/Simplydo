@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.noci.database_lists.items.Items
 import com.example.noci.databinding.ItemStyleBinding
 
-
-const val EDIT_CHECKER: String = ""
-
 class ShopNoteAdapter(private val itemAdapterEdit: ItemsAdapterEdit, private val itemAdapterDelete: ItemsAdapterDelete) :
     ListAdapter<Items, ShopNoteAdapter.ViewHolder>(
         ShowNotesDiffCallback()
@@ -32,39 +29,19 @@ class ShopNoteAdapter(private val itemAdapterEdit: ItemsAdapterEdit, private val
     class ViewHolder(val binding: ItemStyleBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(currentItem: Items, itemAdapterEdit: ItemsAdapterEdit, adapterDelete: ItemsAdapterDelete) {
+
+            // initialise every item with certain features
             binding.listTitle.text = currentItem.name
             binding.itemCheckbox.isChecked = currentItem.itemState
 
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // CREATE IN THE ITEM DATABASE A BOOLEAN TYPE, AFTER THE READING OF ALL DATA CHECK IF THE ITEMS ARE CHECKED OR NOT THEN SHOW THEM AS SUCH, ON EVERY ITEMCHECKBOX CLICK CHECK IF THE ITEM IS CHECKED, IF CHECKED THEN UNCHECK, ELSE CHECK
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
-//            if(currentItem.listBool == true) {
-//                binding.expand.visibility = View.VISIBLE
-//            } else {
-//                binding.expand.visibility = View.GONE
-//            }
-
-            // set each note's type if specified
-
-
-//            binding.noteBase.setOnClickListener {
-//                //Hawk.put(EDIT_CHECKER, "edit")
-//
-//                adapterInfo.editItem(currentItem)
-//            }
-
-            // function for deleting a note, this.function -> interface -> override function
+            // function for checking an item, this.function -> interface -> override function
             binding.itemCheckbox.setOnClickListener {
-                //adapterDelete.deleteItem(currentItem)
                 if(currentItem.itemState) {
                     itemAdapterEdit.editItem(currentItem.id, false)
                 } else {
                     itemAdapterEdit.editItem(currentItem.id, true)
                 }
-
             }
-
         }
 
         companion object {

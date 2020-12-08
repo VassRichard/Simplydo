@@ -18,16 +18,16 @@
             android:id="@+id/back_button"
             android:layout_width="24dp"
             android:layout_height="0dp"
-            android:paddingStart="5dp"
-            android:src="@drawable/ic_backbutton"
-            android:elevation="6dp"
             android:background="@color/white"
             android:backgroundTint="@color/mainTopHeaderColor"
+            android:elevation="6dp"
             android:onClick="@{() -> inputViewModel.onGoBack()}"
+            android:paddingStart="5dp"
+            android:src="@drawable/ic_backbutton"
+            app:layout_constraintBottom_toBottomOf="@+id/input_fragment_title"
             app:layout_constraintEnd_toStartOf="@id/input_fragment_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/input_fragment_title" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/input_fragment_title"
@@ -50,11 +50,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_title"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:hintTextColor="@color/inputTextInputLayoutBorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             app:boxStrokeColor="@color/inputTextInputLayoutBorder"
+            app:hintTextColor="@color/inputTextInputLayoutBorder"
             app:layout_constraintBottom_toTopOf="@+id/add_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,19 +73,19 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/add_date"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:hint="@string/noteDate"
-                android:gravity="start|center"
-                android:textSize="18sp"
-                android:paddingStart="10dp"
-                android:onClick="@{() -> inputViewModel.insertNoteDateInitializer()}"
-                app:layout_constraintBottom_toTopOf="@id/note_type"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_title" />
+        <TextView
+            android:id="@+id/add_date"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:gravity="start|center"
+            android:hint="@string/noteDate"
+            android:onClick="@{() -> inputViewModel.insertNoteDateInitializer()}"
+            android:paddingStart="10dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/note_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_title" />
 
         <TextView
             android:id="@+id/note_type"
@@ -106,7 +106,7 @@
             android:onClick="@{() -> inputViewModel.onSetNoteType(0)}"
             app:layout_constraintBottom_toBottomOf="@+id/quality_one_image"
             app:layout_constraintStart_toStartOf="@+id/add_date"
-            app:srcCompat="@drawable/ic_health" />
+            app:srcCompat="@drawable/note_type_health" />
 
         <ImageView
             android:id="@+id/quality_one_image"
@@ -117,7 +117,7 @@
             app:layout_constraintEnd_toStartOf="@+id/quality_two_image"
             app:layout_constraintStart_toEndOf="@+id/quality_zero_image"
             app:layout_constraintTop_toBottomOf="@+id/note_type"
-            app:srcCompat="@drawable/ic_relationships" />
+            app:srcCompat="@drawable/note_type_relationship" />
 
         <ImageView
             android:id="@+id/quality_two_image"
@@ -127,7 +127,7 @@
             android:onClick="@{() -> inputViewModel.onSetNoteType(2)}"
             app:layout_constraintBottom_toBottomOf="@+id/quality_one_image"
             app:layout_constraintEnd_toEndOf="@+id/add_date"
-            app:srcCompat="@drawable/ic_career" />
+            app:srcCompat="@drawable/note_type_career" />
 
         <ImageView
             android:id="@+id/quality_three_image"
@@ -136,7 +136,7 @@
             android:onClick="@{() -> inputViewModel.onSetNoteType(3)}"
             app:layout_constraintBottom_toBottomOf="@+id/quality_four_image"
             app:layout_constraintStart_toStartOf="@+id/quality_zero_image"
-            app:srcCompat="@drawable/ic_personal" />
+            app:srcCompat="@drawable/note_type_personal" />
 
         <ImageView
             android:id="@+id/quality_four_image"
@@ -148,7 +148,7 @@
             app:layout_constraintEnd_toStartOf="@+id/quality_five_image"
             app:layout_constraintStart_toEndOf="@+id/quality_three_image"
             app:layout_constraintTop_toBottomOf="@+id/quality_one_image"
-            app:srcCompat="@drawable/ic_social" />
+            app:srcCompat="@drawable/note_type_social" />
 
         <ImageView
             android:id="@+id/quality_five_image"
@@ -157,7 +157,7 @@
             android:onClick="@{() -> inputViewModel.onSetNoteType(5)}"
             app:layout_constraintBottom_toBottomOf="@+id/quality_four_image"
             app:layout_constraintEnd_toEndOf="@+id/quality_two_image"
-            app:srcCompat="@drawable/ic_recreation" />
+            app:srcCompat="@drawable/note_type_recreation" />
 
         <Button
             android:id="@+id/add_button"

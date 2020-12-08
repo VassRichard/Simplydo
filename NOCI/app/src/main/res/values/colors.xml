@@ -19,7 +19,7 @@
     <!--   main/notes interface colors   -->
 
     <color name="mainTopHeaderColor">#FFFFFF</color>
-    <color name="mainPageDayColor">#5491CF</color>
+    <color name="mainPageDayColor">#000000</color>
     <color name="mainPageNoteBorderColor">#5491CF</color>
 
     <color name="mainOverdueColorYesterday">#FF0000</color>

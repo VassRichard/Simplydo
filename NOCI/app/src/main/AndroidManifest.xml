@@ -17,13 +17,13 @@
 <!--            android:enabled="true"-->
 <!--            android:exported="false" >-->
 <!--        </receiver>-->
-        <receiver android:name=".utils.AlarmReceiver">
-            <intent-filter>
-                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+<!--        <receiver android:name=".utils.AlarmReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
 <!--        <service-->
 <!--            android:name=".MyNew"-->
 <!--            android:exported="false" >-->
@@ -43,7 +43,8 @@
             android:name=".ListsActivity">
         </activity>
         <activity
-            android:name=".ListsInputActivity">
+            android:name=".ListsInputActivity"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
         <activity
             android:name=".InputActivity">

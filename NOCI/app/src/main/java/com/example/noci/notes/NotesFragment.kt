@@ -2,31 +2,23 @@ package com.example.noci.notes
 
 //import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
 
-import android.app.Activity
-import android.app.Application
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat.recreate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.noci.InputActivity
 import com.example.noci.R
-import com.example.noci.ThemeKey
 import com.example.noci.database.Note
 import com.example.noci.databinding.FragmentNotesBinding
 import com.example.noci.setThemeKey
-import com.example.noci.utils.MyApplication
 import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.fragment_notes.*
+import org.jetbrains.anko.backgroundDrawable
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
@@ -57,21 +49,13 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
         binding.notesList.adapter = adapter
 
-        Hawk.init(context).build()
-
         currentNightMode = AppCompatDelegate.getDefaultNightMode()
-        val theme = Hawk.get<String>(MODE_ENABLER, "light_mode")
 
-        // the problem is here
-//        if(ThemeKey.theme == "dark_mode") {
-//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//            //Hawk.put(MODE_ENABLER, "dark_mode")
-//            setThemeKey("dark_mode")
-//        } else if(ThemeKey.theme == "light_mode") {
-//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//            //Hawk.put(MODE_ENABLER, "light_mode")
-//            setThemeKey("light_mode")
-//        }
+        if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
+            binding.dayNight.setBackgroundResource(R.drawable.mode_night_1)
+        } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            binding.dayNight.setBackgroundResource(R.drawable.mode_day)
+        }
 
         return binding.root
     }
@@ -93,16 +77,12 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
                 //val currentNightMode =
                 //resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
                 if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
-                    //Hawk.put(MODE_ENABLER, "dark_mode")
                     setThemeKey("dark_mode")
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    //activity?.let { it1 -> recreate(it1) }
                     notesViewModel.dayNightResetter()
                 } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-                    //Hawk.put(MODE_ENABLER, "light_mode")
                     setThemeKey("light_mode")
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    //activity?.let { it1 -> recreate(it1) }
                     notesViewModel.dayNightResetter()
                 }
             }
@@ -146,15 +126,12 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
         notesViewModel.goToInput.observe(viewLifecycleOwner, Observer
         {
             if (it == true) {
-
                 if (binding.notesList.visibility == View.VISIBLE) {
                     onAddNote()
-                    notesViewModel.resetGoToInput()
-                } else {
-                    Toast.makeText(context, "YOLO BOY", Toast.LENGTH_LONG).show()
-
-                }
-
+                    notesViewModel.goToInputNoteResetter()
+                } // else {
+//                    Toast.makeText(context, "YOLO BOY", Toast.LENGTH_LONG).show()
+//                }
             }
         })
 

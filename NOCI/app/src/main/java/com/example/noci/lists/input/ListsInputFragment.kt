@@ -127,7 +127,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
 
                     binding.addTitle.text = newTitle
 
-                    // check if this goes as intened
+                    // check if this goes as intended
                     if (details != null) {
                         inputViewModel.updateTitle(details.id, newTitle)
                     }
@@ -148,8 +148,8 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
             val month = calendar.get(Calendar.MONTH)
             val year = calendar.get(Calendar.YEAR)
-            // date picker dialog
 
+            // date picker dialog
             val datepickerdialog: DatePickerDialog? =
                 this.context?.let { it1 ->
                     DatePickerDialog(
@@ -181,10 +181,8 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
                 }
 
                 binding.itemName.setText("")
-
             }
         })
-
     }
 
     override fun editItem(id: Int, newState: Boolean) {
