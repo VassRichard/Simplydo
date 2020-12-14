@@ -1,8 +1,17 @@
 package com.example.noci.lists.input
 
 import android.app.Application
+import android.app.PendingIntent.FLAG_NO_CREATE
+import android.app.PendingIntent.getActivity
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.*
+import com.example.noci.ListsInputActivity
 import com.example.noci.database.Note
 import com.example.noci.database_lists.ItemListDatabase
 import com.example.noci.database_lists.ItemListRepository
@@ -14,31 +23,53 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class ListsInputViewModel(application: Application): AndroidViewModel(application)  {
+class ListsInputViewModel(application: Application) : AndroidViewModel(application) {
+
+    /// ------------------------------- CONTEXT ------------------------------- ///
+
+    private val context = getApplication<Application>().applicationContext
+
+    /// ------------------------------- COROUTINES (BACKGROUND THREAD JOBS) INITALIZERS ------------------------------- ///
 
     private val viewModelJob = Job()
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    /// ------------------------------- MUTABLELIVEDATA/LIVEDATA VARIABLES ------------------------------- ///
+
     private val _insertInitializer = MutableLiveData<Boolean>()
-    val insertInitializer : LiveData<Boolean>
+    val insertInitializer: LiveData<Boolean>
         get() = _insertInitializer
 
     private val _insertDateInitializer = MutableLiveData<Boolean>()
-    val insertDateInitializer : LiveData<Boolean>
+    val insertDateInitializer: LiveData<Boolean>
         get() = _insertDateInitializer
 
     private val _onChangeTitle = MutableLiveData<Boolean>()
-    val onChangeTitle : LiveData<Boolean>
+    val onChangeTitle: LiveData<Boolean>
         get() = _onChangeTitle
 
     private val _onGoBackToMain = MutableLiveData<Boolean>()
-    val onGoBackToMain : LiveData<Boolean>
+    val onGoBackToMain: LiveData<Boolean>
         get() = _onGoBackToMain
 
     private val _addToListBool = MutableLiveData<Boolean>()
-    val addToListBool : LiveData<Boolean>
+    val addToListBool: LiveData<Boolean>
         get() = _addToListBool
+
+    private val _onSelectAllBool = MutableLiveData<Boolean>()
+    val onSelectAllBool: LiveData<Boolean>
+        get() = _onSelectAllBool
+
+    private val _onDeleteSelectedBool = MutableLiveData<Boolean>()
+    val onDeleteSelectedBool: LiveData<Boolean>
+        get() = _onDeleteSelectedBool
+
+    private val _onCopyDataBool = MutableLiveData<Boolean>()
+    val onCopyDataBool: LiveData<Boolean>
+        get() = _onCopyDataBool
+
+    /// ------------------------------- DATABASE REPOSITORY INITIALIZERS ------------------------------- ///
 
     //private val readAll: LiveData<List<Note>>
     private val listRepository: ItemListRepository
@@ -46,9 +77,9 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
     val itemsReadAll: LiveData<List<Items>>
     private val itemsRepository: ItemsRepository
 
+    var dataStorageList: List<String>? = null
 
-    private var noteType : Int = -1
-    private var newNoteType: Int = -1
+    /// ------------------------------- INITIALIZER ------------------------------- ///
 
     init {
         val noteDao = ItemListDatabase.getInstance(application).noteDao
@@ -62,13 +93,7 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
         itemsReadAll = itemsRepository.readSpecificData!!
     }
 
-    fun insertNoteInitializer() {
-        _insertInitializer.value = true
-    }
-
-    fun insertNoteDateInitializer() {
-        _insertDateInitializer.value = true
-    }
+    /// ------------------------------- DATABASE FUNCTIONS ------------------------------- ///
 
     fun addNote(title: String, noteId: Int) {
         val input = Items(0, title, noteId, false)
@@ -88,8 +113,16 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-    fun onChangeTitleObserver() {
-        _onChangeTitle.value = true
+    fun selectAllItems(listId: Int, stateToBeSet: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            itemsRepository.selectAll(listId, stateToBeSet)
+        }
+    }
+
+    fun copyDataToClip(listId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStorageList = itemsRepository.copyData(listId)
+        }
     }
 
     fun changeItemState(id: Int, newState: Boolean) {
@@ -100,26 +133,35 @@ class ListsInputViewModel(application: Application): AndroidViewModel(applicatio
 
     fun deleteFromLocalDB(item: Items) {
         uiScope.launch {
-           itemsRepository.deleteNote(item)
+            itemsRepository.deleteNote(item)
         }
     }
 
-//    fun addToNote(subnote: String) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            //repository.updateNote(subnote)
-//        }
-//    }
+    fun onDeleteSelectedItems(itemId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            itemsRepository.onDeleteSelected(itemId)
+        }
+    }
 
-//    fun onSetNoteType(type: Int) {
-//        noteType = type
-//        newNoteType = type
-//    }
-//
-//    fun onGoBack() {
-//        _onGoBackToMain.value = true
-//    }
+    /// ------------------------------- MUTABLELIVEDATA/LIVEDATA FUNCTIONS ------------------------------- ///
 
     fun addToList() {
         _addToListBool.value = true
+    }
+
+    fun onSelectAll() {
+        _onSelectAllBool.value = true
+    }
+
+    fun onCopyData() {
+        _onCopyDataBool.value = true
+    }
+
+    fun onChangeTitleObserver() {
+        _onChangeTitle.value = true
+    }
+
+    fun onDeleteSelected() {
+        _onDeleteSelectedBool.value = true
     }
 }

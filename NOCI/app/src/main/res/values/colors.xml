@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <color name="splashscreenBackgrounColor">#5491CF</color>
+
     <!--   basic colors   -->
 
     <color name="colorPrimary">#FFFFFF</color>
@@ -19,7 +21,7 @@
     <!--   main/notes interface colors   -->
 
     <color name="mainTopHeaderColor">#FFFFFF</color>
-    <color name="mainPageDayColor">#000000</color>
+    <color name="mainPageDayColor">#5491CF</color>
     <color name="mainPageNoteBorderColor">#5491CF</color>
 
     <color name="mainOverdueColorYesterday">#FF0000</color>
@@ -37,6 +39,10 @@
     <color name="listInputTextColor">#000000</color>
 
     <!--   item style colors   -->
+
+    <color name="itemListTitle">#5491CF</color>
+
+    <color name="itemLineSplitterColor">#5491CF</color>
 
     <color name="itemTopHeaderColor">#FFFFFF</color>
     <color name="itemTopHeaderTextColor">#5491CF</color>

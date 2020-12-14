@@ -52,7 +52,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
         currentNightMode = AppCompatDelegate.getDefaultNightMode()
 
         if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
-            binding.dayNight.setBackgroundResource(R.drawable.mode_night_1)
+            binding.dayNight.setBackgroundResource(R.drawable.mode_night)
         } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
             binding.dayNight.setBackgroundResource(R.drawable.mode_day)
         }

@@ -17,17 +17,9 @@ class ItemsRepository(private val itemsNoteDao: ItemsDao) {
         )
     }
 
-    //private val today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy")).toString()
-
-    //val todayTasksCount: LiveData<String> = noteDao.getTodayTasksCount()
-
     suspend fun addNote(note: Items) {
         itemsNoteDao.addNote(note)
     }
-
-//    fun getTodayTasksCount(today: String) {
-//        noteDao.getTodayTasksCount(today)
-//    }
 
     suspend fun editNote(id: Int, newState: Boolean) {
         itemsNoteDao.editItem(id, newState)
@@ -35,6 +27,18 @@ class ItemsRepository(private val itemsNoteDao: ItemsDao) {
 
     suspend fun deleteNote(note: Items) {
         itemsNoteDao.deleteNote(note)
+    }
+
+    suspend fun selectAll(listId: Int, stateToBeSet: Boolean) {
+        itemsNoteDao.selectAll(listId, stateToBeSet)
+    }
+
+    suspend fun copyData(listId: Int) : List<String>? {
+        return itemsNoteDao.copyData(listId)
+    }
+
+    suspend fun onDeleteSelected(itemId: Int) {
+        itemsNoteDao.onDeleteSelected(itemId)
     }
 
     suspend fun deleteItemsFromSpecificList() {

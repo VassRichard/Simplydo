@@ -17,8 +17,8 @@ data class Items @RequiresApi(Build.VERSION_CODES.O) constructor(
     @ColumnInfo(name = "nameTitle")
     val name: String = "",
 
-    @ColumnInfo(name = "noteId")
-    val noteId: Int,
+    @ColumnInfo(name = "listId")
+    val listId: Int,
 
     @ColumnInfo(name = "itemState")
     val itemState: Boolean

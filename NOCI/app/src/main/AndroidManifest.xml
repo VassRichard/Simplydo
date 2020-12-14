@@ -2,56 +2,38 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.noci">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
+        android:name=".utils.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".utils.MyApplication"
         android:theme="@style/AppThemeLight">
-<!--        <receiver-->
-<!--            android:name=".notification.MyReceiver"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="false" >-->
-<!--        </receiver>-->
-<!--        <receiver android:name=".utils.AlarmReceiver">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />-->
 
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
-<!--        <service-->
-<!--            android:name=".MyNew"-->
-<!--            android:exported="false" >-->
-<!--        </service>-->
-        <activity android:name=".splashscreen.Splashscreen"
+        <activity
+            android:name=".splashscreen.Splashscreen"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".NotesActivity">
-        </activity>
-        <activity
-            android:name=".ListsActivity">
-        </activity>
+
+        <activity android:name=".NotesActivity" />
+        <activity android:name=".ListsActivity" />
         <activity
             android:name=".ListsInputActivity"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-        <activity
-            android:name=".InputActivity">
-        </activity>
-        <uses-library android:name="android.test.base"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".InputActivity" />
+
+        <uses-library
+            android:name="android.test.base"
             android:required="false" />
-        <uses-library android:name="android.test.mock"
+        <uses-library
+            android:name="android.test.mock"
             android:required="false" />
 
     </application>

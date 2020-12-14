@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.noci.database.Note
 import com.example.noci.database.NoteDatabase
 import com.example.noci.database.NoteRepository
@@ -17,9 +18,13 @@ const val MODE_ENABLER: String = ""
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
+    /// ------------------------------- COROUTINES (BACKGROUND THREAD JOBS) INITALIZERS ------------------------------- ///
+
     private val viewModelJob = Job()
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+    /// ------------------------------- MUTABLELIVEDATA/LIVEDATA VARIABLES ------------------------------- ///
 
     private val _goToInput = MutableLiveData<Boolean>()
     val goToInput: LiveData<Boolean>
@@ -29,13 +34,15 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     val onClickedSwitch: LiveData<Boolean>
         get() = _onClickedSwitch
 
-//    private val _switch = MutableLiveData<Boolean>()
-//    val switch : LiveData<Boolean>
-//        get() = _switch
+    /// ------------------------------- DATABASE REPOSITORY INITIALIZERS ------------------------------- ///
 
     private val repository: NoteRepository
 
+    /// ------------------------------- STORAGE FOR DATABASE DATA ------------------------------- ///
+
     val readAllData: LiveData<List<Note>>
+
+    /// ------------------------------- INITIALIZER ------------------------------- ///
 
     init {
         val noteDao = NoteDatabase.getInstance(application).noteDao
@@ -43,6 +50,16 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
         readAllData = repository.readAllData
     }
+
+    /// ------------------------------- DATABASE FUNCTIONS ------------------------------- ///
+
+    fun deleteFromLocalDB(note: Note) {
+        uiScope.launch {
+            repository.deleteNote(note)
+        }
+    }
+
+    /// ------------------------------- MUTABLELIVEDATA/LIVEDATA FUNCTIONS ------------------------------- ///
 
     fun goToInputNote() {
         _goToInput.value = true
@@ -60,14 +77,11 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         _onClickedSwitch.value = false
     }
 
-    fun deleteFromLocalDB(note: Note) {
-        uiScope.launch {
-            repository.deleteNote(note)
-        }
-    }
+    /// ------------------------------- VIEWMODEL LIFECYCLE FUNCTIONS ------------------------------- ///
 
     override fun onCleared() {
         super.onCleared()
+
         viewModelJob.cancel()
     }
 
