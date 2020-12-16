@@ -3,6 +3,7 @@ package com.example.noci.splashscreen
 import android.content.Intent
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.example.noci.MainActivity
 import com.example.noci.NotesActivity
 
 class Splashscreen : AppCompatActivity() {

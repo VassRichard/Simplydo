@@ -1,6 +1,9 @@
 package com.example.noci.lists.input
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,8 +12,11 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,13 +24,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.noci.ListsInputActivity
 import com.example.noci.R
 import com.example.noci.SelectKey
-import com.example.noci.database.Note
 import com.example.noci.database_lists.items.Items
 import com.example.noci.databinding.FragmentInputListsBinding
 import com.example.noci.lists.ITEM_DELETER_CHECKER
 import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.fragment_input_lists.*
 import java.util.*
+
 
 class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
 
@@ -149,12 +155,12 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
         })
 
         // activate the _addToListBool value when user pressed Enter
-//        binding.itemName.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-//            if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == EditorInfo.IME_ACTION_DONE) {
-//                inputViewModel.addToList()
-//            }
-//            false
-//        })
+        binding.itemName.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                inputViewModel.addToList()
+            }
+            false
+        })
 
         inputViewModel.addToListBool.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -164,7 +170,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
                 Log.e(" NOTE : ", " $item and $listId")
 
                 if (item.isNotEmpty()) {
-                    if(listId != null) {
+                    if (listId != null) {
                         inputViewModel.addNote(item, listId)
                     }
                 }
@@ -196,13 +202,19 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
         })
 
         inputViewModel.onCopyDataBool.observe(viewLifecycleOwner, Observer {
-            if(it) {
+            if (it) {
                 if (details != null) {
                     inputViewModel.copyDataToClip(details.id)
                 }
             }
         })
 
+        binding.itemName.setOnFocusChangeListener { view: View, b: Boolean ->
+//            if(!view.hasFocus()) {
+//                binding.itemName.requestFocus()
+//                val inputMethodManager = context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//                inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, SOFT_INPUT_STATE_VISIBLE)
+        }
     }
 
     override fun editItem(id: Int, newState: Boolean) {
