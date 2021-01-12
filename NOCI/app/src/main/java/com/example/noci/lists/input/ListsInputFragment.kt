@@ -21,9 +21,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.noci.ListsInputActivity
-import com.example.noci.R
-import com.example.noci.SelectKey
+import com.example.noci.*
 import com.example.noci.database_lists.items.Items
 import com.example.noci.databinding.FragmentInputListsBinding
 import com.example.noci.lists.ITEM_DELETER_CHECKER
@@ -69,14 +67,14 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             binding.editTitle.setText(details.title)
         }
 
-        inputViewModel.itemsReadAll.observe(viewLifecycleOwner, Observer {
-//            if (it.isEmpty()) {
-//                //binding.emptyListTitle.visibility = View.VISIBLE
-//                //binding.emptyListDescription.visibility = View.VISIBLE
-//            } else {
-//                //binding.emptyListTitle.visibility = View.INVISIBLE
-//                //binding.emptyListDescription.visibility = View.INVISIBLE
-//            }
+        inputViewModel.itemsReadAll?.observe(viewLifecycleOwner, Observer {
+    //            if (it.isEmpty()) {
+    //                //binding.emptyListTitle.visibility = View.VISIBLE
+    //                //binding.emptyListDescription.visibility = View.VISIBLE
+    //            } else {
+    //                //binding.emptyListTitle.visibility = View.INVISIBLE
+    //                //binding.emptyListDescription.visibility = View.INVISIBLE
+    //            }
 
             it?.let {
                 adapter.submitList(it)
@@ -122,7 +120,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
 
         inputViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
             if (it) {
-                val intent = Intent(context, ListsInputActivity::class.java)
+                val intent = Intent(context, NotesActivity::class.java)
 
                 startActivity(intent)
             }
@@ -182,11 +180,11 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
         inputViewModel.onSelectAllBool.observe(viewLifecycleOwner, Observer {
             if (it) {
                 if (details != null) {
-                    if (!SelectKey.select) {
-                        SelectKey.select = true
+                    if (!SelectKey.getSelect()) {
+                        SelectKey.setSelect(true)
                         inputViewModel.selectAllItems(details.id, true)
                     } else {
-                        SelectKey.select = false
+                        SelectKey.setSelect(false)
                         inputViewModel.selectAllItems(details.id, false)
                     }
                 }
@@ -201,13 +199,13 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             }
         })
 
-        inputViewModel.onCopyDataBool.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                if (details != null) {
-                    inputViewModel.copyDataToClip(details.id)
-                }
-            }
-        })
+//        inputViewModel.onCopyDataBool.observe(viewLifecycleOwner, Observer {
+//            if (it) {
+//                if (details != null) {
+//                    inputViewModel.copyDataToClip(details.id)
+//                }
+//            }
+//        })
 
         binding.itemName.setOnFocusChangeListener { view: View, b: Boolean ->
 //            if(!view.hasFocus()) {

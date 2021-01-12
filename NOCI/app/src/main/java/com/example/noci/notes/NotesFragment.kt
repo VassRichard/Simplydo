@@ -11,16 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.noci.InputActivity
 import com.example.noci.R
 import com.example.noci.database.Note
 import com.example.noci.databinding.FragmentNotesBinding
-import com.example.noci.setThemeKey
 import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.fragment_notes.*
-import org.jetbrains.anko.backgroundDrawable
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.properties.Delegates
 
 class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
@@ -30,10 +27,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
     private var currentNightMode by Delegates.notNull<Int>()
 
-    private val MONTHS =
-        arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-
-    private var threadChecker = false
+    //    private var threadChecker = false
     private val adapter = NotesAdapter(this, this)
 
     override fun onCreateView(
@@ -51,42 +45,11 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
         currentNightMode = AppCompatDelegate.getDefaultNightMode()
 
-        if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
-            binding.dayNight.setBackgroundResource(R.drawable.mode_night)
-        } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-            binding.dayNight.setBackgroundResource(R.drawable.mode_day)
-        }
-
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-
-        if (!threadChecker) {
-            thread.start()
-        }
-
-        //val todayDate =
-        //LocalDateTime.now().format(DateTimeFormatter.ofPattern("d MMM yyyy")).toString()
-
-        //notesViewModel.getTodayTasksCount(todayDate)
-
-        notesViewModel.onClickedSwitch.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                //val currentNightMode =
-                //resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-                if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
-                    setThemeKey("dark_mode")
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    notesViewModel.dayNightResetter()
-                } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-                    setThemeKey("light_mode")
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    notesViewModel.dayNightResetter()
-                }
-            }
-        })
 
         notesViewModel.readAllData.observe(viewLifecycleOwner, Observer
         {
@@ -135,31 +98,61 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
             }
         })
 
-        val itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
+        val itemTouchHelperCallback =
+            object :
+                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+
+                    return false
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    //val position = viewHolder.adapterPosition
+                    adapter.notifyItemRemoved(viewHolder.adapterPosition);
+
+                    //val note: Note = adapter.getNoteAt(position)
+
+                    //notesViewModel.deleteFromLocalDB(note)
+                    //adapter.notifyItemRemoved(position)
+//                    Toast.makeText(
+//                        this@MainActivity,
+//                        getString(R.string.note_deleted),
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+
+                }
+            }
+
+
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(notes_list)
     }
 
     // Thread function that runs in another Thread, not blocking the interface and calculates today's date
-    private
-    val thread: Thread = object : Thread() {
-        override fun run() {
-            try {
-                threadChecker = true
-                while (!this.isInterrupted) {
-                    //sleep(1000)
-                    val c: Calendar = Calendar.getInstance()
-
-                    val df = SimpleDateFormat("EEEE", Locale.ENGLISH)
-                    val formattedDate: String = df.format(c.time)
-
-                    if (binding.dayHeader.text != formattedDate) {
-                        binding.dayHeader.text = formattedDate
-                    }
-                }
-            } catch (e: InterruptedException) {
-            }
-        }
-    }
+//    private
+//    val thread: Thread = object : Thread() {
+//        override fun run() {
+//            try {
+//                threadChecker = true
+//                while (!this.isInterrupted) {
+//                    //sleep(1000)
+//                    val c: Calendar = Calendar.getInstance()
+//
+//                    val df = SimpleDateFormat("EEEE", Locale.ENGLISH)
+//                    val formattedDate: String = df.format(c.time)
+//
+////                    if (binding.dayHeader.text != formattedDate) {
+////                        binding.dayHeader.text = formattedDate
+////                    }
+//                }
+//            } catch (e: InterruptedException) {
+//            }
+//        }
+//    }
 
     // override function for editItem interface defined in NotesAdapter, it also transfers a Bundle(that holds the currentItem's attributes) into the InputActivity
     override fun editItem(currentItem: Note) {
@@ -171,7 +164,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
     // override function for deleteItem interface defined in NotesAdapter
     override fun deleteItem(currentItem: Note) {
-        notesViewModel.deleteFromLocalDB(currentItem)
+        //notesViewModel.deleteFromLocalDB(currentItem)
     }
 
     // function that accesses the InputActivity interface

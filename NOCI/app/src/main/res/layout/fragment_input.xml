@@ -18,8 +18,7 @@
             android:id="@+id/back_button"
             android:layout_width="24dp"
             android:layout_height="0dp"
-            android:background="@color/white"
-            android:backgroundTint="@color/mainTopHeaderColor"
+            android:background="@color/mainTopHeaderColor"
             android:elevation="6dp"
             android:onClick="@{() -> inputViewModel.onGoBack()}"
             android:paddingStart="5dp"
@@ -27,7 +26,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/input_fragment_title"
             app:layout_constraintEnd_toStartOf="@id/input_fragment_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/backButtonIconColor" />
 
         <TextView
             android:id="@+id/input_fragment_title"
@@ -64,9 +64,10 @@
                 android:id="@+id/add_title"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/work_sans_regular"
                 android:hint="@string/input_fragment_note"
-                android:textSize="18sp"
                 android:singleLine="true"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +79,7 @@
             android:id="@+id/add_date"
             android:layout_width="350dp"
             android:layout_height="50dp"
+            android:fontFamily="@font/work_sans_regular"
             android:gravity="start|center"
             android:hint="@string/noteDate"
             android:onClick="@{() -> inputViewModel.insertNoteDateInitializer()}"
@@ -92,6 +94,7 @@
             android:id="@+id/note_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/work_sans_semibold"
             android:text="@string/type"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/quality_one_image"

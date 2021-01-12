@@ -18,10 +18,18 @@ fun setThemeKey(currentTheme: String) {
 }
 
 object SelectKey {
-    var select: Boolean = false
+    private var select: Boolean = false
 
     init {
 
+    }
+
+    fun setSelect(select: Boolean) {
+        this.select = select
+    }
+
+    fun getSelect(): Boolean {
+        return select
     }
 
 }

@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/note_base"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="6dp"
@@ -29,6 +29,9 @@
             android:gravity="center"
             android:text="@string/dummy"
             android:textSize="16sp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:fontFamily="@font/work_sans_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/delete_note"
             app:layout_constraintStart_toStartOf="parent"

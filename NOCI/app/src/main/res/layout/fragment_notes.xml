@@ -16,33 +16,6 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/day_header"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/white"
-            android:backgroundTint="@color/mainTopHeaderColor"
-            android:elevation="6dp"
-            android:fontFamily="@font/work_sans_regular"
-            android:gravity="center|end"
-            android:paddingEnd="5dp"
-            android:textColor="@color/mainPageDayColor"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/day_night"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:elevation="6dp"
-            android:onClick="@{() -> notesViewModel.dayNightSwitcher()}"
-            android:layout_marginStart="5dp"
-            app:layout_constraintBottom_toBottomOf="@id/day_header"
-            app:layout_constraintStart_toStartOf="@id/day_header"
-            app:layout_constraintTop_toTopOf="@id/day_header" />
-
-        <TextView
             android:id="@+id/empty_list_title"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -79,10 +52,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/day_header"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:leftBgColor="@color/blue"
-            app:leftImage="@drawable/ic_delete"
             app:textColor="@android:color/white"
             app:textSize="20sp" />
 

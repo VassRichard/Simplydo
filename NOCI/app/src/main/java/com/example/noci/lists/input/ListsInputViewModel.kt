@@ -29,7 +29,7 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
 
     private val context = getApplication<Application>().applicationContext
 
-    /// ------------------------------- COROUTINES (BACKGROUND THREAD JOBS) INITALIZERS ------------------------------- ///
+    /// ------------------------------- COROUTINES (BACKGROUND THREAD JOBS) INITIALIZERS ------------------------------- ///
 
     private val viewModelJob = Job()
 
@@ -65,16 +65,16 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
     val onDeleteSelectedBool: LiveData<Boolean>
         get() = _onDeleteSelectedBool
 
-    private val _onCopyDataBool = MutableLiveData<Boolean>()
-    val onCopyDataBool: LiveData<Boolean>
-        get() = _onCopyDataBool
+//    private val _onCopyDataBool = MutableLiveData<Boolean>()
+//    val onCopyDataBool: LiveData<Boolean>
+//        get() = _onCopyDataBool
 
     /// ------------------------------- DATABASE REPOSITORY INITIALIZERS ------------------------------- ///
 
     //private val readAll: LiveData<List<Note>>
     private val listRepository: ItemListRepository
 
-    val itemsReadAll: LiveData<List<Items>>
+    val itemsReadAll: LiveData<List<Items>>?
     private val itemsRepository: ItemsRepository
 
     var dataStorageList: List<String>? = null
@@ -90,7 +90,7 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
         itemsRepository = ItemsRepository(shopNoteDao)
 
         // change readSpecificData to readAllData if you want to show all items
-        itemsReadAll = itemsRepository.readSpecificData!!
+        itemsReadAll = itemsRepository.readSpecificData
     }
 
     /// ------------------------------- DATABASE FUNCTIONS ------------------------------- ///
@@ -153,9 +153,13 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
         _onSelectAllBool.value = true
     }
 
-    fun onCopyData() {
-        _onCopyDataBool.value = true
+    fun onGoBack() {
+        _onGoBackToMain.value = true
     }
+
+//    fun onCopyData() {
+//        _onCopyDataBool.value = true
+//    }
 
     fun onChangeTitleObserver() {
         _onChangeTitle.value = true
