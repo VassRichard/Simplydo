@@ -20,14 +20,14 @@
             android:layout_width="24dp"
             android:layout_height="0dp"
             android:background="@color/mainTopHeaderColor"
-            app:tint="@color/backButtonIconColor"
             android:elevation="6dp"
             android:onClick="@{() -> inputViewModel.onGoBack()}"
             android:paddingStart="5dp"
             android:src="@drawable/ic_backbutton"
             app:layout_constraintBottom_toBottomOf="@+id/input_fragment_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/backButtonIconColor" />
 
         <TextView
             android:id="@+id/input_fragment_title"
@@ -78,7 +78,9 @@
             android:fontFamily="@font/work_sans_bold"
             android:gravity="center"
             android:hint="@string/input_fragment_note"
+            android:imeOptions="actionSend"
             android:paddingStart="5dp"
+            android:singleLine="true"
             android:textColor="@color/itemListTitle"
             android:textSize="32sp"
             android:visibility="invisible"
@@ -91,8 +93,8 @@
             android:id="@+id/add_to_list"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:elevation="13dp"
             android:layout_marginStart="3dp"
+            android:elevation="13dp"
             android:onClick="@{() -> inputViewModel.addToList()}"
             android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="@+id/item_name"
@@ -127,17 +129,14 @@
             android:id="@+id/show_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginTop="6dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center"
             android:screenReaderFocusable="true"
-            android:layout_marginTop="6dp"
             android:textSize="18sp"
-            app:layout_goneMarginTop="3dp"
-            app:layout_goneMarginBottom="3dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/select_all"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -145,28 +144,50 @@
 
         <ImageView
             android:id="@+id/select_all"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/item_style_icon"
+            android:elevation="8dp"
             android:onClick="@{() -> inputViewModel.onSelectAll()}"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:src="@drawable/item_select"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/delete_selected"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal"
+            app:tint="@color/standardIconColor" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
 
         <ImageView
             android:id="@+id/delete_selected"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/item_style_icon"
+            android:elevation="8dp"
             android:onClick="@{() -> inputViewModel.onDeleteSelected()}"
-            android:src="@drawable/item_delete"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@mipmap/icon_delete_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/select_all" />
+            app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal"
+            app:tint="@color/standardIconColor" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

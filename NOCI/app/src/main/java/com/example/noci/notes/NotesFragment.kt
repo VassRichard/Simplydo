@@ -17,7 +17,7 @@ import com.example.noci.R
 import com.example.noci.database.Note
 import com.example.noci.databinding.FragmentNotesBinding
 import com.orhanobut.hawk.Hawk
-import kotlinx.android.synthetic.main.fragment_notes.*
+import kotlinx.android.synthetic.main.fragment_lists.*
 import kotlin.properties.Delegates
 
 class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
@@ -29,6 +29,8 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
     //    private var threadChecker = false
     private val adapter = NotesAdapter(this, this)
+
+//    val itemTouch = object : ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(adapter)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,67 +94,46 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
                 if (binding.notesList.visibility == View.VISIBLE) {
                     onAddNote()
                     notesViewModel.goToInputNoteResetter()
-                } // else {
-//                    Toast.makeText(context, "YOLO BOY", Toast.LENGTH_LONG).show()
-//                }
+                }
             }
         })
 
-        val itemTouchHelperCallback =
-            object :
-                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
-                ): Boolean {
-
-                    return false
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    //val position = viewHolder.adapterPosition
-                    adapter.notifyItemRemoved(viewHolder.adapterPosition);
-
-                    //val note: Note = adapter.getNoteAt(position)
-
-                    //notesViewModel.deleteFromLocalDB(note)
-                    //adapter.notifyItemRemoved(position)
-//                    Toast.makeText(
-//                        this@MainActivity,
-//                        getString(R.string.note_deleted),
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-
-                }
-            }
-
-
-        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
-        itemTouchHelper.attachToRecyclerView(notes_list)
-    }
-
-    // Thread function that runs in another Thread, not blocking the interface and calculates today's date
-//    private
-//    val thread: Thread = object : Thread() {
-//        override fun run() {
-//            try {
-//                threadChecker = true
-//                while (!this.isInterrupted) {
-//                    //sleep(1000)
-//                    val c: Calendar = Calendar.getInstance()
+//        val itemTouchHelperCallback =
+//            object :
+//                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+//                override fun onMove(
+//                    recyclerView: RecyclerView,
+//                    viewHolder: RecyclerView.ViewHolder,
+//                    target: RecyclerView.ViewHolder
+//                ): Boolean {
 //
-//                    val df = SimpleDateFormat("EEEE", Locale.ENGLISH)
-//                    val formattedDate: String = df.format(c.time)
-//
-////                    if (binding.dayHeader.text != formattedDate) {
-////                        binding.dayHeader.text = formattedDate
-////                    }
+//                    return false
 //                }
-//            } catch (e: InterruptedException) {
+//
+//                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                    //adapter.adapterDelete.deleteItem(viewHolder.adapterPosition)
+//                    adapter.notifyItemRemoved(viewHolder.adapterPosition)
+////                    adapter.notifyItemRemoved(viewHolder.position)
+//                    adapter.notifyDataSetChanged()
+//
+//                    //val note: Note = adapter.getNoteAt(position)
+//
+//                    //notesViewModel.deleteFromLocalDB(note)
+//                    //adapter.notifyItemRemoved(position)
+////                    Toast.makeText(
+////                        this@MainActivity,
+////                        getString(R.string.note_deleted),
+////                        Toast.LENGTH_SHORT
+////                    ).show()
+//
+//                }
 //            }
-//        }
-//    }
+
+
+
+//        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+//        itemTouchHelper.attachToRecyclerView(notes_list)
+    }
 
     // override function for editItem interface defined in NotesAdapter, it also transfers a Bundle(that holds the currentItem's attributes) into the InputActivity
     override fun editItem(currentItem: Note) {
@@ -164,7 +145,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
     // override function for deleteItem interface defined in NotesAdapter
     override fun deleteItem(currentItem: Note) {
-        //notesViewModel.deleteFromLocalDB(currentItem)
+        notesViewModel.deleteFromLocalDB(currentItem)
     }
 
     // function that accesses the InputActivity interface

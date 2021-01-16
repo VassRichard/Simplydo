@@ -123,19 +123,17 @@ class NotesActivity : AppCompatActivity() {
             try {
                 threadChecker = true
                 while (!this.isInterrupted) {
-                    //val c: Calendar = Calendar.getInstance()
+                    val c: Calendar = Calendar.getInstance()
 
-//                    val df = SimpleDateFormat("EEEE", Locale.ENGLISH)
-//                    val formattedDate: String = df.format(c.time)
+                    val df = SimpleDateFormat("EEEE", Locale.ENGLISH)
+                    val formattedDate = df.format(c.time).toString()
 
-                    val currentDate = SimpleDateFormat("hh:mm:ss")
-                    val formattedDate = currentDate.format(Date())
-
-
-                    Log.e("DATE ", formattedDate.toString())
+//                    val currentDate = SimpleDateFormat("hh:mm:ss")
+//                    val formattedDate = currentDate.format(Date())
+//                    Log.e("DATE ", formattedDate.toString())
 
                     if (dayHeader.text != formattedDate) {
-                        dayHeader.text = formattedDate.toString()
+                        dayHeader.text = formattedDate
                     }
 
                     sleep(1000)
