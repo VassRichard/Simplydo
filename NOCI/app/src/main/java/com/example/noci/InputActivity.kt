@@ -12,29 +12,15 @@ import com.orhanobut.hawk.Hawk
 class InputActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        if(ThemeKey.theme == "dark_mode") {
-            setThemeKey("dark_mode")
+        if(ThemeKey.getThemeKey() == "dark_mode") {
+            ThemeKey.setThemeKey("dark_mode")
             setTheme(R.style.AppThemeDark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else if(ThemeKey.theme == "light_mode") {
-            setThemeKey("light_mode")
+        } else if(ThemeKey.getThemeKey() == "light_mode") {
+            ThemeKey.setThemeKey("light_mode")
             setTheme(R.style.AppThemeLight)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-
-//        Hawk.init(this).build()
-//
-//        val theme = Hawk.get<String>(MODE_ENABLER, "light_mode")
-//
-//        if (theme == "dark_mode") {
-//            Hawk.put(MODE_ENABLER, "dark_mode")
-//            setTheme(R.style.AppThemeDark)
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//        } else if(theme == "light_mode") {
-//            Hawk.put(MODE_ENABLER, "light_mode")
-//            setTheme(R.style.AppThemeLight)
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//        }
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input)

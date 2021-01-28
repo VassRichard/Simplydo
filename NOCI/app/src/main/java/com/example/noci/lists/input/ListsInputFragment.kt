@@ -1,9 +1,5 @@
 package com.example.noci.lists.input
 
-import android.app.Activity
-import android.app.DatePickerDialog
-import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -12,11 +8,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -26,8 +18,6 @@ import com.example.noci.database_lists.items.Items
 import com.example.noci.databinding.FragmentInputListsBinding
 import com.example.noci.lists.ITEM_DELETER_CHECKER
 import com.orhanobut.hawk.Hawk
-import kotlinx.android.synthetic.main.fragment_input_lists.*
-import java.util.*
 
 
 class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
@@ -38,7 +28,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
     val MONTHS =
         arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
-    private val adapter = ShopNoteAdapter(this, this)
+    private val adapter = ItemsAdapter(this, this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,23 +49,16 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
     override fun onStart() {
         super.onStart()
 
+        // get arguments from the bundle that came from the ListFragment via navigation
         val details = ListsInputFragmentArgs.fromBundle(requireArguments()).lists
-        Log.e(" DET ", "$details")
 
         if (details != null) {
             binding.addTitle.text = details.title
             binding.editTitle.setText(details.title)
         }
 
+        // read all items from the database of the specific list
         inputViewModel.itemsReadAll?.observe(viewLifecycleOwner, Observer {
-    //            if (it.isEmpty()) {
-    //                //binding.emptyListTitle.visibility = View.VISIBLE
-    //                //binding.emptyListDescription.visibility = View.VISIBLE
-    //            } else {
-    //                //binding.emptyListTitle.visibility = View.INVISIBLE
-    //                //binding.emptyListDescription.visibility = View.INVISIBLE
-    //            }
-
             it?.let {
                 adapter.submitList(it)
             }
@@ -83,6 +66,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             Hawk.delete(ITEM_DELETER_CHECKER)
         })
 
+        // insert item to the database
         inputViewModel.insertInitializer.observe(viewLifecycleOwner, Observer {
             val noteTitle = binding.addTitle.text.toString()
 
@@ -93,6 +77,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             }
         })
 
+        // update title of the list
         inputViewModel.onChangeTitle.observe(viewLifecycleOwner, Observer {
             if (it) {
                 binding.addTitle.visibility = View.INVISIBLE
@@ -118,6 +103,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
                 }
         })
 
+        // go back to main
         inputViewModel.onGoBackToMain.observe(viewLifecycleOwner, Observer {
             if (it) {
                 val intent = Intent(context, NotesActivity::class.java)
@@ -126,40 +112,42 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             }
         })
 
-        inputViewModel.insertDateInitializer.observe(viewLifecycleOwner, Observer {
-            val calendar = Calendar.getInstance()
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
-            val month = calendar.get(Calendar.MONTH)
-            val year = calendar.get(Calendar.YEAR)
+//        inputViewModel.insertDateInitializer.observe(viewLifecycleOwner, Observer {
+//            val calendar = Calendar.getInstance()
+//            val day = calendar.get(Calendar.DAY_OF_MONTH)
+//            val month = calendar.get(Calendar.MONTH)
+//            val year = calendar.get(Calendar.YEAR)
+//
+//            // date picker dialog
+//            val datepickerdialog: DatePickerDialog? =
+//                this.context?.let { it1 ->
+//                    DatePickerDialog(
+//                        it1,
+//                        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+//
+//                            // Display Selected date in textbox
+//                            //binding.addDate.setText("" + dayOfMonth + " " + MONTHS[monthOfYear] + " " + year)
+//
+//                        },
+//                        year,
+//                        month,
+//                        day
+//                    )
+//                }
+//
+//            datepickerdialog!!.show()
+//        })
 
-            // date picker dialog
-            val datepickerdialog: DatePickerDialog? =
-                this.context?.let { it1 ->
-                    DatePickerDialog(
-                        it1,
-                        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-
-                            // Display Selected date in textbox
-                            //binding.addDate.setText("" + dayOfMonth + " " + MONTHS[monthOfYear] + " " + year)
-
-                        },
-                        year,
-                        month,
-                        day
-                    )
-                }
-
-            datepickerdialog!!.show()
-        })
-
-        // activate the _addToListBool value when user pressed Enter
+        // activate the _addToListBool value when user pressed Enter, which adds the item into database / the function below
         binding.itemName.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 inputViewModel.addToList()
+                //binding.itemName.requestFocus()
             }
-            false
+            true
         })
 
+        // adds item in the database of the specific list
         inputViewModel.addToListBool.observe(viewLifecycleOwner, Observer {
             if (it) {
                 val item = binding.itemName.text.toString()
@@ -177,6 +165,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             }
         })
 
+        // sets the ItemState variable in the item database of the specific list to true/false depending on already stored value
         inputViewModel.onSelectAllBool.observe(viewLifecycleOwner, Observer {
             if (it) {
                 if (details != null) {
@@ -215,6 +204,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
         }
     }
 
+    // override for interfaces in the ItemsAdapter class
     override fun editItem(id: Int, newState: Boolean) {
         inputViewModel.changeItemState(id, newState)
     }

@@ -85,10 +85,17 @@
             android:onClick="@{() -> inputViewModel.insertNoteDateInitializer()}"
             android:paddingStart="10dp"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@id/note_type"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_title" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
 
         <TextView
             android:id="@+id/note_type"
@@ -97,15 +104,24 @@
             android:fontFamily="@font/work_sans_semibold"
             android:text="@string/type"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/quality_one_image"
+            android:layout_marginTop="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_date" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal" />
+
+        <CheckBox
+            android:id="@+id/check"
+            android:onClick="@{() -> inputViewModel.onMarkType()}"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintStart_toEndOf="@id/note_type"
+            app:layout_constraintTop_toTopOf="@id/note_type"
+            app:layout_constraintBottom_toBottomOf="@id/note_type"/>
 
         <ImageView
             android:id="@+id/quality_zero_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_marginStart="25dp"
             android:onClick="@{() -> inputViewModel.onSetNoteType(0)}"
             app:layout_constraintBottom_toBottomOf="@+id/quality_one_image"
@@ -114,29 +130,29 @@
 
         <ImageView
             android:id="@+id/quality_one_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:onClick="@{() -> inputViewModel.onSetNoteType(1)}"
             app:layout_constraintBottom_toTopOf="@+id/quality_four_image"
             app:layout_constraintEnd_toStartOf="@+id/quality_two_image"
             app:layout_constraintStart_toEndOf="@+id/quality_zero_image"
             app:layout_constraintTop_toBottomOf="@+id/note_type"
-            app:srcCompat="@drawable/note_type_relationship" />
+            app:srcCompat="@drawable/note_type_relationships" />
 
         <ImageView
             android:id="@+id/quality_two_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_marginEnd="25dp"
             android:onClick="@{() -> inputViewModel.onSetNoteType(2)}"
             app:layout_constraintBottom_toBottomOf="@+id/quality_one_image"
             app:layout_constraintEnd_toEndOf="@+id/add_date"
-            app:srcCompat="@drawable/note_type_career" />
+            app:srcCompat="@drawable/note_type_professional" />
 
         <ImageView
             android:id="@+id/quality_three_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:onClick="@{() -> inputViewModel.onSetNoteType(3)}"
             app:layout_constraintBottom_toBottomOf="@+id/quality_four_image"
             app:layout_constraintStart_toStartOf="@+id/quality_zero_image"
@@ -144,8 +160,8 @@
 
         <ImageView
             android:id="@+id/quality_four_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_marginTop="15dp"
             android:onClick="@{() -> inputViewModel.onSetNoteType(4)}"
             app:layout_constraintBottom_toTopOf="@+id/add_button"
@@ -156,16 +172,16 @@
 
         <ImageView
             android:id="@+id/quality_five_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:onClick="@{() -> inputViewModel.onSetNoteType(5)}"
             app:layout_constraintBottom_toBottomOf="@+id/quality_four_image"
             app:layout_constraintEnd_toEndOf="@+id/quality_two_image"
-            app:srcCompat="@drawable/note_type_recreation" />
+            app:srcCompat="@drawable/note_type_chill" />
 
         <Button
             android:id="@+id/add_button"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/style_note"
             android:onClick="@{() -> inputViewModel.insertNoteInitializer()}"
@@ -173,8 +189,7 @@
             android:textColor="@color/inputButtonText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quality_four_image" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

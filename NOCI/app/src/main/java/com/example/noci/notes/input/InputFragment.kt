@@ -1,8 +1,10 @@
 package com.example.noci.notes.input
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -19,7 +21,7 @@ import com.example.noci.R
 import com.example.noci.ThemeKey
 import com.example.noci.databinding.FragmentInputBinding
 import com.example.noci.notes.MODE_ENABLER
-import com.example.noci.setThemeKey
+import com.example.noci.typeKey
 import com.orhanobut.hawk.Hawk
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -95,6 +97,14 @@ class InputFragment : Fragment() {
         }
         //}
 
+        if(typeKey.getMark()) {
+            binding.check.isChecked = true
+            noteTypeMarker(typeKey.getMark())
+        } else {
+            binding.check.isChecked = false
+            noteTypeMarker(typeKey.getMark())
+        }
+
         inputViewModel.insertInitializer.observe(viewLifecycleOwner, Observer {
             //binding.addTitle.toString() != "" && binding.addDescription.toString() != ""
             val noteTitle = binding.addTitle.text.toString()
@@ -118,6 +128,20 @@ class InputFragment : Fragment() {
                 }
 
                 onGoBack()
+            }
+        })
+
+        inputViewModel.onMarkType.observe(viewLifecycleOwner, Observer {
+            if(it) {
+                if(typeKey.getMark()) {
+                    typeKey.setMark(false)
+                } else {
+                    typeKey.setMark(true)
+                }
+
+                noteTypeMarker(typeKey.getMark())
+
+                inputViewModel.onMarkTypeReset()
             }
         })
 
@@ -166,9 +190,9 @@ class InputFragment : Fragment() {
             // date picker dialog
 
             val datepickerdialog: DatePickerDialog? =
-                this.context?.let { it1 ->
+                this.context?.let {
                     DatePickerDialog(
-                        it1,
+                        it,
                         DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
                             // Display Selected date in textbox
@@ -184,6 +208,24 @@ class InputFragment : Fragment() {
             datepickerdialog!!.show()
         })
 
+    }
+
+    fun noteTypeMarker(mark: Boolean) {
+        if(mark) {
+            binding.qualityZeroImage.visibility = View.VISIBLE
+            binding.qualityOneImage.visibility = View.VISIBLE
+            binding.qualityTwoImage.visibility = View.VISIBLE
+            binding.qualityThreeImage.visibility = View.VISIBLE
+            binding.qualityFourImage.visibility = View.VISIBLE
+            binding.qualityFiveImage.visibility = View.VISIBLE
+        } else {
+            binding.qualityZeroImage.visibility = View.INVISIBLE
+            binding.qualityOneImage.visibility = View.INVISIBLE
+            binding.qualityTwoImage.visibility = View.INVISIBLE
+            binding.qualityThreeImage.visibility = View.INVISIBLE
+            binding.qualityFourImage.visibility = View.INVISIBLE
+            binding.qualityFiveImage.visibility = View.INVISIBLE
+        }
     }
 
     fun noteOpacityChanger(typeNumber: Int) {

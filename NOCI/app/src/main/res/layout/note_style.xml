@@ -77,7 +77,7 @@
             android:layout_height="16dp"
             android:layout_marginEnd="15dp"
             app:tint="@color/standardIconColor"
-            android:src="@mipmap/icon_delete_1"
+            android:src="@mipmap/icon_delete"
             app:layout_constraintBottom_toBottomOf="@+id/note_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/note_title" />

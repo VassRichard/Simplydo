@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.noci.database_lists.items.Items
 import com.example.noci.databinding.ItemStyleBinding
 
-class ShopNoteAdapter(private val itemAdapterEdit: ItemsAdapterEdit, private val itemAdapterDelete: ItemsAdapterDelete) :
-    ListAdapter<Items, ShopNoteAdapter.ViewHolder>(
+class ItemsAdapter(private val itemAdapterEdit: ItemsAdapterEdit, private val itemAdapterDelete: ItemsAdapterDelete) :
+    ListAdapter<Items, ItemsAdapter.ViewHolder>(
         ShowNotesDiffCallback()
     ) {
 

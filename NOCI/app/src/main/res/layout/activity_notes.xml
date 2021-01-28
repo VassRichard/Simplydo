@@ -27,7 +27,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:elevation="6dp"
-        android:onClick="@{() -> notesViewModel.dayNightSwitcher()}"
         android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="@id/day_header"
         app:layout_constraintStart_toStartOf="@id/day_header"

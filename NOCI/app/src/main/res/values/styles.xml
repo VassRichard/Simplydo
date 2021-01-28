@@ -18,7 +18,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#000000</item>
-        <item name="colorAccent">#000000</item>
+        <!-- the item below is used for calendar (DatePicker) point backgroundColor-->
+        <item name="colorAccent">#FFFFFF</item>
         <item name="backgroundColor">#000000</item>
         <item name="cardBackgroundColor">#000000</item>
         <item name="textColor">#FFFFFF</item>
@@ -36,26 +37,6 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="ErrorText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">#FF0099CC</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="HintText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">#FF0099CC</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <!-- reference our hint & error styles -->
-        <item name="hintTextAppearance">@style/HintText</item>
-        <item name="errorTextAppearance">@style/ErrorText</item>
-        <item name="android:textColor">#FF0099CC</item>
-        <item name="colorControlNormal">@color/white</item>
-        <item name="colorControlActivated">#FF0099CC</item>
-        <item name="colorControlHighlight">#FF0099CC</item>
     </style>
 
 </resources>

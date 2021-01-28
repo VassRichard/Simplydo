@@ -18,7 +18,7 @@ class Splashscreen : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 2000)
+        handler.postDelayed(runnable, 100)
     }
 
     override fun onPause() {

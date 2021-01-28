@@ -182,7 +182,7 @@
             android:onClick="@{() -> inputViewModel.onDeleteSelected()}"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:src="@mipmap/icon_delete_1"
+            android:src="@mipmap/icon_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/guideline_vertical"

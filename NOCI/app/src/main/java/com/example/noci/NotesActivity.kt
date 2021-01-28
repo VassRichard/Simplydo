@@ -3,6 +3,9 @@ package com.example.noci
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +21,7 @@ import kotlin.properties.Delegates
 
 class NotesActivity : AppCompatActivity() {
 
-    lateinit var bottomNavigationView : BottomNavigationView
+    lateinit var bottomNavigationView: BottomNavigationView
     private var threadChecker = false
 
     private var currentNightMode by Delegates.notNull<Int>()
@@ -30,12 +33,25 @@ class NotesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        if(ThemeKey.theme == "dark_mode") {
-            setThemeKey("dark_mode")
+//        val fadeOut = AlphaAnimation(1f, 0f)
+//        fadeOut.interpolator = AccelerateInterpolator() //and this
+//        fadeOut.startOffset = 1000
+//        fadeOut.duration = 1000
+//
+//        val animation1 = AnimationSet(false) //change to false
+////        animation.addAnimation(fadeIn)
+//        animation1.addAnimation(fadeOut)
+//
+//        val rootView1 = window.decorView.rootView
+//
+//        rootView1.startAnimation(animation1)
+
+        if (ThemeKey.getThemeKey() == "dark_mode") {
+            ThemeKey.setThemeKey("dark_mode")
             setTheme(R.style.AppThemeDark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else if(ThemeKey.theme == "light_mode") {
-            setThemeKey("light_mode")
+        } else if (ThemeKey.getThemeKey() == "light_mode") {
+            ThemeKey.setThemeKey("light_mode")
             setTheme(R.style.AppThemeLight)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
@@ -63,9 +79,9 @@ class NotesActivity : AppCompatActivity() {
         super.onConfigurationChanged(newConfig)
         val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
-        if (nightModeFlags == Configuration.UI_MODE_NIGHT_NO){
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_NO) {
             applyDayNight(AppCompatDelegate.MODE_NIGHT_NO)
-        } else{
+        } else {
             applyDayNight(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
@@ -74,15 +90,15 @@ class NotesActivity : AppCompatActivity() {
         super.onStart()
 
         day_n_night.setOnClickListener {
-                if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
-                    setThemeKey("dark_mode")
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    //notesViewModel.dayNightResetter()
-                } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-                    setThemeKey("light_mode")
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    //notesViewModel.dayNightResetter()
-                }
+            if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
+                ThemeKey.setThemeKey("dark_mode")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                //notesViewModel.dayNightResetter()
+            } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                ThemeKey.setThemeKey("light_mode")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                //notesViewModel.dayNightResetter()
+            }
         }
 
 //        val notifyIntent = Intent(this, MyReceiver::class.java)
@@ -103,15 +119,16 @@ class NotesActivity : AppCompatActivity() {
 
     fun setUpNavigation() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_menu)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
     }
 
-    private fun applyDayNight(state: Int){
-        if (state == AppCompatDelegate.MODE_NIGHT_NO){
+    private fun applyDayNight(state: Int) {
+        if (state == AppCompatDelegate.MODE_NIGHT_NO) {
             //apply day colors for your views
             setTheme(R.style.AppThemeLight)
-        }else{
+        } else {
             //apply night colors for your views
             setTheme(R.style.AppThemeDark)
         }
@@ -169,6 +186,86 @@ class NotesActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+
+//        val rootView1 = window.decorView.rootView
+//
+////        val fadeIn: Animation = AlphaAnimation(0f, 1f)
+////        fadeIn.duration = 1000
+//        val fadeOut: Animation = AlphaAnimation(1f, 0f)
+//        fadeOut.startOffset = 1000
+//        fadeOut.duration = 1000
+//        val animation = AnimationSet(true)
+////        animation.addAnimation(fadeIn)
+//        animation.addAnimation(fadeOut)
+//        rootView1.startAnimation(animation)
+
+//        val rootView = window.decorView.rootView
+//
+//        rootView.animate()
+//            .scaleY(1F) //just wanted to show you possible methods you can add more
+//            .setStartDelay(100)
+//            .setDuration(2000)
+//            .setInterpolator(DecelerateInterpolator())
+//            .setListener(object : Animator.AnimatorListener {
+//                override fun onAnimationStart(animation: Animator) {
+//                    val fadeOut = AlphaAnimation(1f, 0f)
+//                    fadeOut.interpolator = AccelerateInterpolator() //and this
+//                    fadeOut.startOffset = 1000
+//                    fadeOut.duration = 1000
+//
+//                    val animation1 = AnimationSet(false) //change to false
+////        animation.addAnimation(fadeIn)
+//                    animation1.addAnimation(fadeOut)
+//
+//                    val rootView1 = window.decorView.rootView
+//
+//                    rootView1.startAnimation(animation1)
+//
+//                    Toast.makeText(applicationContext, "OL", Toast.LENGTH_SHORT).show()
+//                }
+//
+//                override fun onAnimationEnd(animation: Animator) {
+//                    val fadeOut = AlphaAnimation(1f, 0f)
+//                    fadeOut.interpolator = AccelerateInterpolator() //and this
+//                    fadeOut.startOffset = 1000
+//                    fadeOut.duration = 1000
+//
+//                    val animation1 = AnimationSet(false) //change to false
+////        animation.addAnimation(fadeIn)
+//                    animation1.addAnimation(fadeOut)
+//
+//                    val rootView1 = window.decorView.rootView
+//
+//                    rootView1.startAnimation(animation1)
+//
+//                    Toast.makeText(applicationContext, "OL", Toast.LENGTH_SHORT).show()
+//                }
+//                override fun onAnimationCancel(animation: Animator) {}
+//                override fun onAnimationRepeat(animation: Animator) {}
+//            }).start()
+
+
+        ///val animFadeIn: Animation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out)
+
+
+//        val fadeOut = AlphaAnimation(1f, 0f)
+//        fadeOut.interpolator = AccelerateInterpolator() //and this
+//        fadeOut.startOffset = 1000
+//        fadeOut.duration = 1000
+//
+//        val animation = AnimationSet(false) //change to false
+////        animation.addAnimation(fadeIn)
+//        animation.addAnimation(fadeOut)
+//
+//        //val rootView =
+//            (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0) as ViewGroup
+//
+//        //val rootView = window.decorView.rootView
+//
+//        val rootView = window.decorView.rootView
+//
+//        rootView.startAnimation(animation)
+
 
 //        val intent = Intent(this, AlarmReceiver::class.java)
 //        intent.putExtra("NotificationText", "some text")

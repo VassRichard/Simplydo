@@ -41,9 +41,9 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
     val insertInitializer: LiveData<Boolean>
         get() = _insertInitializer
 
-    private val _insertDateInitializer = MutableLiveData<Boolean>()
-    val insertDateInitializer: LiveData<Boolean>
-        get() = _insertDateInitializer
+//    private val _insertDateInitializer = MutableLiveData<Boolean>()
+//    val insertDateInitializer: LiveData<Boolean>
+//        get() = _insertDateInitializer
 
     private val _onChangeTitle = MutableLiveData<Boolean>()
     val onChangeTitle: LiveData<Boolean>
@@ -119,11 +119,11 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun copyDataToClip(listId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            dataStorageList = itemsRepository.copyData(listId)
-        }
-    }
+//    fun copyDataToClip(listId: Int) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            dataStorageList = itemsRepository.copyData(listId)
+//        }
+//    }
 
     fun changeItemState(id: Int, newState: Boolean) {
         uiScope.launch {

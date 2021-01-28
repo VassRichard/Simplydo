@@ -8,8 +8,6 @@
 
     <!--   basic colors   -->
 
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#5491CF</color>
     <color name="colorAccent">#5491CF</color>
 
     <!--   bottom navigation colors   -->
@@ -18,14 +16,11 @@
     <color name="bottomNavMenuIconActive">#000000</color>
 
     <color name="bottomNavMenuBackgroundColor">#5491CF</color>
-    <color name="bottomNavMenuItemTintColor">#FFFFFF</color>
-    <color name="bottomNavMenuTextColor">#FFFFFF</color>
 
     <!--   main/notes interface colors   -->
 
     <color name="mainTopHeaderColor">#FFFFFF</color>
     <color name="mainPageDayColor">#5491CF</color>
-    <color name="mainPageNoteBorderColor">#5491CF</color>
 
     <color name="mainOverdueColorYesterday">#FF0000</color>
     <color name="mainOverdueColorToday">#32CD32</color>
@@ -48,8 +43,6 @@
 
     <color name="addIconColor">#000000</color>
 
-    <color name="itemLineSplitterColor">#5491CF</color>
-
     <color name="itemTopHeaderColor">#FFFFFF</color>
     <color name="itemTopHeaderTextColor">#5491CF</color>
 
@@ -58,12 +51,6 @@
     <color name="itemBackgroundColor">#FFFFFF</color>
 
     <!--   the rest   -->
-
-    <color name="settingsHeader">#5491CF</color>
-    <color name="settingsSubmenu">#5491CF</color>
-    <color name="settingsCredits">#5491CF</color>
-
-    <color name="textColor">#000000</color>
 
     <color name="editTextBackground">#DCDCDC</color>
 </resources>

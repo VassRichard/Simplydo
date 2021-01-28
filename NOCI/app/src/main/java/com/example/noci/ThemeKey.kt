@@ -5,16 +5,20 @@ import com.example.noci.ThemeKey.theme
 
 object ThemeKey {
 
-    var theme: String = "light_mode"
+    private var theme: String = "light_mode"
 
     init {
 
     }
 
-}
+    fun setThemeKey(currentTheme: String) {
+        this.theme = currentTheme
+    }
 
-fun setThemeKey(currentTheme: String) {
-    theme = currentTheme
+    fun getThemeKey() : String {
+        return theme
+    }
+
 }
 
 object SelectKey {
@@ -32,4 +36,20 @@ object SelectKey {
         return select
     }
 
+}
+
+object typeKey {
+    private var mark: Boolean = false
+
+    init {
+
+    }
+
+    fun setMark(mark: Boolean) {
+        this.mark = mark
+    }
+
+    fun getMark(): Boolean {
+        return mark
+    }
 }

@@ -9,28 +9,32 @@ import com.example.noci.database.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class InputViewModel(application: Application): AndroidViewModel(application)  {
+class InputViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _insertInitializer = MutableLiveData<Boolean>()
-    val insertInitializer : LiveData<Boolean>
+    val insertInitializer: LiveData<Boolean>
         get() = _insertInitializer
 
     private val _insertDateInitializer = MutableLiveData<Boolean>()
-    val insertDateInitializer : LiveData<Boolean>
+    val insertDateInitializer: LiveData<Boolean>
         get() = _insertDateInitializer
 
     private val _onGoBackToMain = MutableLiveData<Boolean>()
-    val onGoBackToMain : LiveData<Boolean>
+    val onGoBackToMain: LiveData<Boolean>
         get() = _onGoBackToMain
 
     private val readAll: LiveData<List<Note>>
     private val repository: NoteRepository
 
+    private val _onMarkType = MutableLiveData<Boolean>()
+    val onMarkType: LiveData<Boolean>
+        get() = _onMarkType
+
     private val _noteOpacity = MutableLiveData<Int>()
     val noteOpacity: LiveData<Int>
         get() = _noteOpacity
 
-    private var noteType : Int = -1
+    private var noteType: Int = -1
     private var newNoteType: Int = -1
 
     init {
@@ -63,6 +67,14 @@ class InputViewModel(application: Application): AndroidViewModel(application)  {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateNote(id, newTitle, newDate, newNoteType)
         }
+    }
+
+    fun onMarkType() {
+        _onMarkType.value = true
+    }
+
+    fun onMarkTypeReset() {
+        _onMarkType.value = false
     }
 
     fun onSetNoteType(type: Int) {
