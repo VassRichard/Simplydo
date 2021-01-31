@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noci.InputActivity
@@ -62,24 +63,6 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
                 binding.emptyListTitle.visibility = View.INVISIBLE
                 binding.emptyListDescription.visibility = View.INVISIBLE
             }
-            // show the amount of tasks today
-//                val calendar = Calendar.getInstance()
-//                val day = calendar.get(Calendar.DAY_OF_MONTH)
-//                val month = calendar.get(Calendar.MONTH)
-//                val year = calendar.get(Calendar.YEAR)
-//                val todayDate = "" + day + " " + MONTHS[month] + " " + year
-//
-//                var todayTasks: Int = 0
-//
-//                for (item in it) {
-//                    //Log.e("TAG ITEM : ", "$item")
-//                    if (todayDate == item.noteDate) {
-//                        todayTasks += 1
-//                        //Log.e("TODAY", "TODAY")
-//                    }
-//                }
-//
-//                Toast.makeText(context, "Today you have $todayTasks", Toast.LENGTH_LONG).show()
 
             it?.let {
                 adapter.submitList(it)
@@ -133,6 +116,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 
 //        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
 //        itemTouchHelper.attachToRecyclerView(notes_list)
+
     }
 
     // override function for editItem interface defined in NotesAdapter, it also transfers a Bundle(that holds the currentItem's attributes) into the InputActivity

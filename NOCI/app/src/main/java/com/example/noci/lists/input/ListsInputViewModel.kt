@@ -41,10 +41,6 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
     val insertInitializer: LiveData<Boolean>
         get() = _insertInitializer
 
-//    private val _insertDateInitializer = MutableLiveData<Boolean>()
-//    val insertDateInitializer: LiveData<Boolean>
-//        get() = _insertDateInitializer
-
     private val _onChangeTitle = MutableLiveData<Boolean>()
     val onChangeTitle: LiveData<Boolean>
         get() = _onChangeTitle
@@ -64,10 +60,6 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
     private val _onDeleteSelectedBool = MutableLiveData<Boolean>()
     val onDeleteSelectedBool: LiveData<Boolean>
         get() = _onDeleteSelectedBool
-
-//    private val _onCopyDataBool = MutableLiveData<Boolean>()
-//    val onCopyDataBool: LiveData<Boolean>
-//        get() = _onCopyDataBool
 
     /// ------------------------------- DATABASE REPOSITORY INITIALIZERS ------------------------------- ///
 
@@ -119,12 +111,6 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-//    fun copyDataToClip(listId: Int) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            dataStorageList = itemsRepository.copyData(listId)
-//        }
-//    }
-
     fun changeItemState(id: Int, newState: Boolean) {
         uiScope.launch {
             itemsRepository.editNote(id, newState)
@@ -156,10 +142,6 @@ class ListsInputViewModel(application: Application) : AndroidViewModel(applicati
     fun onGoBack() {
         _onGoBackToMain.value = true
     }
-
-//    fun onCopyData() {
-//        _onCopyDataBool.value = true
-//    }
 
     fun onChangeTitleObserver() {
         _onChangeTitle.value = true

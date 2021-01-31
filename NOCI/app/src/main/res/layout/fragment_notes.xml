@@ -22,6 +22,7 @@
             android:fontFamily="@font/amiko_bold"
             android:gravity="bottom|center"
             android:text="@string/no_notes_added"
+            android:textColor="@color/standardTextColor"
             android:textSize="24sp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -35,6 +36,7 @@
             android:layout_height="100dp"
             android:gravity="top|center"
             android:text="@string/add_notes"
+            android:textColor="@color/standardTextColor"
             android:textSize="20sp"
             android:visibility="visible"
             app:fontFamily="@font/amiko_regular"
@@ -42,10 +44,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/empty_list_title" />
 
-        <com.tsuryo.swipeablerv.SwipeableRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notes_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,9 +57,22 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:textColor="@android:color/white"
-            app:textSize="20sp" />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <!--        <com.tsuryo.swipeablerv.SwipeableRecyclerView-->
+        <!--            android:id="@+id/notes_list"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:visibility="visible"-->
+        <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.0"-->
+        <!--            app:textColor="@android:color/white"-->
+        <!--            app:textSize="20sp" />-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/notes_button"

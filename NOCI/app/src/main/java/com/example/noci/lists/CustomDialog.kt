@@ -47,7 +47,7 @@ class CustomDialog() : DialogFragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView(view)
+        //setupView(view)
         //setupClickListeners(view)
     }
 
@@ -71,37 +71,37 @@ class CustomDialog() : DialogFragment()  {
         }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            // Get the layout inflater
-            val inflater = requireActivity().layoutInflater;
-
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.custom_dialog, null))
-                // Add action buttons
-                .setPositiveButton(R.string.cancel,
-                    DialogInterface.OnClickListener { dialog, id ->
-                        // sign in the user ...
-                        Toast.makeText(context, "FIRST GOOD", Toast.LENGTH_LONG).show()
-                        if (listener != null) {
-                            listener!!.applyTexts("title")
-                            Toast.makeText(context, "SECOND GOOD", Toast.LENGTH_LONG).show()
-                        }
-                    })
-                .setNegativeButton(R.string.cancel,
-                    DialogInterface.OnClickListener { dialog, id ->
-                        Toast.makeText(context, "FIRST BAD", Toast.LENGTH_LONG).show()
-                        getDialog()?.cancel()
-                    })
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
-    }
-
-    private fun setupView(view: View) {
-        //view.username.setText("title")
-    }
+//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+//        return activity?.let {
+//            val builder = AlertDialog.Builder(it)
+//            // Get the layout inflater
+//            val inflater = requireActivity().layoutInflater;
+//
+//            // Inflate and set the layout for the dialog
+//            // Pass null as the parent view because its going in the dialog layout
+//            builder.setView(inflater.inflate(R.layout.custom_dialog, null))
+//                // Add action buttons
+//                .setPositiveButton(R.string.cancel,
+//                    DialogInterface.OnClickListener { dialog, id ->
+//                        // sign in the user ...
+//                        Toast.makeText(context, "FIRST GOOD", Toast.LENGTH_LONG).show()
+//                        if (listener != null) {
+//                            listener!!.applyTexts("title")
+//                            Toast.makeText(context, "SECOND GOOD", Toast.LENGTH_LONG).show()
+//                        }
+//                    })
+//                .setNegativeButton(R.string.cancel,
+//                    DialogInterface.OnClickListener { dialog, id ->
+//                        Toast.makeText(context, "FIRST BAD", Toast.LENGTH_LONG).show()
+//                        getDialog()?.cancel()
+//                    })
+//            builder.create()
+//        } ?: throw IllegalStateException("Activity cannot be null")
+//    }
+//
+//    private fun setupView(view: View) {
+//        //view.username.setText("title")
+//    }
 
 //    private fun setupClickListeners(view: View) {
 //

@@ -17,6 +17,7 @@ import com.example.noci.*
 import com.example.noci.database_lists.items.Items
 import com.example.noci.databinding.FragmentInputListsBinding
 import com.example.noci.lists.ITEM_DELETER_CHECKER
+import com.example.noci.lists.PLM
 import com.orhanobut.hawk.Hawk
 
 
@@ -24,9 +25,6 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
 
     private lateinit var binding: FragmentInputListsBinding
     private lateinit var inputViewModel: ListsInputViewModel
-
-    val MONTHS =
-        arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
     private val adapter = ItemsAdapter(this, this)
 
@@ -144,7 +142,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
                 inputViewModel.addToList()
                 //binding.itemName.requestFocus()
             }
-            true
+            false
         })
 
         // adds item in the database of the specific list
@@ -152,8 +150,6 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             if (it) {
                 val item = binding.itemName.text.toString()
                 val listId = details?.id
-
-                Log.e(" NOTE : ", " $item and $listId")
 
                 if (item.isNotEmpty()) {
                     if (listId != null) {
@@ -188,21 +184,19 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
             }
         })
 
-//        inputViewModel.onCopyDataBool.observe(viewLifecycleOwner, Observer {
-//            if (it) {
-//                if (details != null) {
-//                    inputViewModel.copyDataToClip(details.id)
-//                }
-//            }
-//        })
-
-        binding.itemName.setOnFocusChangeListener { view: View, b: Boolean ->
-//            if(!view.hasFocus()) {
-//                binding.itemName.requestFocus()
-//                val inputMethodManager = context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//                inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, SOFT_INPUT_STATE_VISIBLE)
-        }
+//        binding.itemName.setOnFocusChangeListener { view: View, b: Boolean ->
+////            if(!view.hasFocus()) {
+////                binding.itemName.requestFocus()
+////                val inputMethodManager = context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+////                inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, SOFT_INPUT_STATE_VISIBLE)
+//        }
     }
+
+//    override fun onPause() {
+//        super.onPause()
+//
+//
+//    }
 
     // override for interfaces in the ItemsAdapter class
     override fun editItem(id: Int, newState: Boolean) {

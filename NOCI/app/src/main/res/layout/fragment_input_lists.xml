@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/back_button"
-            android:layout_width="24dp"
+            android:layout_width="30dp"
             android:layout_height="0dp"
             android:background="@color/mainTopHeaderColor"
             android:elevation="6dp"
@@ -33,7 +33,7 @@
             android:id="@+id/input_fragment_title"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:background="@color/white"
+            android:background="@android:color/white"
             android:backgroundTint="@color/itemTopHeaderColor"
             android:elevation="6dp"
             android:fontFamily="@font/work_sans_regular"

@@ -28,10 +28,6 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     val goToInput: LiveData<Boolean>
         get() = _goToInput
 
-    private val _onClickedSwitch = MutableLiveData<Boolean>()
-    val onClickedSwitch: LiveData<Boolean>
-        get() = _onClickedSwitch
-
     /// ------------------------------- DATABASE REPOSITORY INITIALIZERS ------------------------------- ///
 
     private val repository: NoteRepository
@@ -65,14 +61,6 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun goToInputNoteResetter() {
         _goToInput.value = false
-    }
-
-    fun dayNightSwitcher() {
-        _onClickedSwitch.value = true
-    }
-
-    fun dayNightResetter() {
-        _onClickedSwitch.value = false
     }
 
     /// ------------------------------- VIEWMODEL LIFECYCLE FUNCTIONS ------------------------------- ///

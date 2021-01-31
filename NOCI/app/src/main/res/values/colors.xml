@@ -5,6 +5,7 @@
     <color name="backButtonIconColor">#000000</color>
 
     <color name="standardIconColor">#000000</color>
+    <color name="standardTextColor">#808080</color>
 
     <!--   basic colors   -->
 

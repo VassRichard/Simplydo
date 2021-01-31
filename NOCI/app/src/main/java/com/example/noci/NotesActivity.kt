@@ -1,11 +1,9 @@
 package com.example.noci
 
+import android.app.FragmentManager
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -115,6 +113,8 @@ class NotesActivity : AppCompatActivity() {
 
         // setup bottom navigation view
         setUpNavigation()
+
+//        if(fragmentManager?.popBackStack() != true)
     }
 
     fun setUpNavigation() {
@@ -184,94 +184,4 @@ class NotesActivity : AppCompatActivity() {
 //        threadChecker = false
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
-//        val rootView1 = window.decorView.rootView
-//
-////        val fadeIn: Animation = AlphaAnimation(0f, 1f)
-////        fadeIn.duration = 1000
-//        val fadeOut: Animation = AlphaAnimation(1f, 0f)
-//        fadeOut.startOffset = 1000
-//        fadeOut.duration = 1000
-//        val animation = AnimationSet(true)
-////        animation.addAnimation(fadeIn)
-//        animation.addAnimation(fadeOut)
-//        rootView1.startAnimation(animation)
-
-//        val rootView = window.decorView.rootView
-//
-//        rootView.animate()
-//            .scaleY(1F) //just wanted to show you possible methods you can add more
-//            .setStartDelay(100)
-//            .setDuration(2000)
-//            .setInterpolator(DecelerateInterpolator())
-//            .setListener(object : Animator.AnimatorListener {
-//                override fun onAnimationStart(animation: Animator) {
-//                    val fadeOut = AlphaAnimation(1f, 0f)
-//                    fadeOut.interpolator = AccelerateInterpolator() //and this
-//                    fadeOut.startOffset = 1000
-//                    fadeOut.duration = 1000
-//
-//                    val animation1 = AnimationSet(false) //change to false
-////        animation.addAnimation(fadeIn)
-//                    animation1.addAnimation(fadeOut)
-//
-//                    val rootView1 = window.decorView.rootView
-//
-//                    rootView1.startAnimation(animation1)
-//
-//                    Toast.makeText(applicationContext, "OL", Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onAnimationEnd(animation: Animator) {
-//                    val fadeOut = AlphaAnimation(1f, 0f)
-//                    fadeOut.interpolator = AccelerateInterpolator() //and this
-//                    fadeOut.startOffset = 1000
-//                    fadeOut.duration = 1000
-//
-//                    val animation1 = AnimationSet(false) //change to false
-////        animation.addAnimation(fadeIn)
-//                    animation1.addAnimation(fadeOut)
-//
-//                    val rootView1 = window.decorView.rootView
-//
-//                    rootView1.startAnimation(animation1)
-//
-//                    Toast.makeText(applicationContext, "OL", Toast.LENGTH_SHORT).show()
-//                }
-//                override fun onAnimationCancel(animation: Animator) {}
-//                override fun onAnimationRepeat(animation: Animator) {}
-//            }).start()
-
-
-        ///val animFadeIn: Animation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out)
-
-
-//        val fadeOut = AlphaAnimation(1f, 0f)
-//        fadeOut.interpolator = AccelerateInterpolator() //and this
-//        fadeOut.startOffset = 1000
-//        fadeOut.duration = 1000
-//
-//        val animation = AnimationSet(false) //change to false
-////        animation.addAnimation(fadeIn)
-//        animation.addAnimation(fadeOut)
-//
-//        //val rootView =
-//            (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0) as ViewGroup
-//
-//        //val rootView = window.decorView.rootView
-//
-//        val rootView = window.decorView.rootView
-//
-//        rootView.startAnimation(animation)
-
-
-//        val intent = Intent(this, AlarmReceiver::class.java)
-//        intent.putExtra("NotificationText", "some text")
-//        val pendingIntent =
-//            PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-//        val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
-//        alarmManager[AlarmManager.RTC_WAKEUP, 1000] = pendingIntent
-    }
 }

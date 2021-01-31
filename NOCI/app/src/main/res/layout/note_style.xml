@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -28,10 +28,10 @@
             android:layout_width="4dp"
             android:layout_height="35dp"
             android:background="@drawable/overdue_yesterday"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintCircleRadius="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/note_type"
@@ -46,6 +46,7 @@
             android:id="@+id/note_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/standardTextColor"
             android:fontFamily="@font/work_sans_regular"
             android:gravity="center"
             android:text="@string/dummy"
@@ -59,11 +60,12 @@
             android:id="@+id/note_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginBottom="1dp"
             android:fontFamily="@font/work_sans_regular"
             android:gravity="bottom|end"
             android:text="@string/input_fragment_date"
+            android:textColor="@color/standardTextColor"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/delete_note"
@@ -76,11 +78,11 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginEnd="15dp"
-            app:tint="@color/standardIconColor"
             android:src="@mipmap/icon_delete"
             app:layout_constraintBottom_toBottomOf="@+id/note_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/note_title" />
+            app:layout_constraintTop_toTopOf="@+id/note_title"
+            app:tint="@color/standardIconColor" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
