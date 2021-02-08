@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lists_input_navigation"
+    app:startDestination="@id/listsInputFragment">
+
+    <fragment
+        android:id="@+id/listsInputFragment"
+        android:name="com.example.noci.lists.input.ListsInputFragment"
+        android:label="InputListsFragment"
+        tools:layout="@layout/fragment_input_lists">
+        <argument
+            android:name="lists"
+            android:defaultValue="@null"
+            app:argType="com.example.noci.database_lists.ItemList"
+            app:nullable="true" />
+    </fragment>
+</navigation>

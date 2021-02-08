@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="inputViewModel"
+            type="com.example.noci.lists.input.ListsInputViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="32dp">
+
+
+        <TextView
+            android:id="@+id/input_fragment_title"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/itemTopHeaderColor"
+            android:elevation="6dp"
+            android:fontFamily="@font/work_sans_regular"
+            android:gravity="center|end"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@string/lists_input_fragment_title"
+            android:textColor="@color/itemTopHeaderTextColor"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/add_title"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:hint="@string/input_fragment_note"
+            android:onClick="@{() -> inputViewModel.onChangeTitleObserver()}"
+            android:paddingStart="5dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/input_fragment_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/input_fragment_title" />
+
+        <EditText
+            android:id="@+id/edit_title"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:hint="@string/input_fragment_note"
+            android:paddingStart="5dp"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/input_fragment_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/input_fragment_title" />
+
+        <ImageView
+            android:id="@+id/add_to_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> inputViewModel.addToList()}"
+            android:src="@drawable/ic_baseline_arrow_right_24"
+            app:layout_constraintBottom_toBottomOf="@+id/item_name"
+            app:layout_constraintEnd_toEndOf="@id/input_fragment_title"
+            app:layout_constraintStart_toEndOf="@id/item_name"
+            app:layout_constraintTop_toTopOf="@+id/item_name" />
+
+        <EditText
+            android:id="@+id/item_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:elevation="32dp"
+            android:hint="@string/lists_input_fragment_add_item"
+            android:paddingStart="5dp"
+            android:textSize="18sp"
+            android:singleLine="true"
+            android:imeOptions="actionSend"
+            app:layout_constraintBottom_toTopOf="@id/colored_line"
+            app:layout_constraintEnd_toStartOf="@id/add_to_list"
+            app:layout_constraintStart_toStartOf="@id/add_title"
+            app:layout_constraintTop_toBottomOf="@id/input_fragment_title" />
+
+        <ImageView
+            android:id="@+id/colored_line"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/itemLineSplitterColor"
+            app:layout_constraintBottom_toTopOf="@id/show_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_name" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/show_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:screenReaderFocusable="true"
+            android:textSize="18sp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/select_all"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/colored_line" />
+
+        <ImageView
+            android:id="@+id/select_all"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/function_select"
+            android:onClick="@{() -> inputViewModel.onSelectAll()}"
+            app:layout_constraintEnd_toStartOf="@+id/delete_selected"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/delete_selected"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:onClick="@{() -> inputViewModel.onDeleteSelected()}"
+            android:src="@drawable/function_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/select_all"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
