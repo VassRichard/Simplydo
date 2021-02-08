@@ -45,6 +45,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
 
+    // Navigation safe-args
+//    classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.3"
+
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:2.2.6"
     kapt "androidx.room:room-compiler:2.2.6"
@@ -106,11 +109,6 @@ dependencies {
     // dependency to appear on your APK's compile classpath or the test APK
     // classpath.
     androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.3.0'
-
-
-
-    // Navigation safe-args
-    //classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0"
 
     //
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'

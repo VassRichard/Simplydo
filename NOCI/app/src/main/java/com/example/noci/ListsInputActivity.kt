@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import com.example.noci.database_lists.ItemList
 import com.example.noci.lists.input.ListsInputFragmentArgs
-import com.example.noci.notes.MODE_ENABLER
 import com.orhanobut.hawk.Hawk
 
 class ListsInputActivity: AppCompatActivity() {

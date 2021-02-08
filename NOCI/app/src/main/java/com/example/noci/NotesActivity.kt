@@ -1,9 +1,8 @@
 package com.example.noci
 
-import android.app.FragmentManager
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.lang.String
+import com.orhanobut.hawk.Hawk
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
@@ -31,27 +30,14 @@ class NotesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-//        val fadeOut = AlphaAnimation(1f, 0f)
-//        fadeOut.interpolator = AccelerateInterpolator() //and this
-//        fadeOut.startOffset = 1000
-//        fadeOut.duration = 1000
-//
-//        val animation1 = AnimationSet(false) //change to false
-////        animation.addAnimation(fadeIn)
-//        animation1.addAnimation(fadeOut)
-//
-//        val rootView1 = window.decorView.rootView
-//
-//        rootView1.startAnimation(animation1)
-
-        if (ThemeKey.getThemeKey() == "dark_mode") {
-            ThemeKey.setThemeKey("dark_mode")
-            setTheme(R.style.AppThemeDark)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else if (ThemeKey.getThemeKey() == "light_mode") {
+        if (ThemeKey.getThemeKey() == "light_mode") {
             ThemeKey.setThemeKey("light_mode")
-            setTheme(R.style.AppThemeLight)
+            applyDayNight(AppCompatDelegate.MODE_NIGHT_NO)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else if (ThemeKey.getThemeKey() == "dark_mode") {
+            ThemeKey.setThemeKey("dark_mode")
+            applyDayNight(AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
 
         super.onCreate(savedInstanceState)
@@ -59,10 +45,6 @@ class NotesActivity : AppCompatActivity() {
 
         dayHeader = findViewById(R.id.day_header)
         day_n_night = findViewById(R.id.day_night)
-
-//        if (!threadChecker) {
-//            thread.start()
-//        }
 
         currentNightMode = AppCompatDelegate.getDefaultNightMode()
 
@@ -91,11 +73,9 @@ class NotesActivity : AppCompatActivity() {
             if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
                 ThemeKey.setThemeKey("dark_mode")
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                //notesViewModel.dayNightResetter()
             } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
                 ThemeKey.setThemeKey("light_mode")
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                //notesViewModel.dayNightResetter()
             }
         }
 
@@ -114,13 +94,12 @@ class NotesActivity : AppCompatActivity() {
         // setup bottom navigation view
         setUpNavigation()
 
-//        if(fragmentManager?.popBackStack() != true)
     }
 
     fun setUpNavigation() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_menu)
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.notes_nav_host_fragment) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
     }
 
@@ -145,10 +124,6 @@ class NotesActivity : AppCompatActivity() {
                     val df = SimpleDateFormat("EEEE", Locale.ENGLISH)
                     val formattedDate = df.format(c.time).toString()
 
-//                    val currentDate = SimpleDateFormat("hh:mm:ss")
-//                    val formattedDate = currentDate.format(Date())
-//                    Log.e("DATE ", formattedDate.toString())
-
                     if (dayHeader.text != formattedDate) {
                         dayHeader.text = formattedDate
                     }
@@ -160,17 +135,19 @@ class NotesActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        moveTaskToBack(true)
+    }
+
     override fun onResume() {
         super.onResume()
 
-        thread = Thread(thread, "Thread #" + String.valueOf(threadNameCounter))
-        thread.start()
-        Log.e("THREAD IS ", thread.toString())
-
-//        if (!threadChecker) {
-//            thread.start()
-//            threadChecker = true
-//        }
+        if (!threadChecker) {
+            thread.start()
+            threadChecker = true
+        }
     }
 
     override fun onPause() {
@@ -178,10 +155,6 @@ class NotesActivity : AppCompatActivity() {
 
         threadNameCounter++
         thread.interrupt()
-
-        //thread.interrupt()
-//        t?.interrupt()
-//        threadChecker = false
     }
 
 }

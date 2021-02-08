@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.example.noci.NotesActivity
 import com.example.noci.R
 import com.example.noci.databinding.FragmentInputBinding
 import com.example.noci.typeKey
+import com.orhanobut.hawk.Hawk
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -43,31 +45,6 @@ class InputFragment : Fragment() {
 
         binding.inputViewModel = inputViewModel
 
-//        // the problem is here
-//        if(ThemeKey.theme == "dark_mode") {
-//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//            //Hawk.put(MODE_ENABLER, "dark_mode")
-//            setThemeKey("dark_mode")
-//        } else if(ThemeKey.theme == "light_mode") {
-//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//            //Hawk.put(MODE_ENABLER, "light_mode")
-//            setThemeKey("light_mode")
-//        }
-
-//        Hawk.init(context).build()
-//
-//        currentNightMode = AppCompatDelegate.getDefaultNightMode()
-//        val theme = Hawk.get<String>(MODE_ENABLER, "light_mode")
-//
-//        // the problem is here
-//        if(theme == "dark_mode") {
-//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//            Hawk.put(MODE_ENABLER, "dark_mode")
-//        } else if(theme == "light_mode") {
-//            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//            Hawk.put(MODE_ENABLER, "light_mode")
-//        }
-
         return binding.root
     }
 
@@ -80,13 +57,16 @@ class InputFragment : Fragment() {
         val details = InputFragmentArgs.fromBundle(requireArguments()).note
 
         if (details != null) {
-            binding.addButton.text = "SAVE NOTE"
-
             binding.addTitle.setText(details.title)
+
+            binding.addDate.isEnabled = false
+            binding.addDate.isClickable = false
             binding.addDate.text = details.noteDate
+
+            binding.addButton.text = "SAVE NOTE"
         }
 
-        if(typeKey.getMark()) {
+        if (typeKey.getMark()) {
             binding.check.isChecked = true
             noteTypeMarker(typeKey.getMark())
         } else {
@@ -106,7 +86,9 @@ class InputFragment : Fragment() {
                     .show()
             } else {
                 if (details != null) {
-                    inputViewModel.updateNote(details.id, noteTitle, noteDate)
+//                    if you want to update noteDate
+//                    inputViewModel.updateNote(details.id, noteTitle, noteDate)
+                    inputViewModel.updateNote(details.id, noteTitle)
                 } else {
                     inputViewModel.addNote(noteTitle, noteDate)
                 }
@@ -195,7 +177,7 @@ class InputFragment : Fragment() {
     }
 
     fun noteTypeMarker(mark: Boolean) {
-        if(mark) {
+        if (mark) {
             binding.qualityZeroImage.visibility = View.VISIBLE
             binding.qualityOneImage.visibility = View.VISIBLE
             binding.qualityTwoImage.visibility = View.VISIBLE
@@ -213,37 +195,37 @@ class InputFragment : Fragment() {
     }
 
     fun noteOpacityChanger(typeNumber: Int) {
-        if(typeNumber == 0) {
+        if (typeNumber == 0) {
             binding.qualityOneImage.alpha = 1F
             binding.qualityTwoImage.alpha = 1F
             binding.qualityThreeImage.alpha = 1F
             binding.qualityFourImage.alpha = 1F
             binding.qualityFiveImage.alpha = 1F
-        } else if(typeNumber == 1) {
+        } else if (typeNumber == 1) {
             binding.qualityZeroImage.alpha = 1F
             binding.qualityTwoImage.alpha = 1F
             binding.qualityThreeImage.alpha = 1F
             binding.qualityFourImage.alpha = 1F
             binding.qualityFiveImage.alpha = 1F
-        } else if(typeNumber == 2) {
+        } else if (typeNumber == 2) {
             binding.qualityZeroImage.alpha = 1F
             binding.qualityOneImage.alpha = 1F
             binding.qualityThreeImage.alpha = 1F
             binding.qualityFourImage.alpha = 1F
             binding.qualityFiveImage.alpha = 1F
-        } else if(typeNumber == 3) {
+        } else if (typeNumber == 3) {
             binding.qualityZeroImage.alpha = 1F
             binding.qualityOneImage.alpha = 1F
             binding.qualityTwoImage.alpha = 1F
             binding.qualityFourImage.alpha = 1F
             binding.qualityFiveImage.alpha = 1F
-        } else if(typeNumber == 4) {
+        } else if (typeNumber == 4) {
             binding.qualityZeroImage.alpha = 1F
             binding.qualityOneImage.alpha = 1F
             binding.qualityTwoImage.alpha = 1F
             binding.qualityThreeImage.alpha = 1F
             binding.qualityFiveImage.alpha = 1F
-        } else if(typeNumber == 5) {
+        } else if (typeNumber == 5) {
             binding.qualityZeroImage.alpha = 1F
             binding.qualityOneImage.alpha = 1F
             binding.qualityTwoImage.alpha = 1F

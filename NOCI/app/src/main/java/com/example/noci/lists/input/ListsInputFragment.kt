@@ -83,6 +83,7 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
 
                 binding.editTitle.requestFocus()
             }
+
             binding.editTitle.onFocusChangeListener =
                 View.OnFocusChangeListener() { view: View, b: Boolean ->
                     if (!binding.editTitle.hasFocus()) {
@@ -109,32 +110,6 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
                 startActivity(intent)
             }
         })
-
-//        inputViewModel.insertDateInitializer.observe(viewLifecycleOwner, Observer {
-//            val calendar = Calendar.getInstance()
-//            val day = calendar.get(Calendar.DAY_OF_MONTH)
-//            val month = calendar.get(Calendar.MONTH)
-//            val year = calendar.get(Calendar.YEAR)
-//
-//            // date picker dialog
-//            val datepickerdialog: DatePickerDialog? =
-//                this.context?.let { it1 ->
-//                    DatePickerDialog(
-//                        it1,
-//                        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-//
-//                            // Display Selected date in textbox
-//                            //binding.addDate.setText("" + dayOfMonth + " " + MONTHS[monthOfYear] + " " + year)
-//
-//                        },
-//                        year,
-//                        month,
-//                        day
-//                    )
-//                }
-//
-//            datepickerdialog!!.show()
-//        })
 
         // activate the _addToListBool value when user pressed Enter, which adds the item into database / the function below
         binding.itemName.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
@@ -191,12 +166,6 @@ class ListsInputFragment : Fragment(), ItemsAdapterEdit, ItemsAdapterDelete {
 ////                inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, SOFT_INPUT_STATE_VISIBLE)
 //        }
     }
-
-//    override fun onPause() {
-//        super.onPause()
-//
-//
-//    }
 
     // override for interfaces in the ItemsAdapter class
     override fun editItem(id: Int, newState: Boolean) {

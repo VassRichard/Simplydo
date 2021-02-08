@@ -11,9 +11,9 @@ class ItemListRepository(private val noteDao: ItemListDao) {
         noteDao.addNote(note)
     }
 
-    suspend fun updateNote(id: Int, newTitle: String, newDate: String) {
-        noteDao.updateNote(id, newTitle, newDate)
-    }
+//    suspend fun updateNote(id: Int, newTitle: String, newDate: String) {
+//        noteDao.updateNote(id, newTitle, newDate)
+//    }
 
     suspend fun updateTitle(titleId: Int, title: String) {
         noteDao.updateTitle(titleId, title)

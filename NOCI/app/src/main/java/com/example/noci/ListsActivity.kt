@@ -3,7 +3,6 @@ package com.example.noci
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.noci.notes.MODE_ENABLER
 import com.orhanobut.hawk.Hawk
 
 class ListsActivity : AppCompatActivity() {
@@ -13,4 +12,5 @@ class ListsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lists)
 
     }
+
 }

@@ -12,8 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-const val MODE_ENABLER: String = ""
-
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     /// ------------------------------- COROUTINES (BACKGROUND THREAD JOBS) INITALIZERS ------------------------------- ///

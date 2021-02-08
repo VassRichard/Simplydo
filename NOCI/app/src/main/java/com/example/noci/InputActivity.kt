@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import com.example.noci.database.Note
-import com.example.noci.notes.MODE_ENABLER
 import com.example.noci.notes.input.InputFragmentArgs
 import com.orhanobut.hawk.Hawk
 

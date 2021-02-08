@@ -1,7 +1,9 @@
 package com.example.noci
 
-import com.example.noci.SelectKey.select
-import com.example.noci.ThemeKey.theme
+import android.content.Context
+import android.content.SharedPreferences
+import android.provider.Settings.Global.getString
+
 
 object ThemeKey {
 
