@@ -10,15 +10,16 @@ import com.orhanobut.hawk.Hawk
 
 class InputActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val mode = Hawk.get("KEY_MODE", "light_mode")
 
-        if(ThemeKey.getThemeKey() == "dark_mode") {
-            ThemeKey.setThemeKey("dark_mode")
-            setTheme(R.style.AppThemeDark)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else if(ThemeKey.getThemeKey() == "light_mode") {
-            ThemeKey.setThemeKey("light_mode")
-            setTheme(R.style.AppThemeLight)
+        if (mode == "light_mode") {
+            Hawk.put("KEY_MODE", "light_mode")
+            applyDayNight(AppCompatDelegate.MODE_NIGHT_NO)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else if (mode == "dark_mode") {
+            Hawk.put("KEY_MODE", "dark_mode")
+            applyDayNight(AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
 
         super.onCreate(savedInstanceState)
@@ -32,6 +33,16 @@ class InputActivity : AppCompatActivity() {
             findNavController(R.id.input_nav_host_fragment).setGraph(R.navigation.input_navigation, InputFragmentArgs(noteObject).toBundle())
         }
 
+    }
+
+    private fun applyDayNight(state: Int) {
+        if (state == AppCompatDelegate.MODE_NIGHT_NO) {
+            //apply day colors for your views
+            setTheme(R.style.AppThemeLight)
+        } else {
+            //apply night colors for your views
+            setTheme(R.style.AppThemeDark)
+        }
     }
 
     override fun onPause() {

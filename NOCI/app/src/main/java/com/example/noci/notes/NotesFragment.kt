@@ -2,7 +2,9 @@ package com.example.noci.notes
 
 //import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -33,6 +35,7 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
     private val adapter = NotesAdapter(this, this)
 
 //    val itemTouch = object : ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(adapter)
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -119,6 +122,8 @@ class NotesFragment : Fragment(), NotesAdapterInfo, NotesAdapterDelete {
 //        itemTouchHelper.attachToRecyclerView(notes_list)
 
     }
+
+
 
     // override function for editItem interface defined in NotesAdapter, it also transfers a Bundle(that holds the currentItem's attributes) into the InputActivity
     override fun editItem(currentItem: Note) {

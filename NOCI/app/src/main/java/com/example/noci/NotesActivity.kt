@@ -1,8 +1,11 @@
 package com.example.noci
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +14,15 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.orhanobut.hawk.Hawk
+import org.jetbrains.anko.share
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
 
-
 class NotesActivity : AppCompatActivity() {
+
+    //    lateinit var sharedPreferences: SharedPreferences
+//    var isRemembered = "light_mode"
 
     lateinit var bottomNavigationView: BottomNavigationView
     private var threadChecker = false
@@ -29,13 +35,14 @@ class NotesActivity : AppCompatActivity() {
     var threadNameCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val mode = Hawk.get("KEY_MODE", "light_mode")
 
-        if (ThemeKey.getThemeKey() == "light_mode") {
-            ThemeKey.setThemeKey("light_mode")
+        if (mode == "light_mode") {
+            Hawk.put("KEY_MODE", "light_mode")
             applyDayNight(AppCompatDelegate.MODE_NIGHT_NO)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        } else if (ThemeKey.getThemeKey() == "dark_mode") {
-            ThemeKey.setThemeKey("dark_mode")
+        } else if (mode == "dark_mode") {
+            Hawk.put("KEY_MODE", "dark_mode")
             applyDayNight(AppCompatDelegate.MODE_NIGHT_YES)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
@@ -43,11 +50,16 @@ class NotesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes)
 
+        Hawk.init(this).build()
+
+        // get current mode
+        currentNightMode = AppCompatDelegate.getDefaultNightMode()
+
+        // find Views
         dayHeader = findViewById(R.id.day_header)
         day_n_night = findViewById(R.id.day_night)
 
-        currentNightMode = AppCompatDelegate.getDefaultNightMode()
-
+        // depending on mode, set the icon
         if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
             day_n_night.setBackgroundResource(R.drawable.mode_night)
         } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
@@ -69,12 +81,13 @@ class NotesActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        // onClickListener for switching modes
         day_n_night.setOnClickListener {
             if (currentNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
-                ThemeKey.setThemeKey("dark_mode")
+                Hawk.put("KEY_MODE", "dark_mode")
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-                ThemeKey.setThemeKey("light_mode")
+                Hawk.put("KEY_MODE", "light_mode")
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
@@ -155,6 +168,7 @@ class NotesActivity : AppCompatActivity() {
 
         threadNameCounter++
         thread.interrupt()
+
     }
 
 }
