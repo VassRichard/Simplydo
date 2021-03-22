@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <!--        <variable-->
+        <!--            name="note"-->
+        <!--            type="com.example.noci.database.Note" />-->
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/note_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="3dp"
+        android:elevation="32dp">
+
+        <!--        android:background="@drawable/style_note"-->
+        <!--        android:backgroundTint="@color/noteBackgroundColor"-->
+
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/overdue_signaler"-->
+        <!--            android:layout_width="4dp"-->
+        <!--            android:layout_height="35dp"-->
+        <!--            android:background="@drawable/overdue_yesterday"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintCircleRadius="5dp"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <ImageView
+            android:id="@+id/note_type"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="7.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/note_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toEndOf="@id/note_type"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        android:textColor="@color/standardTextColor"-->
+        <!--        android:fontFamily="@font/work_sans_regular"-->
+        <!--        android:text="@string/dummy"-->
+        <!--        app:layout_constraintEnd_toStartOf="@id/delete_note"-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
