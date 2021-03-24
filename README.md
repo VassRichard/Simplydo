@@ -1,5 +1,5 @@
-# NOCI
-**NOCI - launched as Simplydo  
+# NOCI - launched as Simplydo  
+**NOCI -  - launched as Simplydo  
 Available in Huawei App Gallery**  
 
 Simplydo! - Your simple to-do & shopping list!
