@@ -9,7 +9,7 @@ The application is focused on simplicity and efficiency.
 With a minimalist & user-friendly design and on-point mechanism, the application provides every feature, for every person, as a small note taking application.  
 Simplydo's goal is to increase the users task-completion efficiency throughout the day, helping with day-to-day tasks, be that simple reminders or more like a "routine style" list, Simplydo has got you covered!
 
-The application consists of 2 different interfaces.  
+The application consists mainly of 2 different interfaces.  
 
 * As the application starts you are presented with the 1st interface that shows you the notes you have saved or NONE if you weren't a potato. 
 * With a press ( on the + ) button you are redirected to the input screen where you can set a title, a date for it and optionally, you can set a category image to remind you of the life-area you are working on ( thought it was cute to add :3 )
