@@ -1,4 +1,4 @@
-# android.development
+# NOCI
 **NOCI - launched as Simplydo  
 Available in Huawei App Gallery**  
 
