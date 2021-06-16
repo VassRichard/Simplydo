@@ -79,7 +79,7 @@
 </h2>
 
 <p align="center">
-  By clicking on any note, you are redirected to the input section of the app with the note's settings where you can change it's title or type. You can't change the date of it though, in that case you are more comfortable to post-pone any task so for tasks which's deadline changed outside your control zone, you need to CREATE a new note.
+  By clicking on any note, you are redirected to the input section of the app with the note's settings where you can change it's title or type. You can't change the date of it though, if it would be that case you would be more comfortable to post-pone any task. So for tasks which's deadline changed(unfortunately) outside of your control zone, you need to CREATE a new note.
 </p>
 
 <p align="center">
