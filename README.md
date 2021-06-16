@@ -105,6 +105,10 @@
 </p>
 
 <h2 align="center">
+  THE APP CAN BE DOWNLOADED FROM : Huawei App Gallery
+</h2>
+
+<h2 align="center">
   TECHNOLOGIES USED
 </h2>
  
