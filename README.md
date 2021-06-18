@@ -120,4 +120,5 @@
   <li>Database: Room ( serverless )  </li>
   <li>Design: Photoshop & Illustrator (later I took free icons, I didn't like the aesthetic of mine. The logo was self-made)  </li>
   <li>Other technologies: Koin (dependecy injection), RecyclerView, Navigation & Safe-Args, Hawk, Git  </li>
+  <li>Management tool: Trello  </li>
 </ul>
